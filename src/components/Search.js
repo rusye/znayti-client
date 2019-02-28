@@ -1,41 +1,48 @@
 import React, { Component } from 'react';
 import './Search.css';
 
+const cache = {}
+
 class Search extends Component {
-  getLocationCoordinates = (input) => {
-    const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
-    const key = '?key=EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB'
-    fetch(GEO_SEARCH_URL + key + '&location=' + input)
-    .then(results => results.json())
-    .then(data => {
-      let lat = data.results[0].locations[0].latLng.lat;
-      let lng = data.results[0].locations[0].latLng.lng;
-      console.log('lat: ' + lat + ', long: ' + lng)
-      // Do I need to create a callback function?
-      // How do I make sure I get back the data before the next step executes?
-      // Or do I set this all to state?
-    })
+  state = {
+    city: '',
+    radius: 10
   }
 
-  searchRequest = (e) => {
+  getLocationCoordinates = async (input) => {
+    if(cache[input]) {
+      console.log('no need for another api call')
+      return cache[input]
+    }
+    const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
+    const key = '?key=EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB'
+    const results = await fetch(GEO_SEARCH_URL + key + '&location=' + input)
+    const data = await results.json()
+    let lat = data.results[0].locations[0].latLng.lat;
+    let long = data.results[0].locations[0].latLng.lng;
+    cache[input] = [lat, long]
+    console.log('getting new coordinates')
+    return [lat, long]
+  }
+
+  searchRequest = async (e) => {
     e.preventDefault()
     // 1. Get the input's
-    let location = this.input.value
-    let radius = this.radius.value
-    // Should I set this to state?
-    console.log('location: ' + location + ', radius: ' + radius)
+    // console.log('location: ' + this.state.city + ', radius: ' + this.state.radius)
     // 2. Get the coordinates of city
-    this.getLocationCoordinates(location)
+    const [lat, long] = await this.getLocationCoordinates(this.state.city)
     // 3. Change the page to /long+lat+radius
-    console.log('I run after coordinates')
     // 4. Get request for backend data
   }
 
   render () {
+    const city = this.state.city
     return (
       <form className='search-bar' onSubmit={this.searchRequest}>
-        <input type='text'ref={input => (this.input = input)} required placeholder='City, State or Zip Code'></input>
-        <select id="radius" ref={radius => (this.radius = radius)}>
+      {/* add a label for the input */}
+        <input type='text' value={city} onChange={e => this.setState({city: e.target.value})} required placeholder='City, State or Zip Code'></input>
+        {/* add a label for the select */}
+        <select id="radius" onChange={e => this.setState({radius: e.target.value})}>
           <option value="10">10</option>
           <option value="20">20</option>
           <option value="50">50</option>
