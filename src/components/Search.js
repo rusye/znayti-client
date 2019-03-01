@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Link } from "react-router-dom";
 import './Search.css';
 
 const cache = {}
 
-class Search extends Component {
-  state = {
-    city: '',
-    radius: 10
-  }
+export default function Search(props) {
+  const [location, setLocation] = useState("");
+  const [radius, setRadius] = useState(10);
 
-  getLocationCoordinates = async (input) => {
+  const getLocationCoordinates = async (input) => {
     if(cache[input]) {
       console.log('no need for another api call')
       return cache[input]
@@ -25,35 +24,30 @@ class Search extends Component {
     return [lat, long]
   }
 
-  searchRequest = async (e) => {
+  const searchRequest = async (e) => {
     e.preventDefault()
     // 1. Get the input's
     // console.log('location: ' + this.state.city + ', radius: ' + this.state.radius)
     // 2. Get the coordinates of city
-    const [lat, long] = await this.getLocationCoordinates(this.state.city)
+    const [lat, long] = await getLocationCoordinates(location)
     // 3. Change the page to /long+lat+radius
     // 4. Get request for backend data
   }
 
-  render () {
-    const city = this.state.city
-    return (
-      <form className='search-bar' onSubmit={this.searchRequest}>
-      {/* add a label for the input */}
-        <input type='text' value={city} onChange={e => this.setState({city: e.target.value})} required placeholder='City, State or Zip Code'></input>
-        {/* add a label for the select */}
-        <select id="radius" onChange={e => this.setState({radius: e.target.value})}>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-          <option value="200">200</option>
-          <option value="3963.2">Any</option>
-        </select>
-        <button type='submit'>Search</button>
-      </form>
-    )
-  }
+  return (
+    <form className='search-bar' onSubmit={searchRequest}>
+    {/* add a label for the input */}
+      <input type='text' value={location} onChange={e => setLocation(e.target.value)} required placeholder='City, State or Zip Code'></input>
+      {/* add a label for the select */}
+      <select id="radius" onChange={e => setRadius(e.target.value)}>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+        <option value="3963.2">Any</option>
+      </select>
+      <button type='submit'>Search</button>
+    </form>
+  )
 }
-
-export default Search;
