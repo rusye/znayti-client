@@ -14,9 +14,9 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={HomePage} />
-          <Route exact path='/business/search/' component={Categories} />
+          <Route exact path='/business/search' component={Categories} />
           {/* I need the category to display only category that the user selects after the search response */}
-          {/* <Route exact path='/business/search/--idk what the rest is--' component={Category} /> */}
+          {/* <Route exact path='/business/:category/search--idk what the rest is--' component={Category} /> */}
           {/* <Route exact path='/business/:id' component={Business} /> */}
         </Switch>
       </Router>
