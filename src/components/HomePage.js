@@ -13,7 +13,7 @@ export default function HomePage(props) {
       </header>
 
       <main role='main'>
-        <Search />
+        <Search {...props} />
       </main>
     </div>
   );
