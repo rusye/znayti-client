@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+// import { BrowserRouter as Link } from "react-router-dom";
 import './Search.css';
 
 const cache = {}
@@ -26,12 +26,11 @@ export default function Search(props) {
 
   const searchRequest = async (e) => {
     e.preventDefault()
-    // 1. Get the input's
-    // console.log('location: ' + this.state.city + ', radius: ' + this.state.radius)
-    // 2. Get the coordinates of city
+    // 1. Get the coordinates of city
     const [lat, long] = await getLocationCoordinates(location)
-    // 3. Change the page to /long+lat+radius
-    // 4. Get request for backend data
+    // 2. Change the page to /long+lat+radius
+    // /business/search/?long=-122.610900&lat=45.502269&rad=136
+    props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${radius}`)
   }
 
   return (
