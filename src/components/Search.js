@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { BrowserRouter as Link } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './Search.css';
 
 const cache = {}
@@ -29,7 +29,6 @@ export default function Search(props) {
     // 1. Get the coordinates of city
     const [lat, long] = await getLocationCoordinates(location)
     // 2. Change the page to /long+lat+radius
-    // /business/search/?long=-122.610900&lat=45.502269&rad=136
     props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${radius}`)
   }
 
