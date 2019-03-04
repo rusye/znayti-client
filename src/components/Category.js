@@ -8,12 +8,14 @@ const {API_BASE_URL} = require('../config');
 
 export default function Businesses(props) {
   const [businesses, setBusinesses] = useState('');
-  const [catName, setCatName] = useState('');
+  const [fetchingData, setFetchingData] = useState(true)
+
   const fetchCategory = async () => {
     const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdBusinesses = await normalize.json()
     setBusinesses(rcvdBusinesses)
+    setFetchingData(false)
   }
   
   useEffect(
@@ -50,6 +52,7 @@ export default function Businesses(props) {
     business = 'Submit a business'
   }
 
+  if(fetchingData) return (<div className='businesses'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='businesses'>
       <NavBar />

@@ -8,15 +8,17 @@ const {API_BASE_URL} = require('../config');
 
 export default function Categories(props) {
   const [categories, setCategories] = useState('');
-  // 1. Get request for backend data
+  const [fetchingData, setFetchingData] = useState(true);
+
   const fetchCategories = async () => {
+    setFetchingData(true)
     const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdCategories = await normalize.json()
     let newArr = []
     rcvdCategories.forEach(category => newArr.push(category.charAt(0).toUpperCase() + category.slice(1)))
     setCategories(newArr)
-    // How do make it wait for the response to finish and then do the if statement?
+    setFetchingData(false)
   }
   
   useEffect(
@@ -28,7 +30,6 @@ export default function Categories(props) {
   const searchCategory = (e) => {
     e.preventDefault()
     let category = e.target.value.toLowerCase()
-    console.log(`${API_BASE_URL}/${category}${props.location.pathname}${props.location.search}`)
     props.history.push(`${category}/search${props.location.search}`)
   }
 
@@ -47,6 +48,7 @@ export default function Categories(props) {
     category = 'Submit a business'
   }
 
+  if(fetchingData) return (<div className='categories'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='categories'>
       <NavBar />

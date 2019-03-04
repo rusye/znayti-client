@@ -1,6 +1,5 @@
-import React, { useState} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './index.css';
 import HomePage from './components/HomePage';
 import Categories from './components/Categories';
@@ -10,7 +9,6 @@ import Business from './components/Business';
 import * as serviceWorker from './serviceWorker';
 
 function App() {
-  // const [storeUser, setStoreUser]
   return (
     <div>
       <Router>
