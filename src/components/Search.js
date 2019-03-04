@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './Search.css';
 
 const cache = {}
 
 export default function Search(props) {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState('Portland, OR');
   const [radius, setRadius] = useState(10);
 
   const getLocationCoordinates = async (input) => {
@@ -20,31 +20,39 @@ export default function Search(props) {
     let lat = data.results[0].locations[0].latLng.lat;
     let long = data.results[0].locations[0].latLng.lng;
     cache[input] = [lat, long]
-    console.log('getting new coordinates')
+    console.log('getting new coordinates', lat, long)
     return [lat, long]
   }
 
   const searchRequest = async (e) => {
     e.preventDefault()
-    // 1. Get the coordinates of city
     const [lat, long] = await getLocationCoordinates(location)
-    // 2. Change the page to /long+lat+radius
+    console.log(location, radius)
     props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${radius}`)
   }
 
   return (
     <form className='search-bar' onSubmit={searchRequest}>
-    {/* add a label for the input */}
-      <input type='text' value={location} onChange={e => setLocation(e.target.value)} required placeholder='City, State or Zip Code'></input>
-      {/* add a label for the select */}
-      <select id="radius" onChange={e => setRadius(e.target.value)}>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-        <option value="100">100</option>
-        <option value="200">200</option>
-        <option value="3963.2">Any</option>
-      </select>
+      <label htmlFor='search' aria-label='search-form'>City, State</label>
+      <input 
+        type='text' 
+        id='search' 
+        name='search' 
+        value={location} 
+        onChange={e => setLocation(e.target.value)} 
+        placeholder='City, State or Zip Code'
+        required>
+      </input>
+      
+      <label htmlFor='radius' aria-label='radius-input'>Radius</label>
+        <select id='radius' onChange={e => setRadius(e.target.value)}>
+          <option value='10'>10</option>
+          <option value='20'>20</option>
+          <option value='50'>50</option>
+          <option value='100'>100</option>
+          <option value='200'>200</option>
+          <option value='3963.2'>Any</option>
+        </select>
       <button type='submit'>Search</button>
     </form>
   )
