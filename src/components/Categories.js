@@ -53,7 +53,6 @@ export default function Categories(props) {
       <Search {...props} />
       <div>
         <h2>{title}</h2>
-        {/* Div will show up even if empty */}
         <div>{category}</div>
       </div>
     </div>
