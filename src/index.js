@@ -5,7 +5,7 @@ import './index.css';
 import HomePage from './components/HomePage';
 import Categories from './components/Categories';
 import Category from './components/Category';
-// import Business from './components/Business';
+import Business from './components/Business';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -18,7 +18,7 @@ function App() {
           <Route exact path='/' component={HomePage} />
           <Route exact path='/business/search' component={Categories} />
           <Route exact path='/business/:category/search' component={Category} />
-          {/* <Route exact path='/business/:id' component={Business} /> */}
+          <Route exact path='/business/:id' component={Business} />
         </Switch>
       </Router>
     </div>
