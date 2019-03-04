@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Categories.css';
 import Search from './Search';
+import NavBar from './NavBar';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 const {API_BASE_URL} = require('../config');
 
@@ -38,15 +39,18 @@ export default function Categories(props) {
     category = 'Submit a business'
   }
 
+  console.log(props)
+
   
   // 3. Handle click on category
 
   return (
     <div className='categories'>
-      <Search />
+      <NavBar />
+      <Search {...props} />
       <div>
         <h2>{title}</h2>
-        {/* Div will show if  */}
+        {/* Div will show up even if empty */}
         <div>{category}</div>
       </div>
     </div>
