@@ -9,10 +9,9 @@ const {API_BASE_URL} = require('../config');
 export default function Businesses(props) {
   const [business, setBusiness] = useState('');
   const [fetchingData, setFetchingData] = useState(true)
-  console.log(props.location.pathname)
 
   const fetchBusiness = async () => {
-    const response = await fetch(`${API_BASE_URL}${props.location.pathname}`)
+    const response = await fetch(`${API_BASE_URL}${props.props.location.pathname}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdBusiness = await normalize.json()
     setBusiness(rcvdBusiness)

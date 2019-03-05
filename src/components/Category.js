@@ -11,7 +11,7 @@ export default function Businesses(props) {
   const [fetchingData, setFetchingData] = useState(true)
 
   const fetchCategory = async () => {
-    const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
+    const response = await fetch(`${API_BASE_URL}${props.props.location.pathname}${props.props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdBusinesses = await normalize.json()
     setBusinesses(rcvdBusinesses)
@@ -27,7 +27,7 @@ export default function Businesses(props) {
   const viewBusiness = (e) => {
     e.preventDefault()
     let businessId = e.target.id
-    props.history.push(`/business/${businessId}`)
+    props.props.history.push(`/business/${businessId}`)
   }
 
   // 2. Display Results

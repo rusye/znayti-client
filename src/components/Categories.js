@@ -12,11 +12,12 @@ export default function Categories(props) {
 
   const fetchCategories = async () => {
     setFetchingData(true)
-    const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
+    const response = await fetch(`${API_BASE_URL}${props.props.location.pathname}${props.props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdCategories = await normalize.json()
     let newArr = []
     rcvdCategories.forEach(category => newArr.push(category.charAt(0).toUpperCase() + category.slice(1)))
+    console.log('I made a fetch ')
     setCategories(newArr)
     setFetchingData(false)
   }
@@ -24,13 +25,14 @@ export default function Categories(props) {
   useEffect(
     () => {
       fetchCategories()
-    }, []
+    }, [props.props.location.search]
   )
 
   const searchCategory = (e) => {
     e.preventDefault()
     let category = e.target.value.toLowerCase()
-    props.history.push(`${category}/search${props.location.search}`)
+    console.log(`${API_BASE_URL}/${category}${props.props.location.pathname}${props.props.location.search}`)
+    props.props.history.push(`${category}/search${props.props.location.search}`)
   }
 
   // 2. Display Results
@@ -48,11 +50,12 @@ export default function Categories(props) {
     category = 'Submit a business'
   }
 
+  console.log('got new data')
   if(fetchingData) return (<div className='categories'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='categories'>
       <NavBar />
-      <Search {...props} />
+      <Search {...props}/>
       <div>
         <h2>{title}</h2>
         <div>{category}</div>

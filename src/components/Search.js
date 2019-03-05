@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-// import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import React from 'react';
 import './Search.css';
 
 const cache = {}
 
 export default function Search(props) {
-  const [location, setLocation] = useState('Portland, OR');
-  const [radius, setRadius] = useState(10);
 
   const getLocationCoordinates = async (input) => {
     if(cache[input]) {
@@ -26,9 +23,9 @@ export default function Search(props) {
 
   const searchRequest = async (e) => {
     e.preventDefault()
-    const [lat, long] = await getLocationCoordinates(location)
-    console.log(location, radius)
-    props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${radius}`)
+    const [lat, long] = await getLocationCoordinates(props.location)
+    console.log('this is the new state ', props.location, props.radius)
+    props.props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}`)
   }
 
   return (
@@ -38,14 +35,14 @@ export default function Search(props) {
         type='text' 
         id='search' 
         name='search' 
-        value={location} 
-        onChange={e => setLocation(e.target.value)} 
+        value={props.location} 
+        onChange={e => props.updateLocation(e.target.value)} 
         placeholder='City, State or Zip Code'
         required>
       </input>
       
       <label htmlFor='radius' aria-label='radius-input'>Radius</label>
-        <select id='radius' onChange={e => setRadius(e.target.value)}>
+        <select id='radius' value={props.radius} onChange={e => props.updateRadius(e.target.value)}>
           <option value='10'>10</option>
           <option value='20'>20</option>
           <option value='50'>50</option>
