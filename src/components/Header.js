@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css';
 
 
-export default function Businesses() {
+export default function Header() {
 
   return (
     <header className='App-header'>
