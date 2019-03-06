@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Categories.css';
-import Search from './Search';
-import NavBar from './NavBar';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 const {API_BASE_URL} = require('../config');
 
@@ -12,7 +10,7 @@ export default function Categories(props) {
 
   const fetchCategories = async () => {
     setFetchingData(true)
-    const response = await fetch(`${API_BASE_URL}${props.props.location.pathname}${props.props.location.search}`)
+    const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdCategories = await normalize.json()
     let newArr = []
@@ -25,14 +23,14 @@ export default function Categories(props) {
   useEffect(
     () => {
       fetchCategories()
-    }, [props.props.location.search]
+    }, [props.location.search]
   )
 
   const searchCategory = (e) => {
     e.preventDefault()
     let category = e.target.value.toLowerCase()
-    console.log(`${API_BASE_URL}/${category}${props.props.location.pathname}${props.props.location.search}`)
-    props.props.history.push(`${category}/search${props.props.location.search}`)
+    console.log(`${API_BASE_URL}/${category}${props.location.pathname}${props.location.search}`)
+    props.history.push(`${category}/search${props.location.search}`)
   }
 
   // 2. Display Results
@@ -54,8 +52,6 @@ export default function Categories(props) {
   if(fetchingData) return (<div className='categories'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='categories'>
-      <NavBar />
-      <Search {...props}/>
       <div>
         <h2>{title}</h2>
         <div>{category}</div>

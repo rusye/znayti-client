@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Business.css';
-import Search from './Search';
-import NavBar from './NavBar';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 const {API_BASE_URL} = require('../config');
 
@@ -11,7 +9,7 @@ export default function Businesses(props) {
   const [fetchingData, setFetchingData] = useState(true)
 
   const fetchBusiness = async () => {
-    const response = await fetch(`${API_BASE_URL}${props.props.location.pathname}`)
+    const response = await fetch(`${API_BASE_URL}${props.location.pathname}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdBusiness = await normalize.json()
     setBusiness(rcvdBusiness)
@@ -27,8 +25,6 @@ export default function Businesses(props) {
   if(fetchingData) return (<div className='businessDetails'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='businessDetails'>
-      <NavBar />
-      <Search {...props} />
       <div>
         <h2>{business.name}</h2>
         <div className='address'>

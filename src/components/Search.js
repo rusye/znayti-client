@@ -23,9 +23,9 @@ export default function Search(props) {
 
   const searchRequest = async (e) => {
     e.preventDefault()
-    const [lat, long] = await getLocationCoordinates(props.location)
-    console.log('this is the new state ', props.location, props.radius)
-    props.props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}`)
+    const [lat, long] = await getLocationCoordinates(props.userLocation)
+    console.log('this is the new state ', props.userLocation, props.radius)
+    props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}`)
   }
 
   return (
@@ -35,7 +35,7 @@ export default function Search(props) {
         type='text' 
         id='search' 
         name='search' 
-        value={props.location} 
+        value={props.userLocation} 
         onChange={e => props.updateLocation(e.target.value)} 
         placeholder='City, State or Zip Code'
         required>
