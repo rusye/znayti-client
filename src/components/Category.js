@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Category.css';
+import BusinessCard from './BusinessCard'
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 const {API_BASE_URL} = require('../config');
 
@@ -33,18 +34,7 @@ export default function Businesses(props) {
   let title;
   if (businesses.length > 0) {
     title = 'Businesses';
-    business = businesses.map((business, index) => {
-      return (
-        <div className='listedBusinesses' key={index}>
-          <h3>{business.name}</h3>
-          <div className='location'>
-            {business.city}
-            {business.state}
-          </div>
-          <input type='button' id={business.id} key={index} value='View Business' onClick={viewBusiness}></input>
-        </div>
-      )
-    })
+    business = businesses.map((business, index) => <BusinessCard business={business} key={business.id} viewBusiness={viewBusiness}/>)
   } else {
     title = 'No businesses in this area'
     business = 'Submit a business'
