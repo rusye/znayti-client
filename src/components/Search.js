@@ -1,5 +1,6 @@
 import React from 'react';
 import './Search.css';
+const {MAPQUEST_API} = require('../config');
 
 const cache = {}
 
@@ -11,7 +12,7 @@ export default function Search(props) {
       return cache[input]
     }
     const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
-    const key = '?key=EaTfTKVe0lWnGBL9AOM4zpA4rm6O28HB'
+    const key = `?key=${MAPQUEST_API}`
     const results = await fetch(GEO_SEARCH_URL + key + '&location=' + input)
     const data = await results.json()
     let lat = data.results[0].locations[0].latLng.lat;
