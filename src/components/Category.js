@@ -29,7 +29,6 @@ export default function Businesses(props) {
     props.history.push(`/business/${businessId}`)
   }
 
-  // 2. Display Results
   let business;
   let title;
   if (businesses.length > 0) {
@@ -40,13 +39,17 @@ export default function Businesses(props) {
     business = 'Submit a business'
   }
 
-  if(fetchingData) return (<div className='businesses'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='businesses'>
-      <div>
-      <h2>{title}</h2>
-      <div>{business}</div>
-      </div>
+      { fetchingData ? (
+        <h2>Getting the data insert a spining wheel</h2>
+        ) : (
+          <div>
+          <h2>{title}</h2>
+          <div>{business}</div>
+          </div>
+        )
+      }
     </div>
   );
 }

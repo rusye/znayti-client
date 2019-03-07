@@ -33,7 +33,6 @@ export default function Categories(props) {
     props.history.push(`${category}/search${props.location.search}`)
   }
 
-  // 2. Display Results
   let category;
   let title;
   if (categories.length > 0) {
@@ -49,13 +48,17 @@ export default function Categories(props) {
   }
 
   console.log('got new data')
-  if(fetchingData) return (<div className='categories'><h2>Getting the data insert a spining wheel</h2></div>)
   return (
     <div className='categories'>
-      <div>
-        <h2>{title}</h2>
-        <div>{category}</div>
-      </div>
+      { fetchingData ? (
+          <h2>Getting the data insert a spining wheel</h2>
+        ) : (
+          <div>
+            <h2>{title}</h2>
+            <div>{category}</div>
+          </div> 
+        )
+      }
     </div>
   );
 }
