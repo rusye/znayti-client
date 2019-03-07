@@ -24,26 +24,31 @@ function App() {
     setRadius(e)
   }
 
+  const searchProps = (props) => {
+    return (
+      <Search 
+        {...props} 
+        updateLocation={updateLocation} 
+        updateRadius={updateRadius} 
+        userLocation={userLocation} 
+        radius={radius} 
+      />
+    )
+  }
+
   return (
     <Router>
       <div className='App'>
-        <Route path='/business'path="/(business|bigboss)/" component={NavBar} />
+        <Route path='/(business|bigboss)' component={NavBar} />
 
         <Route exact path='/' component={Header} />
 
-        {(window.location.pathname === '/bigboss/login') ? null : (
-          <Route path='/' render={props => 
-            <Search 
-              {...props} 
-              updateLocation={updateLocation} 
-              updateRadius={updateRadius} 
-              userLocation={userLocation} 
-              radius={radius} 
-            />}
-          />
-        )}
-
         <main role='main'>
+          <Switch>
+            <Route path='/bigboss' component={null} />
+            <Route path='/' render={searchProps} />
+          </Switch>
+
           <Switch>
             <Route exact path='/business/search' component={Categories} />
             <Route exact path='/business/:category/search' component={Category} />
