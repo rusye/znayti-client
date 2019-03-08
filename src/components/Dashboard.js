@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Dashboard.css';
-
+import AddCategory from './AddCategory'
 
 export default function Dashboard() {
-
+  
   const coll = document.getElementsByClassName('collapsible');
   let i;
 
@@ -11,24 +11,26 @@ export default function Dashboard() {
     coll[i].addEventListener('click', function() {
       this.classList.toggle('active');
       let content = this.nextElementSibling;
-      if (content.style.display === 'block') {
-        content.style.display = 'none';
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
       } else {
-        content.style.display = 'block';
-      }
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } 
     });
   }
 
   return (
     <section className='Dashboard'>
-      <button className='collapsible'>Add A Category</button>
-      <div className='content'><h2>Add A Category</h2></div>
+      <button className='collapsible'>Add Category</button>
+      <div className='content'>
+        <AddCategory />
+      </div>
 
-      <button className='collapsible'>Add A Business</button>
-      <div className='content'><h2>Add A Business</h2></div>
+      <button className='collapsible'>Add Business</button>
+      <div className='content'><h2>Add Business</h2></div>
 
-      <button className='collapsible'>Add A Admin User</button>
-      <div className='content'><h2>Add A Admin User</h2></div>
+      <button className='collapsible'>Add Admin User</button>
+      <div className='content'><h2>Add Admin User</h2></div>
     </section>
   );
 }
