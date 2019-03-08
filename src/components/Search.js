@@ -26,7 +26,7 @@ export default function Search(props) {
     e.preventDefault()
     const [lat, long] = await getLocationCoordinates(props.userLocation)
     console.log('this is the new state ', props.userLocation, props.radius)
-    props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}`)
+    props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}&input=${props.userLocation}`)
   }
 
   return (
