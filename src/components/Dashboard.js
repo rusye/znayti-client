@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Dashboard.css';
 import AddCategory from './AddCategory'
+import AddAdminUser from './AddAdminUser'
 
 export default function Dashboard() {
-  
+
   const coll = document.getElementsByClassName('collapsible');
   let i;
 
@@ -27,10 +28,14 @@ export default function Dashboard() {
       </div>
 
       <button className='collapsible'>Add Business</button>
-      <div className='content'><h2>Add Business</h2></div>
+      <div className='content'>
+
+      </div>
 
       <button className='collapsible'>Add Admin User</button>
-      <div className='content'><h2>Add Admin User</h2></div>
+      <div className='content'>
+        <AddAdminUser />
+      </div>
     </section>
   );
 }
