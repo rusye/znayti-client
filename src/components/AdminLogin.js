@@ -1,32 +1,14 @@
 import React, {useState} from 'react';
 import { API_BASE_URL } from '../config';
 import { Redirect } from 'react-router-dom';
+import { normalizeResponseErrors } from '../functions/normalizeResponse';
 import './AdminLogin.css';
 
 
 export default function AdminLogin(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
-  let errorMessage;
-  // Reword this auth stuff
-  // if(authError && username.length > 0 ){
-  //   errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
-  //   setInterval(function(){ localStorage.removeItem('error') }, 2000);
-  // } else if (localStorage.error){
-  //   errorMessage = <p>Login Failed. Check your credentials and resubmit.</p>
-  //   setInterval(function(){ localStorage.removeItem('error') }, 2000);
-  // } else {
-  //   errorMessage = <p></p>
-  // }
-
-  const handleErrors = (response) => {
-    console.log(response)
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
-}
+  const [error, setError] = useState(null);
 
   const handleSubmit = e => {
     e.preventDefault(e);
@@ -34,7 +16,7 @@ export default function AdminLogin(props) {
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-    }
+    };
 
     return (fetch(`${API_BASE_URL}/api/auth/bigboss/login`, {
       method: 'POST',
@@ -44,32 +26,36 @@ export default function AdminLogin(props) {
         password
       })
     }))
-    // .then(res => handleErrors(res))
+    .then(res => normalizeResponseErrors(res))
     .then(res => {
       return res.json();
     })
     .then(res => {
-      localStorage.setItem("user", username);
-      localStorage.setItem("authToken", res.authToken);
-      localStorage.setItem("loggedIn", true);
+      setError(null);
+      localStorage.removeItem('error');
+      localStorage.setItem('user', username);
+      localStorage.setItem('authToken', res.authToken);
+      localStorage.setItem('userId', res.user.id);
+      localStorage.setItem('loggedIn', true);
+      console.log(localStorage);
     })
     .catch(err => {
-      console.log(err)
-      const { code } = err;
-      const message = code === 401 ? 'Incorrect username or password' : 'Unable to login, please try again';
-      console.log(message)
-      
-      return Promise.reject(
-        new Error({
-          _error: message
-        })
-      )
+      let message;
+      if (err.code === 401) {
+        message = 'Incorrect username or password';
+        } else if (err.code === 403) {
+          message = err.message;
+        } else {
+          message = 'Unable to login, please try again';
+        }
+      localStorage.setItem('error', message)
+      setError(message)
     })
   };
 
   return (
     <section className='login-container'>
-      {errorMessage}
+      
       {
         localStorage.loggedIn ? (
           <Redirect to='/dashboard' />
@@ -97,7 +83,7 @@ export default function AdminLogin(props) {
                 placeholder='enter password'
                 type='password'
                 name='password'
-                pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$' 
+                // pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$' 
                 title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters'
                 required
                 id='login-password'
@@ -109,6 +95,7 @@ export default function AdminLogin(props) {
               </button>
               {/* <Button /> */}
             </form>
+            {error}
         </section>
         )
       }
