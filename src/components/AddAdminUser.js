@@ -34,13 +34,12 @@ export default function AddAdminUser() {
     })
     .then(res => {
       setServerMessage(null);
-      console.log(res)
     })
     .catch(err => {
       console.log(err)
       let message;
       if (err.code === 422) {
-        message = err.err.message;
+        message = err.message;
         } else if (err.code === 500) {
           message = 'Internal server error';
         } else {
@@ -60,7 +59,7 @@ export default function AddAdminUser() {
         placeholder='enter first name'
         type='text'
         name='first-name'
-        pattern='[A-Za-z]'
+        pattern='[A-Za-z]{1,35}'
         title='Please enter first name'
         id='first-name'
         aria-labelledby='first-name'
@@ -73,7 +72,7 @@ export default function AddAdminUser() {
         placeholder='enter last name'
         type='text'
         name='last-name'
-        pattern='[A-Za-z]'
+        pattern='[A-Za-z]{1, 35}'
         title='Please enter last name'
         id='last-name'
         aria-labelledby='last-name'
