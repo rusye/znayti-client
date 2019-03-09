@@ -1,24 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Dashboard.css';
 import AddCategory from './AddCategory'
 import AddAdminUser from './AddAdminUser'
 
 export default function Dashboard() {
 
-  const coll = document.getElementsByClassName('collapsible');
-  let i;
+  useEffect(
+    () => {
+      console.log('hello')
+      const coll = document.getElementsByClassName('collapsible');
 
-  for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener('click', function() {
-      this.classList.toggle('active');
-      let content = this.nextElementSibling;
-      if (content.style.maxHeight){
-        content.style.maxHeight = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + 'px';
-      } 
-    });
-  }
+      for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener('click', function() {
+          this.classList.toggle('active');
+          let content = this.nextElementSibling;
+          if (content.style.maxHeight){
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          } 
+        });
+      }
+    }, []
+  )
+  
+  
 
   return (
     <section className='Dashboard'>
