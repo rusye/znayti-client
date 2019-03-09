@@ -9,11 +9,12 @@ export const normalizeResponseErrors = res => {
         res.headers.has('content-type') &&
         res.headers.get('content-type').startsWith('application/json')
       ) {
-        return res.json().then(err => Promise.reject({code: res.status, err}));
+        return res.json().then(err => Promise.reject({code: res.status, message: err.message}));
       }
+      
     return Promise.reject({
-        code: res.status,
-        message: res.statusText
+      code: res.status,
+      message: res.statusText
     });
   }
   return res;
