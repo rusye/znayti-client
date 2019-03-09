@@ -38,7 +38,7 @@ export default function Categories(props) {
     title = 'Categories';
     category = categories.map((category, index) => {
       return (
-        <input type='button' id={category} onClick={searchCategory} key={index} value={category}></input>
+        <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
       )
     })
   } else {
