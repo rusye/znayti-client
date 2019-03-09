@@ -32,12 +32,10 @@ export default function AdminLogin(props) {
     })
     .then(res => {
       setError(null);
-      localStorage.removeItem('error');
       localStorage.setItem('user', username);
       localStorage.setItem('authToken', res.authToken);
       localStorage.setItem('userId', res.user.id);
       localStorage.setItem('loggedIn', true);
-      console.log(localStorage);
     })
     .catch(err => {
       let message;
@@ -48,7 +46,6 @@ export default function AdminLogin(props) {
         } else {
           message = 'Unable to login, please try again';
         }
-      localStorage.setItem('error', message)
       setError(message)
     })
   };
@@ -83,7 +80,7 @@ export default function AdminLogin(props) {
                 placeholder='enter password'
                 type='password'
                 name='password'
-                // pattern='(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$' 
+                // pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$' 
                 title='Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters'
                 required
                 id='login-password'
@@ -93,7 +90,6 @@ export default function AdminLogin(props) {
               <button type='submit' className='login-submit'>
                 Submit
               </button>
-              {/* <Button /> */}
             </form>
             {error}
         </section>
