@@ -14,7 +14,7 @@ export default function Categories(props) {
     const normalize = await normalizeResponseErrors(response)
     const rcvdCategories = await normalize.json()
     let newArr = []
-    rcvdCategories.forEach(category => newArr.push(category.charAt(0).toUpperCase() + category.slice(1)))
+    rcvdCategories.forEach(category => newArr.push(category))
     console.log('I made a fetch ')
     setCategories(newArr)
     setFetchingData(false)
@@ -28,8 +28,7 @@ export default function Categories(props) {
 
   const searchCategory = (e) => {
     e.preventDefault()
-    let category = e.target.value.toLowerCase()
-    console.log(`${API_BASE_URL}/${category}${props.location.pathname}${props.location.search}`)
+    let category = e.target.value
     props.history.push(`${category}/search${props.location.search}`)
   }
 
