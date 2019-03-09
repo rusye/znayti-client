@@ -9,7 +9,7 @@ export default function NavBar(props) {
       {
         localStorage.loggedIn ? (<div>
           <Link to="/">Home</Link>
-          <Link to="/">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <Link to="/">LogOut</Link>
         </div>
         ) : (

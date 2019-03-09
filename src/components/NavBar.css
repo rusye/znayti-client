@@ -1,4 +1,4 @@
-.navBar {
+/* .navBar {
   text-align: center;
   background-color: #282c34;
   min-height: 100vh;
@@ -12,4 +12,8 @@
 
 .navBar-link {
   color: #61dafb;
+} */
+nav {
+  background-color: lime;
+  width: 100%;
 }
