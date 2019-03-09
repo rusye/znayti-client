@@ -61,7 +61,7 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <Route path='/(business|bigboss)' component={NavBar} />
+        <Route path='/(business|bigboss|dashboard)' component={NavBar} />
 
         <Route exact path='/' component={Header} />
 
