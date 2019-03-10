@@ -13,10 +13,18 @@ export default function Categories(props) {
     const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
     const normalize = await normalizeResponseErrors(response)
     const rcvdCategories = await normalize.json()
-    let newArr = []
-    rcvdCategories.forEach(category => newArr.push(category))
+    if (rcvdCategories.length > 0) {
+      title = 'Categories';
+      setCategories(rcvdCategories.map((category, index) => {
+        return (
+          <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
+        )
+      }))
+    } else {
+      title = 'No businesses in this area'
+      setCategories('Submit a business')
+    }
     console.log('I made a fetch ')
-    setCategories(newArr)
     setFetchingData(false)
   }
   
@@ -32,19 +40,7 @@ export default function Categories(props) {
     props.history.push(`${category}/search${props.location.search}`)
   }
 
-  let category;
   let title;
-  if (categories.length > 0) {
-    title = 'Categories';
-    category = categories.map((category, index) => {
-      return (
-        <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
-      )
-    })
-  } else {
-    title = 'No businesses in this area'
-    category = 'Submit a business'
-  }
 
   console.log('got new data')
   return (
@@ -54,7 +50,7 @@ export default function Categories(props) {
         ) : (
           <div>
             <h2>{title}</h2>
-            <div>{category}</div>
+            <div>{categories}</div>
           </div> 
         )
       }
