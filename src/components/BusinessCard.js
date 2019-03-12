@@ -10,7 +10,7 @@ export default function BusinessCard(props) {
         {props.business.city}
         {props.business.state}
       </div>
-      <input type='button' id={props.business.id} key={props.business.id} value='View Business' onClick={props.viewBusiness}></input>
+      <button type='button' id={props.business.id} key={props.business.id} onClick={props.viewBusiness}>View Business</button>
     </div>
   );
 }

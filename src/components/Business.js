@@ -15,6 +15,11 @@ export default function Businesses(props) {
     setBusiness(rcvdBusiness)
     setFetchingData(false)
   }
+
+  const viewNumber = (e) => {
+    e.preventDefault()
+    console.log('hello')
+  }
   
   useEffect(
     () => {
@@ -47,8 +52,7 @@ export default function Businesses(props) {
           <p>Saturday: {business.hours.saturday}</p>
           <p>Sunday: {business.hours.sunday}</p>
         </div>
-        {/* Change the input into a <button> */}
-        <input type='button' value='View Telephone' />
+        <button type='button' onClick={viewNumber}>View Telephone</button>
       </div>
     )
   );
