@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
-// import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../config';
 // import { normalizeResponseErrors } from '../functions/normalizeResponse';
-// import CategoryContext from "./Context";
 
 export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
@@ -18,48 +17,7 @@ export default function AddBusiness(props) {
   const [longitude, setLongitude] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
 
-  // console.log(props)
-
-  // const allCategories = useContext(CategoryContext);
-
-  // const fetchCategories = () => {
-  //   return fetch(`${API_BASE_URL}/categories`, {
-  //       method: 'GET'
-  //     })
-  //     .then(res => normalizeResponseErrors(res))
-  //     .then(res => {
-  //       return res.json();
-  //     })
-  //     .then(rcvdCategories => {
-  //       // let results = rcvdCategories
-  //       // allCategories.splice(0)
-  //       // allCategories.push(...results)
-  //       // console.log(allCategories)
-  //       console.log('i Made a fetch')
-  //       setServerMessage(null);
-  //       if (rcvdCategories.length > 0) {
-  //         setCategories(rcvdCategories.map((categoryDetails, index) => {
-  //           return (
-  //             <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
-  //           )
-  //         }))
-  //       } else {
-  //         setServerMessage('No categories available, please create a category')
-  //       }
-  //     })
-  //     .catch(err => {
-  //       let message;
-  //       if (err.message) {
-  //         message = err.message;
-  //       } else {
-  //         message = 'Unable to fetch categories, please try again';
-  //       }
-  //       setServerMessage(message)
-  //     })
-  // }
-
   const populateCategories = () => {
-    // let rcvdCategories = props.categories
     if (props.categories.length > 0) {
       setCategories(props.categories.map((categoryDetails, index) => {
         return (
@@ -74,22 +32,28 @@ export default function AddBusiness(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // const headers = {
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json'
-    // };
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
 
-    // return (fetch(`${API_BASE_URL}/api/users/`, {
-    //   method: 'POST',
-    //   headers,
-    //   body: JSON.stringify({
-    //     firstName,
-    //     lastName,
-    //     username,
-    //     password,
-    //     'admin': true
-    //   })
-    // }))
+    return (fetch(`${API_BASE_URL}/business/`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        'user': localStorage.userId,
+        'name': businessName,
+        category,
+        'address': {
+          street,
+          city,
+          state,
+          zip,
+          'coordinates': [longitude, latitude]
+        },
+        'tel': telephone
+      })
+    }))
     // .then(res => normalizeResponseErrors(res))
     // .then(res => {
     //   return res.json();
@@ -117,7 +81,6 @@ export default function AddBusiness(props) {
   
   useEffect(
     () => {
-      // fetchCategories()
       populateCategories()
     }, [props.categories]
   )
