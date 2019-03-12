@@ -6,8 +6,12 @@ export default function AddCategory() {
   const [name, setName] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
 
-  const handleSubmit = e => {
-    e.preventDefault(e);
+  const reset = () => {
+    setName('')
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const headers = {
       'Content-Type': 'application/json',
@@ -28,7 +32,9 @@ export default function AddCategory() {
     })
     .then(res => {
       setServerMessage(null);
-      console.log(res)
+      reset()
+      setServerMessage(`${res.name} succesfully added`)
+      setInterval(() => { setServerMessage(null) }, 4000)
     })
     .catch(err => {
       console.log(err)
@@ -61,9 +67,8 @@ export default function AddCategory() {
         aria-labelledby='category-name'
       />
 
-      <button type='submit' className='category-submit'>
-        Submit
-      </button>
+      <button type='submit' className='category-submit'>Submit</button>
+      <button type='reset' onClick={reset}>Reset</button>
       {serverMessage}
     </form>
   )
