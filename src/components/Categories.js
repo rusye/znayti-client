@@ -44,16 +44,15 @@ export default function Categories(props) {
 
   console.log('got new data')
   return (
-    <div className='categories'>
-      { fetchingData ? (
-          <h2>Getting the data insert a spining wheel</h2>
-        ) : (
-          <div>
-            <h2>{title}</h2>
-            <div>{categories}</div>
-          </div> 
-        )
-      }
-    </div>
+    fetchingData ? (
+      <div className='categories'>
+        <h2>Getting the data insert a spining wheel</h2>
+      </div>
+    ) : (
+      <div className='categories'>
+        <h2>{title}</h2>
+        <div>{categories}</div>
+      </div> 
+    )
   );
 }

@@ -40,16 +40,15 @@ export default function Businesses(props) {
   }
 
   return (
-    <div className='businesses'>
-      { fetchingData ? (
+    fetchingData ? (
+      <div className='businesses'>
         <h2>Getting the data insert a spining wheel</h2>
-        ) : (
-          <div>
+      </div>
+      ) : (
+        <div className='businesses'>
           <h2>{title}</h2>
           <div>{business}</div>
-          </div>
-        )
-      }
-    </div>
+        </div>
+      )
   );
 }
