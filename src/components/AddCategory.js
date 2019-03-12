@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
+// import CategoryContext from "./Context";
 
-export default function AddCategory() {
+export default function AddCategory(props) {
   const [name, setName] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
 
@@ -10,8 +11,11 @@ export default function AddCategory() {
     setName('')
   }
 
+  // const allCategories = useContext(CategoryContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // console.log(allCategories)
 
     const headers = {
       'Content-Type': 'application/json',
@@ -32,9 +36,12 @@ export default function AddCategory() {
     })
     .then(res => {
       setServerMessage(null);
+      // allCategories.push(res)
+      props.updateCategories(res)
       reset()
       setServerMessage(`${res.name} succesfully added`)
       setInterval(() => { setServerMessage(null) }, 4000)
+      // console.log(allCategories)
     })
     .catch(err => {
       console.log(err)
