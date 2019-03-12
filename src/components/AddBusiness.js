@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import { API_BASE_URL } from '../config';
-import { normalizeResponseErrors } from '../functions/normalizeResponse';
+import React, {useState, useEffect, useContext} from 'react';
+// import { API_BASE_URL } from '../config';
+// import { normalizeResponseErrors } from '../functions/normalizeResponse';
+// import CategoryContext from "./Context";
 
-export default function AddBusiness() {
+export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState('')
@@ -15,25 +16,63 @@ export default function AddBusiness() {
   const [zip, setZip] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
-  // const [serverMessage, setServerMessage] = useState(null);
+  const [serverMessage, setServerMessage] = useState(null);
 
-  // const fetchCategories = () {
-    // Do a fetch request and some stuff
-    // if (rcvdCategories.length > 0) {
-    //   title = 'Categories';
-    //   setCategories(rcvdCategories.map((category, index) => {
-    //     return (
-    //       <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
-    //     )
-    //   }))
-    // } else {
-    //   title = 'No businesses in this area'
-    //   setCategories('Submit a business')
-    // }
+  // console.log(props)
+
+  // const allCategories = useContext(CategoryContext);
+
+  // const fetchCategories = () => {
+  //   return fetch(`${API_BASE_URL}/categories`, {
+  //       method: 'GET'
+  //     })
+  //     .then(res => normalizeResponseErrors(res))
+  //     .then(res => {
+  //       return res.json();
+  //     })
+  //     .then(rcvdCategories => {
+  //       // let results = rcvdCategories
+  //       // allCategories.splice(0)
+  //       // allCategories.push(...results)
+  //       // console.log(allCategories)
+  //       console.log('i Made a fetch')
+  //       setServerMessage(null);
+  //       if (rcvdCategories.length > 0) {
+  //         setCategories(rcvdCategories.map((categoryDetails, index) => {
+  //           return (
+  //             <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
+  //           )
+  //         }))
+  //       } else {
+  //         setServerMessage('No categories available, please create a category')
+  //       }
+  //     })
+  //     .catch(err => {
+  //       let message;
+  //       if (err.message) {
+  //         message = err.message;
+  //       } else {
+  //         message = 'Unable to fetch categories, please try again';
+  //       }
+  //       setServerMessage(message)
+  //     })
   // }
 
-  const handleSubmit = e => {
-    e.preventDefault(e);
+  const populateCategories = () => {
+    // let rcvdCategories = props.categories
+    if (props.categories.length > 0) {
+      setCategories(props.categories.map((categoryDetails, index) => {
+        return (
+          <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
+        )
+      }))
+    } else {
+      setServerMessage('No categories available, please create a category')
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     // const headers = {
     //   'Content-Type': 'application/json',
@@ -57,6 +96,9 @@ export default function AddBusiness() {
     // })
     // .then(res => {
     //   setServerMessage(null);
+    // clear the inputs
+      // user = res.username
+      // setServerMessage('res.business.name succesfully added')
     // })
     // .catch(err => {
     //   console.log(err)
@@ -73,12 +115,12 @@ export default function AddBusiness() {
     // })
   };
   
-  // useEffect(
-  //   () => {
-  //     fetchCategories()
-  //     seeAvailableCategories()
-  //   }, [fetchCategories again when user adds a category]
-  // )
+  useEffect(
+    () => {
+      // fetchCategories()
+      populateCategories()
+    }, [props.categories]
+  )
   
   return(
     <form className='add-business-form' onSubmit={handleSubmit}>
@@ -96,12 +138,13 @@ export default function AddBusiness() {
         required
       />
 
-      <label htmlFor='category' aria-label='select-category'>Select Business Category</label>
-      <select id='category' onChange={e => setCategory(e.target.value)} required>
-        <option disabled selected value={category}> -- select a category -- </option>
-        {/* {categories} */}
+      <label htmlFor='category' aria-label='select-category'>Business Category</label>
+      <select id='category' value='select' onChange={e => setCategory(e.target.value)} required>
+        <option disabled value='select'> -- select a category -- </option>
+        {categories}
       </select>
 
+      {/* Move this to the bottom and add monday-saturday */}
       <p>Business Hours</p>
       <label htmlFor='open' aria-label='select-open-time'>Open</label>
       <input 
@@ -187,20 +230,6 @@ export default function AddBusiness() {
       <input 
         id='zip'
         type='number'
-        value={zip}
-        onChange={e => setZip(e.target.value)}
-        placeholder='97236'
-        title='Please enter the business zip code'
-        pattern='^\d{5}(?:[-]\d{4})?$'
-        name='zip-code'
-        aria-labelledby='zip code'
-        required
-      />
-
-      <label htmlFor='zip' aria-label='state-name-input'>Zip Code</label>
-      <input 
-        id='zip'
-        type='text'
         value={zip}
         onChange={e => setZip(e.target.value)}
         placeholder='97236'

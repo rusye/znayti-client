@@ -1,11 +1,45 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Redirect } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
+import { normalizeResponseErrors } from '../functions/normalizeResponse';
 import './Dashboard.css';
 import AddCategory from './AddCategory'
 import AddAdminUser from './AddAdminUser'
 import AddBusiness from './AddBusiness'
 
 export default function Dashboard() {
+  const [categories, setCategories] = useState('')
+  const [serverMessage, setServerMessage] = useState(null);
+
+  const fetchCategories = () => {
+    return fetch(`${API_BASE_URL}/categories`, {
+        method: 'GET'
+      })
+      .then(res => normalizeResponseErrors(res))
+      .then(res => {
+        return res.json();
+      })
+      .then(rcvdCategories => {
+        console.log('i Made a fetch')
+        setServerMessage(null)
+        if (rcvdCategories.length > 0) {
+          setCategories(rcvdCategories)
+        }
+      })
+      .catch(err => {
+        setServerMessage('Unable to connect to server')
+      })
+  }
+
+  const updateCategories = (newCategory) => {
+    setCategories([...categories, newCategory])
+  }
+
+  useEffect(
+    () => {
+      fetchCategories()
+    }, []
+  )
 
   const collapsible = () => {
     const coll = document.getElementsByClassName('collapsible');
@@ -36,18 +70,20 @@ export default function Dashboard() {
       <section className='Dashboard'>
         <button className='collapsible'>Add Category</button>
         <div className='content'>
-          <AddCategory />
+          <AddCategory updateCategories={updateCategories}/>
         </div>
 
         <button className='collapsible'>Add Business</button>
         <div className='content'>
-          <AddBusiness />
+          <AddBusiness categories={categories}/>
         </div>
 
         <button className='collapsible'>Add Admin User</button>
         <div className='content'>
           <AddAdminUser />
         </div>
+
+        {serverMessage}
       </section>
     ) 
   );
