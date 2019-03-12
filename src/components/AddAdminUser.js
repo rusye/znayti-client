@@ -9,8 +9,14 @@ export default function AddAdminUser() {
   const [password, setPassword] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
 
-  const handleSubmit = e => {
-    e.preventDefault(e);
+  const reset = () => {
+    setFirstName('')
+    setLastName('')
+    setUsername('')
+    setPassword('')
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const headers = {
       'Content-Type': 'application/json',
@@ -34,9 +40,11 @@ export default function AddAdminUser() {
     })
     .then(res => {
       setServerMessage(null);
+      reset()
+      setServerMessage(`${res.username} succesfully added`)
+      setInterval(() => { setServerMessage(null) }, 4000)
     })
     .catch(err => {
-      console.log(err)
       let message;
       if (err.code === 422) {
         message = err.message;
@@ -47,11 +55,12 @@ export default function AddAdminUser() {
         }
       localStorage.setItem('serverMessage', message)
       setServerMessage(message)
+      setInterval(() => { setServerMessage(null) }, 5000)
     })
   };
   
   return(
-    <form className='add-admin-user-form' onSubmit={handleSubmit}>
+    <form id='newAdmin' className='add-admin-user-form' onSubmit={handleSubmit}>
       <label htmlFor='first-name' aria-label='username-input'>First Name</label>
       <input
         value={firstName}
@@ -107,9 +116,8 @@ export default function AddAdminUser() {
         aria-labelledby='login-password'
       />
 
-      <button type='submit' className='add-user-admin-submit'>
-        Submit
-      </button>
+      <button type='submit' className='add-user-admin-submit'>Submit</button>
+      <button type="reset" onClick={reset}>Reset</button>
       {serverMessage}
     </form>
   )
