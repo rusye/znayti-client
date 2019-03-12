@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
 import './Dashboard.css';
 import AddCategory from './AddCategory'
 import AddAdminUser from './AddAdminUser'
+import AddBusiness from './AddBusiness'
 
 export default function Dashboard() {
 
@@ -26,25 +28,27 @@ export default function Dashboard() {
       collapsible()
     }, []
   )
-  
-  
 
   return (
-    <section className='Dashboard'>
-      <button className='collapsible'>Add Category</button>
-      <div className='content'>
-        <AddCategory />
-      </div>
+    !localStorage.loggedIn ? (
+        <Redirect to='/bigboss/login' /> 
+    ) : (
+      <section className='Dashboard'>
+        <button className='collapsible'>Add Category</button>
+        <div className='content'>
+          <AddCategory />
+        </div>
 
-      <button className='collapsible'>Add Business</button>
-      <div className='content'>
+        <button className='collapsible'>Add Business</button>
+        <div className='content'>
+          <AddBusiness />
+        </div>
 
-      </div>
-
-      <button className='collapsible'>Add Admin User</button>
-      <div className='content'>
-        <AddAdminUser />
-      </div>
-    </section>
+        <button className='collapsible'>Add Admin User</button>
+        <div className='content'>
+          <AddAdminUser />
+        </div>
+      </section>
+    ) 
   );
 }
