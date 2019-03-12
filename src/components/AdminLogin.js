@@ -10,8 +10,8 @@ export default function AdminLogin(props) {
   const [password, setPassword] = useState('');
   const [serverMessage, setServerMessage] = useState(null);
 
-  const handleSubmit = e => {
-    e.preventDefault(e);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
     const headers = {
       'Content-Type': 'application/json',
