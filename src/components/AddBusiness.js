@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { API_BASE_URL } from '../config';
 import HourInputs from './HourInputs'
-// import { normalizeResponseErrors } from '../functions/normalizeResponse';
+import { normalizeResponseErrors } from '../functions/normalizeResponse';
 
 export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
-  const [category, setCategory] = useState('select');
+  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState('')
   const [telephone, setTelephone] = useState('')
   const [street, setStreet] = useState('');
@@ -21,7 +21,7 @@ export default function AddBusiness(props) {
 
   const reset = () => {
     setBusinessName('')
-    setCategory('select')
+    setCategory('')
     setTelephone('')
     setStreet('')
     setCity('')
@@ -29,6 +29,7 @@ export default function AddBusiness(props) {
     setZip('')
     setLatitude('')
     setLongitude('')
+    setHours({})
     setResetHours(true)
   }
 
@@ -69,7 +70,7 @@ export default function AddBusiness(props) {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        'user': localStorage.userId,
+        'user_id': localStorage.userId,
         'name': businessName,
         category,
         'address': {
@@ -79,36 +80,36 @@ export default function AddBusiness(props) {
           zip,
           'coordinates': [longitude, latitude]
         },
+        hours,
         'tel': telephone
       })
     }))
-    // .then(res => normalizeResponseErrors(res))
-    // .then(res => {
-    //   return res.json();
-    // })
-    // .then(res => {
-    //   setServerMessage(null);
-    // clear the inputs
-      // user = res.username
-      // setServerMessage('res.business.name succesfully added')
-    // })
-    // .catch(err => {
-    //   console.log(err)
-    //   let message;
-    //   if (err.code === 422) {
-    //     message = err.message;
-    //     } else if (err.code === 500) {
-    //       message = 'Internal server error';
-    //     } else {
-    //       message = 'Something went wrong, please try again later';
-    //     }
-    //   localStorage.setItem('serverMessage', message)
-    //   setServerMessage(message)
-    // })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      return res.json();
+    })
+    .then(res => {
+      setServerMessage(null);
+      reset()
+      setServerMessage(`${res.name} succesfully added`)
+      setInterval(() => { setServerMessage(null) }, 4000)
+    })
+    .catch(err => {
+      let message;
+      if (err.code === 422 || 400) {
+        message = err.message;
+        } else if (err.code === 500) {
+          message = 'Internal server error';
+        } else {
+          message = 'Something went wrong, please try again later';
+        }
+      localStorage.setItem('serverMessage', message)
+      setServerMessage(message)
+    })
   };
 
   const handleHoursChange = (day, value) => {
-    setHours(hours[day] = value)
+    hours[day] = value
   }
   
   
@@ -142,7 +143,7 @@ export default function AddBusiness(props) {
 
       <label htmlFor='category' aria-label='select-category'>Business Category</label>
       <select id='category' value={category} onChange={e => setCategory(e.target.value)} required>
-        <option disabled value='select'> -- select a category -- </option>
+        <option disabled={true} value=''> -- select a category -- </option>
         {categories}
       </select>
 
