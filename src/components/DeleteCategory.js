@@ -73,7 +73,7 @@ export default function DeleteCategory(props) {
 
   return(
     <form className='edit-category-form' onSubmit={handleSubmit}>
-      <label aria-label='select-category'>Category To Update
+      <label aria-label='select-category'>Category To Delete
         <select value={category} onChange={e => setCategory(e.target.value)} required>
           <option disabled={true} value=''> -- select a category -- </option>
           {categories}

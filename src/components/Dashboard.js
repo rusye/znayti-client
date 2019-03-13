@@ -7,6 +7,7 @@ import AddCategory from './AddCategory'
 import AddAdminUser from './AddAdminUser'
 import AddBusiness from './AddBusiness'
 import EditCategory from './EditCategory'
+import DeleteCategory from './DeleteCategory'
 
 export default function Dashboard() {
   const [categories, setCategories] = useState('')
@@ -100,6 +101,14 @@ export default function Dashboard() {
           <fieldset>
             <legend>Edit A Category</legend>
             <EditCategory categories={categories} onChange={setTriggerFetch}/>
+          </fieldset>
+        </div>
+
+        <button className='collapsible'>Delete Category</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Delete A Category</legend>
+            <DeleteCategory categories={categories} onChange={setTriggerFetch}/>
           </fieldset>
         </div>
 
