@@ -1,14 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 
 export default function EditCategory(props) {
   const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
   const [categories, setCategories] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
     setName('')
+    setCategory('')
+    setCategories('')
   }
 
   const populateCategories = () => {
@@ -32,24 +35,23 @@ export default function EditCategory(props) {
       'Accept': 'application/json'
     };
 
-    return (fetch(`${API_BASE_URL}/categories/`, {
-      method: 'POST',
+    return (fetch(`${API_BASE_URL}/categories/${category}`, {
+      method: 'PUT',
       headers,
       body: JSON.stringify({
-        name,
-        'user_id': localStorage.userId
+        'id': category,
+        name
       })
     }))
     .then(res => normalizeResponseErrors(res))
     .then(res => {
-      return res.json();
-    })
-    .then(res => {
       setServerMessage(null);
-      props.updateCategories(res)
       reset()
-      setServerMessage(`${res.name} succesfully added`)
-      setInterval(() => { setServerMessage(null) }, 4000)
+      setServerMessage('Category name successfully updated.')
+      setInterval(() => { 
+        setServerMessage(null)
+        props.onChange(props.triggerFetch + 1) 
+      }, 4000)
     })
     .catch(err => {
       console.log(err)
@@ -74,7 +76,7 @@ export default function EditCategory(props) {
 
   return(
     <form className='edit-category-form' onSubmit={handleSubmit}>
-      <label aria-label='select-category'>Business Category
+      <label aria-label='select-category'>Category To Update
         <select value={category} onChange={e => setCategory(e.target.value)} required>
           <option disabled={true} value=''> -- select a category -- </option>
           {categories}

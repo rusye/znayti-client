@@ -11,6 +11,8 @@ import EditCategory from './EditCategory'
 export default function Dashboard() {
   const [categories, setCategories] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
+  const [triggerFetch, setTriggerFetch] = useState(1)
+  console.log(triggerFetch)
 
   const fetchCategories = () => {
     return fetch(`${API_BASE_URL}/categories`, {
@@ -39,7 +41,7 @@ export default function Dashboard() {
   useEffect(
     () => {
       fetchCategories()
-    }, []
+    }, [triggerFetch]
   )
 
   const collapsible = () => {
@@ -97,7 +99,7 @@ export default function Dashboard() {
         <div className='content'>
           <fieldset>
             <legend>Edit A Category</legend>
-            <EditCategory categories={categories} updateCategories={updateCategories}/>
+            <EditCategory categories={categories} triggerFetch={triggerFetch} onChange={setTriggerFetch}/>
           </fieldset>
         </div>
 
