@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './Category.css';
+import './BusinessesList.css';
 import BusinessCard from './BusinessCard'
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 const {API_BASE_URL} = require('../config');
 
 
-export default function Businesses(props) {
+export default function BusinessesList(props) {
   const [businesses, setBusinesses] = useState('');
   const [fetchingData, setFetchingData] = useState(true)
 
