@@ -63,7 +63,6 @@ export default function EditCategory(props) {
       } else {
         message = 'Something went wrong, please try again later';
       }
-      localStorage.setItem('serverMessage', message)
       setServerMessage(message)
     })
   };
