@@ -81,7 +81,7 @@ export default function AddBusiness(props) {
           'coordinates': [longitude, latitude]
         },
         hours,
-        'tel': telephone
+        telephone
       })
     }))
     .then(res => normalizeResponseErrors(res))
