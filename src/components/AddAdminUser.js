@@ -43,7 +43,7 @@ export default function AddAdminUser() {
       setServerMessage(null);
       reset()
       setServerMessage(`${res.username} succesfully added`)
-      setInterval(() => { setServerMessage(null) }, 4000)
+      setTimeout(() => { setServerMessage(null) }, 4000)
     })
     .catch(err => {
       let message;
@@ -56,7 +56,7 @@ export default function AddAdminUser() {
         }
       localStorage.setItem('serverMessage', message)
       setServerMessage(message)
-      setInterval(() => { setServerMessage(null) }, 5000)
+      setTimeout(() => { setServerMessage(null) }, 5000)
     })
   };
   

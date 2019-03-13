@@ -48,9 +48,9 @@ export default function EditCategory(props) {
       setServerMessage(null);
       reset()
       setServerMessage('Category name successfully updated.')
-      setInterval(() => { 
+      setTimeout(() => { 
         setServerMessage(null)
-        props.onChange(props.triggerFetch + 1) 
+        props.onChange(Math.random()) 
       }, 4000)
     })
     .catch(err => {

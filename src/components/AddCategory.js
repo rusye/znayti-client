@@ -35,7 +35,7 @@ export default function AddCategory(props) {
       props.updateCategories(res)
       reset()
       setServerMessage(`${res.name} succesfully added`)
-      setInterval(() => { setServerMessage(null) }, 4000)
+      setTimeout(() => { setServerMessage(null) }, 4000)
     })
     .catch(err => {
       console.log(err)

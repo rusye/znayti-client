@@ -99,7 +99,7 @@ export default function Dashboard() {
         <div className='content'>
           <fieldset>
             <legend>Edit A Category</legend>
-            <EditCategory categories={categories} triggerFetch={triggerFetch} onChange={setTriggerFetch}/>
+            <EditCategory categories={categories} onChange={setTriggerFetch}/>
           </fieldset>
         </div>
 

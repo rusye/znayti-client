@@ -92,7 +92,7 @@ export default function AddBusiness(props) {
       setServerMessage(null);
       reset()
       setServerMessage(`${res.name} succesfully added`)
-      setInterval(() => { setServerMessage(null) }, 4000)
+      setTimeout(() => { setServerMessage(null) }, 4000)
     })
     .catch(err => {
       let message;
