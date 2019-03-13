@@ -6,6 +6,7 @@ import './Dashboard.css';
 import AddCategory from './AddCategory'
 import AddAdminUser from './AddAdminUser'
 import AddBusiness from './AddBusiness'
+import EditCategory from './EditCategory'
 
 export default function Dashboard() {
   const [categories, setCategories] = useState('')
@@ -89,6 +90,14 @@ export default function Dashboard() {
           <fieldset>
             <legend>Add New Admin</legend>
             <AddAdminUser />
+          </fieldset>
+        </div>
+
+        <button className='collapsible'>Edit Category</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Edit A Category</legend>
+            <EditCategory categories={categories} updateCategories={updateCategories}/>
           </fieldset>
         </div>
 
