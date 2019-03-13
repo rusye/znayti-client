@@ -1,14 +1,27 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 export default function HourInput(props) {
   const [open, setOpen] = useState('')
   const [close, setClose] = useState('')
 
+  const handleUpdate = () => {
+    if (open === '' || close === '') {
+      props.onChange(props.name, 'closed')
+    } else {
+      props.onChange(props.name, `open ${open} close ${close}`)
+    }
+  }
+
+  useEffect(
+    () => {
+      handleUpdate()
+    }, [open, close]
+  )
+
   return (
-    <legend>
+    <legend>{props.name}
       <label aria-label='select-open-time'>Open
         <input 
-          id='open' 
           type='time' 
           value={open} 
           onChange={e => setOpen(e.target.value)} 
@@ -21,7 +34,6 @@ export default function HourInput(props) {
 
       <label aria-label='select-close-time'>Close
         <input 
-          id='close' 
           type='time' 
           value={close} 
           onChange={e => setClose(e.target.value)} 
