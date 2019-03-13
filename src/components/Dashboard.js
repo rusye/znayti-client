@@ -70,17 +70,26 @@ export default function Dashboard() {
       <section className='Dashboard'>
         <button className='collapsible'>Add Category</button>
         <div className='content'>
-          <AddCategory updateCategories={updateCategories}/>
+          <fieldset>
+            <legend>Add New Category</legend>
+            <AddCategory updateCategories={updateCategories}/>
+          </fieldset>
         </div>
 
         <button className='collapsible'>Add Business</button>
         <div className='content'>
-          <AddBusiness categories={categories}/>
+          <fieldset>
+            <legend>Add New Business</legend>
+            <AddBusiness categories={categories}/>
+          </fieldset>
         </div>
 
         <button className='collapsible'>Add Admin User</button>
         <div className='content'>
-          <AddAdminUser />
+          <fieldset>
+            <legend>Add New Admin</legend>
+            <AddAdminUser />
+          </fieldset>
         </div>
 
         {serverMessage}
