@@ -6,7 +6,7 @@ import Search from './components/Search';
 import NavBar from './components/NavBar';
 import Header from './components/Header';
 import Categories from './components/Categories';
-import Category from './components/Category';
+import BusinessList from './components/BusinessesList';
 import Business from './components/Business';
 import AdminLogin from './components/AdminLogin';
 import Dashboard from './components/Dashboard'
@@ -74,7 +74,7 @@ function App() {
           <Switch>
             <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/business/search' component={Categories} />
-            <Route exact path='/business/:category/search' component={Category} />
+            <Route exact path='/business/:category/search' component={BusinessList} />
             <Route exact path='/business/:id' component={Business} />
             <Route exact path='/bigboss/login' component={AdminLogin} />
           </Switch>
