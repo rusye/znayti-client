@@ -36,6 +36,7 @@ export default function AdminLogin(props) {
       localStorage.setItem('authToken', res.authToken);
       localStorage.setItem('userId', res.user.id);
       localStorage.setItem('loggedIn', true);
+      localStorage.setItem('admin', true);
       props.history.push('/dashboard')
     })
     .catch(err => {
