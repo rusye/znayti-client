@@ -28,7 +28,6 @@ export default function HourInput(props) {
           name='open-time'
           title='Please enter open time'
           aria-labelledby='open-time'
-          required
         />
       </label>
 
@@ -40,7 +39,6 @@ export default function HourInput(props) {
           name='close-time'
           title='Please enter close time'
           aria-labelledby='close-time'
-          required
         />
       </label>
     </legend>
