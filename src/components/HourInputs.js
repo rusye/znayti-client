@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 
 export default function HourInput(props) {
-  const [open, setOpen] = useState('')
-  const [close, setClose] = useState('')
+  const [open, setOpen] = useState(props.open || '')
+  const [close, setClose] = useState(props.close || '')
 
   const handleUpdate = () => {
     if (open === '' || close === '') {
       props.onChange(props.name, 'closed')
     } else {
       props.onChange(props.name, `open ${open} close ${close}`)
+      console.log(props.name, `open ${open} close ${close}`)
     }
   }
 

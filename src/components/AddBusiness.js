@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { API_BASE_URL } from '../config';
 import HourInputs from './HourInputs'
 import SelectCategory from './SelectCategory'
+import BusinessForm from './BusinessForm'
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 
 export default function AddBusiness(props) {
@@ -15,7 +16,7 @@ export default function AddBusiness(props) {
   const [zip, setZip] = useState('');
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
-  const [eachDay, setEachDay] = useState('');
+  // const [eachDay, setEachDay] = useState('');
   const [hours, setHours] = useState({})
   const [resetHours, setResetHours] = useState(false)
   const [serverMessage, setServerMessage] = useState(null);
@@ -35,31 +36,28 @@ export default function AddBusiness(props) {
     setResetHours(true)
   }
 
-  const populateDays = () => {
-    setResetHours(false)
-    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    setEachDay(days.map((day, index) => {
-      return (
-        <fieldset key={index}>
-          <HourInputs name={day} onChange={handleHoursChange} />
-        </fieldset>
-      )
-    }))
-  }
+  // const populateDays = () => {
+  //   setResetHours(false)
+  //   let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+  //   setEachDay(days.map((day, index) => {
+  //     return (
+  //       <fieldset key={index}>
+  //         <HourInputs name={day} onChange={handleHoursChange} />
+  //       </fieldset>
+  //     )
+  //   }))
+  // }
 
   const formatPhoneNumber = (phoneNumberString) => {
     let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
     let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
     if (match) {
       setTelephone('(' + match[1] + ') ' + match[2] + '-' + match[3])
-      return match
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await formatPhoneNumber(unformatedTel)
 
     const headers = {
       'Content-Type': 'application/json',
@@ -111,15 +109,69 @@ export default function AddBusiness(props) {
     hours[day] = value
   }
 
+  console.log(hours)
+
+  // useEffect(
+  //   () => {
+  //     populateDays()
+  //   }, []
+  // )
+
   useEffect(
     () => {
-      populateDays()
-    }, []
+      formatPhoneNumber(unformatedTel)
+    }, [unformatedTel]
   )
   
   return(
-    <form className='add-business-form' onSubmit={handleSubmit}>
-      <label htmlFor='business-name' aria-label='username-input'>Business Name</label>
+    <fieldset>
+      <legend>Add New Business</legend>
+      <BusinessForm 
+        handleSubmit={handleSubmit}
+
+        {...props}
+
+        handleHoursChange={handleHoursChange}
+
+        businessName={businessName}
+        setBusinessName={setBusinessName}
+
+        category={category}
+        setCategory={setCategory}
+
+        unformatedTel={unformatedTel}
+        setUnformatedTel={setUnformatedTel}
+
+        telephone={telephone}
+        setTelephone={setTelephone}
+
+        street={street}
+        setStreet={setStreet}
+
+        city={city}
+        setCity={setCity}
+
+        state={state}
+        setState={setState}
+
+        zip={zip}
+        setZip={setZip}
+
+        latitude={latitude}
+        setLatitude={setLatitude}
+
+        longitude={longitude}
+        setLongitude={setLongitude}
+
+        hours={hours}
+        setHours={setHours}
+
+        resetHours={resetHours}
+        setResetHours={setResetHours}
+
+      />
+    {/* <form className='add-business-form' onSubmit={handleSubmit}> */}
+      {/* <label htmlFor='business-name' aria-label='username-input'>Business Name</label>
       <input
         value={businessName}
         onChange={e => setBusinessName(e.target.value)}
@@ -240,11 +292,12 @@ export default function AddBusiness(props) {
       <fieldset key={resetHours}>
         <legend>Business Hours</legend>
         {eachDay}
-      </fieldset>
+      </fieldset> */}
 
-      <button type='submit' className='add-business-submit'>Submit</button>
-      <button type='reset' onClick={reset}>Reset</button>
+      {/* <button type='submit' className='add-business-submit'>Submit</button>
+      <button type='reset' onClick={reset}>Reset</button> */}
       {serverMessage}
-    </form>
+    {/* </form> */}
+    </fieldset>
   )
 }
