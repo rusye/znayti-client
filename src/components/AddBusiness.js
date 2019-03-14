@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { API_BASE_URL } from '../config';
 import HourInputs from './HourInputs'
+import SelectCategory from './SelectCategory'
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 
 export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
   const [category, setCategory] = useState('');
-  const [categories, setCategories] = useState('')
   const [telephone, setTelephone] = useState('')
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
@@ -31,19 +31,6 @@ export default function AddBusiness(props) {
     setLongitude('')
     setHours({})
     setResetHours(true)
-  }
-
-  const populateCategories = () => {
-    if (props.categories.length > 0) {
-      setServerMessage(null)
-      setCategories(props.categories.map((categoryDetails, index) => {
-        return (
-          <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
-        )
-      }))
-    } else {
-      setServerMessage('No categories available, please create a category')
-    }
   }
 
   const populateDays = () => {
@@ -110,13 +97,6 @@ export default function AddBusiness(props) {
   const handleHoursChange = (day, value) => {
     hours[day] = value
   }
-  
-  
-  useEffect(
-    () => {
-      populateCategories()
-    }, [props.categories]
-  )
 
   useEffect(
     () => {
@@ -140,11 +120,7 @@ export default function AddBusiness(props) {
         required
       />
 
-      <label htmlFor='category' aria-label='select-category'>Business Category</label>
-      <select id='category' value={category} onChange={e => setCategory(e.target.value)} required>
-        <option disabled={true} value=''> -- select a category -- </option>
-        {categories}
-      </select>
+      <SelectCategory {...props} category={category} setCategory={setCategory} />
 
       <fieldset key={resetHours}>
         <legend>Business Hours</legend>

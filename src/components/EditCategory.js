@@ -1,30 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
+import SelectCategory from './SelectCategory'
 
 export default function EditCategory(props) {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
-  const [categories, setCategories] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
     setName('')
     setCategory('')
-    setCategories('')
-  }
-
-  const populateCategories = () => {
-    if (props.categories.length > 0) {
-      setServerMessage(null)
-      setCategories(props.categories.map((categoryDetails, index) => {
-        return (
-          <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
-        )
-      }))
-    } else {
-      setServerMessage('No categories available, please create a category')
-    }
+    setServerMessage('Category name successfully updated.')
   }
 
   const handleSubmit = (e) => {
@@ -47,7 +34,6 @@ export default function EditCategory(props) {
     .then(res => {
       setServerMessage(null);
       reset()
-      setServerMessage('Category name successfully updated.')
       setTimeout(() => { 
         setServerMessage(null)
         props.onChange(Math.random()) 
@@ -67,20 +53,9 @@ export default function EditCategory(props) {
     })
   };
 
-  useEffect(
-    () => {
-      populateCategories()
-    }, [props.categories]
-  )
-
   return(
     <form className='edit-category-form' onSubmit={handleSubmit}>
-      <label aria-label='select-category'>Category To Update
-        <select value={category} onChange={e => setCategory(e.target.value)} required>
-          <option disabled={true} value=''> -- select a category -- </option>
-          {categories}
-        </select>
-      </label>
+      <SelectCategory {...props} category={category} setCategory={setCategory} />
 
       <label aria-label='category-name-input'>New Category Name
         <input

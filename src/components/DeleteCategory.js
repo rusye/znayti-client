@@ -1,29 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
+import SelectCategory from './SelectCategory'
 
 export default function DeleteCategory(props) {
   const [category, setCategory] = useState('');
-  const [categories, setCategories] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
-
-  const reset = () => {
-    setCategory('')
-    setCategories('')
-  }
-
-  const populateCategories = () => {
-    if (props.categories.length > 0) {
-      setServerMessage(null)
-      setCategories(props.categories.map((categoryDetails, index) => {
-        return (
-          <option key={index} value={categoryDetails.id}>{categoryDetails.name}</option>
-        )
-      }))
-    } else {
-      setServerMessage('No categories available, please create a category')
-    }
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +25,7 @@ export default function DeleteCategory(props) {
     .then(res => normalizeResponseErrors(res))
     .then(res => {
       setServerMessage(null);
-      reset()
+      setCategory('')
       setServerMessage('Category was successfully deleted.')
       setTimeout(() => { 
         setServerMessage(null)
@@ -64,20 +46,9 @@ export default function DeleteCategory(props) {
     })
   };
 
-  useEffect(
-    () => {
-      populateCategories()
-    }, [props.categories]
-  )
-
   return(
-    <form className='edit-category-form' onSubmit={handleSubmit}>
-      <label aria-label='select-category'>Category To Delete
-        <select value={category} onChange={e => setCategory(e.target.value)} required>
-          <option disabled={true} value=''> -- select a category -- </option>
-          {categories}
-        </select>
-      </label>
+    <form className='edit-category-form' onSubmit={e => {if (window.confirm('Are you sure you want to delete this business?')) handleSubmit(e)}}>
+      <SelectCategory {...props} category={category} setCategory={setCategory} />
 
       <button type='submit' className='delete-submit'>Delete</button>
       {serverMessage}

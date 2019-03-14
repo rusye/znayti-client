@@ -24,9 +24,11 @@ export default function SelectCategory(props) {
   )
 
   return (
-    <select value={props.category} onChange={e => props.setCategory(e.target.value)} required>
-      <option disabled={true} value=''>{select}</option>
-      {categories}
-    </select>
+    <label aria-label='select-category'>Select Category
+      <select value={props.category} onChange={e => props.setCategory(e.target.value)} required>
+        <option disabled={true} value=''>{select}</option>
+        {categories}
+      </select>
+    </label>
   );
 }
