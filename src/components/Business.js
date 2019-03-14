@@ -7,10 +7,12 @@ const {API_BASE_URL} = require('../config');
 export default function Businesses(props) {
   const [business, setBusiness] = useState('');
   const [businessId, setBusinessId] = useState('')
-  const [serverMessage, setServerMessage] = useState('Fetching Data');
+  const [serverMessage, setServerMessage] = useState(null);
   const [fetchingData, setFetchingData] = useState(true)
+  const [showtelephone, setShowtelephone] = useState(false)
 
   const fetchBusiness = () => {
+    setServerMessage('Fetching Data')
     return fetch(`${API_BASE_URL}${props.location.pathname}`, {
       method: 'GET'
     })
@@ -21,6 +23,7 @@ export default function Businesses(props) {
     .then(rcvdBusiness => {
       setBusinessId(rcvdBusiness.id)
       setBusiness(rcvdBusiness)
+      setServerMessage(null)
       setFetchingData(false)
     })
     .catch(err => {
@@ -35,11 +38,6 @@ export default function Businesses(props) {
       }
       setServerMessage(message)
     })
-  }
-
-  const viewNumber = (e) => {
-    e.preventDefault()
-    console.log('hello')
   }
 
   const handleDelete = (e) => {
@@ -111,10 +109,18 @@ export default function Businesses(props) {
           <p>Saturday: {business.hours.saturday}</p>
           <p>Sunday: {business.hours.sunday}</p>
         </div>
-        <button type='button' onClick={viewNumber}>View Telephone</button>
+
+        {showtelephone ? (
+          <div className='telephone'><p>Telephone: {business.telephone}</p></div>
+          ) : (
+          <button type='button' onClick={e => setShowtelephone(true)}>View Telephone</button>
+          )
+        }
+
         {localStorage.admin ? (
           <button type='button' onClick={e => {if (window.confirm('Are you sure you want to delete this business?')) handleDelete(e)} }>Delete</button>
         ) : null}
+
         {serverMessage}
       </div>
     )
