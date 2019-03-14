@@ -2,18 +2,28 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import './NavBar.css';
 
-export default function NavBar(props) {
+export default function NavBar() {
 
   return (
     <nav>
       {
         localStorage.loggedIn ? (<div>
-          <Link to="/">Home</Link>
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/">LogOut</Link>
+          <Link to="/">
+            <button className='navButton' type='button'>Home</button>
+          </Link>
+
+          <Link to="/dashboard">
+            <button className='navButton' type='button'>Dashboard</button>
+          </Link>
+
+          <Link to="/">
+            <button className='navButton' type='button' onClick={() => {localStorage.clear()}} >LogOut</button>
+          </Link>
         </div>
         ) : (
-          <h2>This Is The Nav Bar <Link to="/">Home</Link></h2>
+          <Link to="/">
+            <button className='navButton' type='button'>Home</button>
+          </Link>
           )
       }
     </nav>
