@@ -8,7 +8,6 @@ export default function Search(props) {
 
   const getLocationCoordinates = async (input) => {
     if(cache[input]) {
-      console.log('no need for another api call')
       return cache[input]
     }
     const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
@@ -18,14 +17,12 @@ export default function Search(props) {
     let lat = data.results[0].locations[0].latLng.lat;
     let long = data.results[0].locations[0].latLng.lng;
     cache[input] = [lat, long]
-    console.log('getting new coordinates', lat, long)
     return [lat, long]
   }
 
   const searchRequest = async (e) => {
     e.preventDefault()
     const [lat, long] = await getLocationCoordinates(props.userLocation)
-    console.log('this is the new state ', props.userLocation, props.radius)
     props.history.push(`/business/search?long=${long}&lat=${lat}&rad=${props.radius}&input=${props.userLocation}`)
   }
 

@@ -29,7 +29,6 @@ export default function Categories(props) {
         title = 'No businesses in this area'
         setCategories('Submit a business')
       }
-      console.log('I made a fetch ')
       setFetchingData(false)
     })
     .catch(err => {
@@ -60,7 +59,6 @@ export default function Categories(props) {
 
   let title;
 
-  console.log('got new data')
   return (
     fetchingData ? (
       <div className='categories'>

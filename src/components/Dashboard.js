@@ -13,7 +13,6 @@ export default function Dashboard() {
   const [categories, setCategories] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
   const [triggerFetch, setTriggerFetch] = useState(1)
-  console.log(triggerFetch)
 
   const fetchCategories = () => {
     return fetch(`${API_BASE_URL}/categories`, {
@@ -24,7 +23,6 @@ export default function Dashboard() {
         return res.json();
       })
       .then(rcvdCategories => {
-        console.log('i Made a fetch')
         setServerMessage(null)
         if (rcvdCategories.length > 0) {
           setCategories(rcvdCategories)
