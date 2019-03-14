@@ -7,14 +7,33 @@ const {API_BASE_URL} = require('../config');
 
 export default function BusinessesList(props) {
   const [businesses, setBusinesses] = useState('');
+  const [serverMessage, setServerMessage] = useState('Fetching Data');
   const [fetchingData, setFetchingData] = useState(true)
 
-  const fetchCategory = async () => {
-    const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
-    const normalize = await normalizeResponseErrors(response)
-    const rcvdBusinesses = await normalize.json()
-    setBusinesses(rcvdBusinesses)
-    setFetchingData(false)
+  const fetchCategory = () => {
+    return fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`, {
+      method: 'GET'
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      return res.json();
+    })
+    .then(rcvdBusinesses => {
+      setBusinesses(rcvdBusinesses)
+      setFetchingData(false)
+    })
+    .catch(err => {
+      console.log(err)
+      let message;
+      if (err.code === 404) {
+        message = err.message;
+      } else if (err.code === 500) {
+        message = 'Internal server error';
+      } else {
+        message = 'Something went wrong, please try again later';
+      }
+      setServerMessage(message)
+    })
   }
   
   useEffect(
@@ -42,7 +61,7 @@ export default function BusinessesList(props) {
   return (
     fetchingData ? (
       <div className='businesses'>
-        <h2>Getting the data insert a spining wheel</h2>
+        <h2>{serverMessage}</h2>
       </div>
       ) : (
         <div className='businesses'>

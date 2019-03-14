@@ -6,26 +6,44 @@ const {API_BASE_URL} = require('../config');
 
 export default function Categories(props) {
   const [categories, setCategories] = useState('');
+  const [serverMessage, setServerMessage] = useState('Fetching Data');
   const [fetchingData, setFetchingData] = useState(true);
 
-  const fetchCategories = async () => {
-    setFetchingData(true)
-    const response = await fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`)
-    const normalize = await normalizeResponseErrors(response)
-    const rcvdCategories = await normalize.json()
-    if (rcvdCategories.length > 0) {
-      title = 'Categories';
-      setCategories(rcvdCategories.map((category, index) => {
-        return (
-          <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
-        )
-      }))
-    } else {
-      title = 'No businesses in this area'
-      setCategories('Submit a business')
-    }
-    console.log('I made a fetch ')
-    setFetchingData(false)
+  const fetchCategories = () => {
+    return fetch(`${API_BASE_URL}${props.location.pathname}${props.location.search}`, {
+      method: 'GET'
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      return res.json();
+    })
+    .then(rcvdCategories => {
+      if (rcvdCategories.length > 0) {
+        title = 'Categories';
+        setCategories(rcvdCategories.map((category, index) => {
+          return (
+            <button type='button' id={category} onClick={searchCategory} key={index} value={category}>{category}</button>
+          )
+        }))
+      } else {
+        title = 'No businesses in this area'
+        setCategories('Submit a business')
+      }
+      console.log('I made a fetch ')
+      setFetchingData(false)
+    })
+    .catch(err => {
+      console.log(err)
+      let message;
+      if (err.code === 404) {
+        message = err.message;
+      } else if (err.code === 500) {
+        message = 'Internal server error';
+      } else {
+        message = 'Something went wrong, please try again later';
+      }
+      setServerMessage(message)
+    })
   }
   
   useEffect(
@@ -46,7 +64,7 @@ export default function Categories(props) {
   return (
     fetchingData ? (
       <div className='categories'>
-        <h2>Getting the data insert a spining wheel</h2>
+        <h2>{serverMessage}</h2>
       </div>
     ) : (
       <div className='categories'>
