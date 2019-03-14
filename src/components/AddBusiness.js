@@ -7,6 +7,7 @@ import { normalizeResponseErrors } from '../functions/normalizeResponse';
 export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
   const [category, setCategory] = useState('');
+  const [unformatedTel, setUnformatedTel] = useState('')
   const [telephone, setTelephone] = useState('')
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
@@ -22,6 +23,7 @@ export default function AddBusiness(props) {
   const reset = () => {
     setBusinessName('')
     setCategory('')
+    setUnformatedTel('')
     setTelephone('')
     setStreet('')
     setCity('')
@@ -45,8 +47,19 @@ export default function AddBusiness(props) {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const formatPhoneNumber = (phoneNumberString) => {
+    let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+      setTelephone('(' + match[1] + ') ' + match[2] + '-' + match[3])
+      return match
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    await formatPhoneNumber(unformatedTel)
 
     const headers = {
       'Content-Type': 'application/json',
@@ -122,20 +135,16 @@ export default function AddBusiness(props) {
 
       <SelectCategory {...props} category={category} setCategory={setCategory} />
 
-      <fieldset key={resetHours}>
-        <legend>Business Hours</legend>
-        {eachDay}
-      </fieldset>
-
       <label htmlFor='telephone' aria-label='telephone-input'>Telephone</label>
       <input 
         id='telephone'
         type='tel'
-        value={telephone}
-        onChange={e => setTelephone(e.target.value)}
-        placeholder='503-123-9876'
-        title='Please enter a telephone number in this format: 503-123-9876'
-        pattern='^\d{3}-\d{3}-\d{4}$'
+        value={unformatedTel}
+        onChange={e => setUnformatedTel(e.target.value)}
+        placeholder='5031239876'
+        // maxLength='10'
+        title='Please enter a telephone number in this format: 5031239876'
+        pattern='^[0-9]{10,10}$'
         name='telephone'
         aria-labelledby='telephone'
         required
@@ -226,6 +235,11 @@ export default function AddBusiness(props) {
           aria-labelledby='longitude code'
           required
         />
+      </fieldset>
+      
+      <fieldset key={resetHours}>
+        <legend>Business Hours</legend>
+        {eachDay}
       </fieldset>
 
       <button type='submit' className='add-business-submit'>Submit</button>
