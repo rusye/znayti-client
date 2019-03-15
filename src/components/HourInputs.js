@@ -9,7 +9,6 @@ export default function HourInput(props) {
       props.onChange(props.name, 'closed')
     } else {
       props.onChange(props.name, `open ${open} close ${close}`)
-      console.log(props.name, `open ${open} close ${close}`)
     }
   }
 

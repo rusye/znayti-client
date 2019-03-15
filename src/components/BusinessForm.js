@@ -48,7 +48,6 @@ export default function BusinessForm(props) {
           value={props.unformatedTel}
           onChange={e => props.setUnformatedTel(e.target.value)}
           placeholder='5031239876'
-          // maxLength='10'
           title='Please enter a telephone number in this format: 5031239876'
           pattern='^[0-9]{10,10}$'
           name='telephone'
