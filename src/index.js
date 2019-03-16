@@ -65,9 +65,6 @@ function App() {
     else if(localStorage.loggedIn && window.location.pathname === '/bigboss/login') {
       const RedirectToDashboard = () => <Redirect to='/dashboard' />
       return RedirectToDashboard
-    } 
-    else if(!localStorage.loggedIn && window.location.pathname === '/bigboss/login') {
-      return Component
     }
     else {
       const RedirectToHome = () => <Redirect to='/bigboss/login' />
