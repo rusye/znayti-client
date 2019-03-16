@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { API_BASE_URL } from '../config';
 import BusinessForm from './BusinessForm'
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
@@ -6,7 +6,6 @@ import { normalizeResponseErrors } from '../functions/normalizeResponse';
 export default function AddBusiness(props) {
   const [businessName, setBusinessName] = useState('');
   const [category, setCategory] = useState('');
-  const [unformatedTel, setUnformatedTel] = useState('')
   const [telephone, setTelephone] = useState('')
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
@@ -21,7 +20,6 @@ export default function AddBusiness(props) {
   const reset = () => {
     setBusinessName('')
     setCategory('')
-    setUnformatedTel('')
     setTelephone('')
     setStreet('')
     setCity('')
@@ -31,14 +29,6 @@ export default function AddBusiness(props) {
     setLongitude('')
     setHours({})
     setResetHours(true)
-  }
-
-  const formatPhoneNumber = (phoneNumberString) => {
-    let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
-    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/)
-    if (match) {
-      setTelephone('(' + match[1] + ') ' + match[2] + '-' + match[3])
-    }
   }
 
   const handleSubmit = async (e) => {
@@ -63,7 +53,7 @@ export default function AddBusiness(props) {
           zip,
           'coordinates': [longitude, latitude]
         },
-        hours,
+        "hours": hours,
         telephone
       })
     }))
@@ -93,57 +83,48 @@ export default function AddBusiness(props) {
   const handleHoursChange = (day, value) => {
     hours[day] = value
   }
-
-  useEffect(
-    () => {
-      formatPhoneNumber(unformatedTel)
-    }, [unformatedTel]
-  )
   
   return(
-    <fieldset>
-      <legend>Add New Business</legend>
-      <BusinessForm 
-        handleSubmit={handleSubmit}
+    <form className='add-business-form' onSubmit={handleSubmit}>
+      <fieldset>
+        <legend>Add New Business</legend>
+        <BusinessForm
+          {...props}
 
-        {...props}
+          handleHoursChange={handleHoursChange}
 
-        handleHoursChange={handleHoursChange}
+          businessName={businessName}
+          setBusinessName={setBusinessName}
 
-        businessName={businessName}
-        setBusinessName={setBusinessName}
+          category={category}
+          setCategory={setCategory}
 
-        category={category}
-        setCategory={setCategory}
+          telephone={telephone}
+          setTelephone={setTelephone}
 
-        unformatedTel={unformatedTel}
-        setUnformatedTel={setUnformatedTel}
+          street={street}
+          setStreet={setStreet}
 
-        telephone={telephone}
-        setTelephone={setTelephone}
+          city={city}
+          setCity={setCity}
 
-        street={street}
-        setStreet={setStreet}
+          state={state}
+          setState={setState}
 
-        city={city}
-        setCity={setCity}
+          zip={zip}
+          setZip={setZip}
 
-        state={state}
-        setState={setState}
+          latitude={latitude}
+          setLatitude={setLatitude}
 
-        zip={zip}
-        setZip={setZip}
+          longitude={longitude}
+          setLongitude={setLongitude}
 
-        latitude={latitude}
-        setLatitude={setLatitude}
-
-        longitude={longitude}
-        setLongitude={setLongitude}
-
-        resetHours={resetHours}
-        setResetHours={setResetHours}
-      />
-      {serverMessage}
-    </fieldset>
+          resetHours={resetHours}
+          setResetHours={setResetHours}
+        />
+        {serverMessage}
+      </fieldset>
+    </form>
   )
 }
