@@ -6,9 +6,9 @@ export default function HourInput(props) {
 
   const handleUpdate = () => {
     if (open === '' || close === '') {
-      props.onChange(props.name, 'closed')
+      props.onChange(props.name, {"open": '', "close": ''})
     } else {
-      props.onChange(props.name, `open ${open} close ${close}`)
+      props.onChange(props.name, {open, close})
     }
   }
 
