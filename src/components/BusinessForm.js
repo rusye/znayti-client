@@ -7,14 +7,33 @@ export default function BusinessForm(props) {
 
   const populateDays = () => {
     props.setResetHours(false)
-    let days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-    setEachDay(days.map((day, index) => {
-      return (
-        <fieldset key={index}>
-          <HourInputs name={day} onChange={props.handleHoursChange} />
-        </fieldset>
-      )
-    }))
+    let days;
+
+    if(props.hours) {
+      days = Object.keys(props.hours)
+  
+      days.forEach(day => {
+        setEachDay(days.map((day, index) => {
+          return (
+            <fieldset key={index}>
+              <HourInputs open={props.hours[day].open} close={props.hours[day].close} name={day} onChange={props.handleHoursChange} />
+            </fieldset>
+          )
+        }))
+      })
+    } 
+    
+    else {
+      days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+      setEachDay(days.map((day, index) => {
+        return (
+          <fieldset key={index}>
+            <HourInputs name={day} onChange={props.handleHoursChange} />
+          </fieldset>
+        )
+      }))
+    }
   }
 
   useEffect(
