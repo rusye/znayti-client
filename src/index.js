@@ -59,12 +59,8 @@ function App() {
   }
 
   function EnforceAuthentication(Component) {
-    if (localStorage.loggedIn && window.location.pathname === '/dashboard') {
+    if (localStorage.loggedIn) {
       return Component
-    } 
-    else if(localStorage.loggedIn && window.location.pathname === '/bigboss/login') {
-      const RedirectToDashboard = () => <Redirect to='/dashboard' />
-      return RedirectToDashboard
     }
     else {
       const RedirectToHome = () => <Redirect to='/bigboss/login' />
@@ -90,7 +86,7 @@ function App() {
             <Route exact path='/business/search' component={Categories} />
             <Route exact path='/business/:category/search' component={BusinessList} />
             <Route exact path='/business/:id' component={Business} />
-            <Route exact path='/bigboss/login' component={EnforceAuthentication(AdminLogin)} />
+            <Route exact path='/bigboss/login' component={AdminLogin} />
           </Switch>
         </main>
       </div>
