@@ -45,7 +45,7 @@ export default function BusinessesList(props) {
   const viewBusiness = (e) => {
     e.preventDefault()
     let businessId = e.target.id
-    props.history.push(`/business/${businessId}`)
+    props.history.push(`/business/${businessId}/${props.location.search}`)
   }
 
   let business;
