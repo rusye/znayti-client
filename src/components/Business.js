@@ -8,6 +8,7 @@ const {API_BASE_URL} = require('../config');
 export default function Businesses(props) {
   const [business, setBusiness] = useState('');
   const [businessId, setBusinessId] = useState('')
+  const [day, setDay] = useState('')
   const [serverMessage, setServerMessage] = useState(null);
   const [fetchingData, setFetchingData] = useState(true)
   const [showtelephone, setShowtelephone] = useState(false)
@@ -27,7 +28,7 @@ export default function Businesses(props) {
   const [longitude, setLongitude] = useState('');
   const [hours, setHours] = useState({})
   const [resetHours, setResetHours] = useState(false)
-  console.log(hours)
+  // console.log(hours)
 
   const setStates = (rcvdBusiness) => {
     setBusinessName(rcvdBusiness.name)
@@ -42,21 +43,6 @@ export default function Businesses(props) {
     setHours(rcvdBusiness.hours)
     return rcvdBusiness
   }
-
-  // Delete this if I don't need it
-  // const reset = () => {
-  //   setBusinessName('')
-  //   setCategory('')
-  //   setTelephone('')
-  //   setStreet('')
-  //   setCity('')
-  //   setState('')
-  //   setZip('')
-  //   setLatitude('')
-  //   setLongitude('')
-  //   setHours({})
-  //   setResetHours(true)
-  // }
 
   const formatPhoneNumber = (phoneNumberString) => {
     let cleaned = ('' + phoneNumberString).replace(/\D/g, '')
@@ -104,6 +90,7 @@ export default function Businesses(props) {
       setBusiness(rcvdBusiness)
       setStates(rcvdBusiness)
       setServerMessage(null)
+      displayHours(rcvdBusiness.hours)
       setFetchingData(false)
     })
     .catch(err => {
@@ -162,14 +149,23 @@ export default function Businesses(props) {
     e.preventDefault()
   }
 
-  // const displayHours = () => {
-  //   const keys = Object.keys(obj) // [ 'Monday', 'Tuesday' ]
+  const displayHours = (obj) => {
+    const days = Object.keys(obj)
   
-  //   keys.forEach(key => {
-  //     console.log('Name of key is', key)
-  //     console.log('Value is', o[key])
-  //   })
-  // }
+    days.forEach(day => {
+      setDay(days.map((day, index) => {
+        return (
+          <p key={index}> {day}: 
+          {(obj[day].open === obj[day].close) ? (
+            ' closed'
+            ) : (
+              ` open ${obj[day].open} close ${obj[day].close}`
+            ) }
+          </p>
+        )
+      }))
+    })
+  }
 
   const updateModal = (e) => {
     modal ? setModal(false) : setModal(true)
@@ -197,15 +193,10 @@ export default function Businesses(props) {
           <p>State: {business.address.state}</p>
           <p>Zip: {business.address.zip}</p>
         </div>
+        
         <div className='hours'>
           <h3>Hours</h3>
-          <p>Monday: open {business.hours.Monday.open} close {business.hours.Monday.close}</p>
-          <p>Tuesday: open {business.hours.Tuesday.open} close {business.hours.Tuesday.close}</p>
-          <p>Wednesday: open {business.hours.Wednesday.open} close {business.hours.Wednesday.close}</p>
-          <p>Thursday: open {business.hours.Thursday.open} close {business.hours.Thursday.close}</p>
-          <p>Friday: open {business.hours.Friday.open} close {business.hours.Friday.close}</p>
-          <p>Saturday: open {business.hours.Saturday.open} close {business.hours.Saturday.close}</p>
-          <p>Sunday: open {business.hours.Sunday.open} close {business.hours.Sunday.close}</p>
+          {day}
         </div>
 
         {showtelephone ? (
@@ -225,6 +216,9 @@ export default function Businesses(props) {
               <legend>Edit Business</legend>
               <section className='container'>
                 <BusinessForm 
+
+                  hours={hours}
+
                   handleSubmit={handleEdit}
 
                   categories={categories}
