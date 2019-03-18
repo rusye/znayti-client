@@ -18,7 +18,6 @@ export default function Businesses(props) {
   const [businessName, setBusinessName] = useState('');
   const [categories, setCategories] = useState('')
   const [category, setCategory] = useState('');
-  // need to reformat the telephone back to regular for this
   const [telephone, setTelephone] = useState('')
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
@@ -149,6 +148,58 @@ export default function Businesses(props) {
     e.preventDefault()
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+
+    return (fetch(`${API_BASE_URL}/business/${businessId}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({
+        'user': localStorage.userId,
+        'id': businessId,
+        'name': businessName,
+        category,
+        'address': {
+          street,
+          city,
+          state,
+          zip,
+          'coordinates': [longitude, latitude]
+        },
+        "hours": hours,
+        telephone
+      })
+    }))
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      setServerMessage(null);
+      // reset()
+      setServerMessage('Business successfully updated.')
+      setTimeout(() => { 
+        setServerMessage(null)
+        fetchBusiness()
+        updateModal()
+      }, 4000)
+    })
+    .catch(err => {
+      console.log(err)
+      let message;
+      if (err.code === 422 || 400) {
+        message = err.message;
+      } else if (err.code === 500) {
+        message = 'Internal server error';
+      } else {
+        message = 'Something went wrong, please try again later';
+      }
+      setServerMessage(message)
+    })
+  };
+
   const displayHours = (obj) => {
     const days = Object.keys(obj)
   
@@ -207,7 +258,7 @@ export default function Businesses(props) {
         }
 
         {modal ? (<section className='modal forms' aria-live='assertive'>
-          <form className='modal-content animate'>
+          <form className='modal-content animate' onSubmit={handleSubmit}>
             <div className="imgcontainer">
               <span className="close" onClick={updateModal} title="Close Form">&times;</span>
             </div>
@@ -257,8 +308,9 @@ export default function Businesses(props) {
                 />
               </section>
             </fieldset>
+            {serverMessage}
           </form>
-          {serverMessage}
+          {/* {serverMessage} */}
         </section>) : null}
 
         {localStorage.admin ? (
