@@ -1,23 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './Search.css';
-const {MAPQUEST_API} = require('../config');
+import { API_BASE_URL } from '../config';
+import { normalizeResponseErrors } from '../functions/normalizeResponse';
 
 const cache = {}
 
 export default function Search(props) {
+  const [serverMessage, setServerMessage] = useState(null);
 
-  const getLocationCoordinates = async (input) => {
+  const getLocationCoordinates = (input) => {
     if(cache[input]) {
       return cache[input]
     }
-    const GEO_SEARCH_URL = 'https://www.mapquestapi.com/geocoding/v1/address';
-    const key = `?key=${MAPQUEST_API}`
-    const results = await fetch(GEO_SEARCH_URL + key + '&location=' + input)
-    const data = await results.json()
-    let lat = data.results[0].locations[0].latLng.lat;
-    let long = data.results[0].locations[0].latLng.lng;
-    cache[input] = [lat, long]
-    return [lat, long]
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    };
+
+    return (fetch(`${API_BASE_URL}/location`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        'location': props.userLocation
+      })
+    }))
+    .then(res => normalizeResponseErrors(res))
+    .then(res => {
+      return res.json();
+    })
+    .then(res => {
+      setServerMessage(null)
+      cache[input] = [res.lat, res.long]
+      return [res.lat, res.long]
+    })
+    .catch(err => {
+      console.log(err)
+      let message = 'Something went wrong, please try again later';
+      setServerMessage(message)
+    })
   }
 
   const searchRequest = async (e) => {
@@ -49,6 +70,7 @@ export default function Search(props) {
           <option value='3963.2'>Any</option>
         </select>
       <button type='submit'>Search</button>
+      {serverMessage}
     </form>
   )
 }
