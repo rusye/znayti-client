@@ -62,6 +62,9 @@ function App() {
     if (localStorage.loggedIn) {
       return Component
     }
+    else if (!localStorage.loggedIn) {
+      return Component
+    }
     else {
       const RedirectToHome = () => <Redirect to='/bigboss/login' />
       return RedirectToHome
@@ -86,7 +89,8 @@ function App() {
             <Route exact path='/business/search' component={Categories} />
             <Route exact path='/business/:category/search' component={BusinessList} />
             <Route exact path='/business/:id' component={Business} />
-            <Route exact path='/bigboss/login' component={AdminLogin} />
+            {/* <Route exact path='/bigboss/login' component={AdminLogin} /> */}
+            <Route exact path='/bigboss/login' component={EnforceAuthentication(AdminLogin)} />
           </Switch>
         </main>
       </div>
