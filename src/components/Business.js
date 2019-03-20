@@ -261,10 +261,21 @@ export default function Businesses(props) {
         <h2>{business.name}</h2>
         <div className='address'>
           <h3>Address</h3>
-          <p>Street: {business.address.street}</p>
-          <p>City: {business.address.city}</p>
-          <p>State: {business.address.state}</p>
-          <p>Zip: {business.address.zip}</p>
+          <address>
+            <span>
+              {business.address.street},
+              &nbsp;{business.address.city},
+              &nbsp;{business.address.state}
+              &nbsp;{business.address.zip}
+            </span>
+          </address>
+          <a target='_blank' 
+            href={`https://www.google.com/maps/place/
+              ${business.address.street},
+              +${business.address.city},
+              +${business.address.state}
+              +${business.address.zip}`}
+          >Map</a>
         </div>
         
         <div className='hours'>
@@ -273,7 +284,9 @@ export default function Businesses(props) {
         </div>
 
         {showtelephone ? (
-          <div className='telephone'><p>Telephone: {formatPhoneNumber(business.telephone)}</p></div>
+          <form role='link' action={`tel:${business.telephone}`}>
+            <input type="submit" value={`Tel: ${formatPhoneNumber(business.telephone)}`} />
+          </form>
           ) : (
           <button type='button' onClick={e => setShowtelephone(true)}>View Telephone</button>
           )
@@ -332,7 +345,6 @@ export default function Businesses(props) {
             </fieldset>
             {serverMessage}
           </form>
-          {/* {serverMessage} */}
         </section>) : null}
 
         {localStorage.admin ? (
