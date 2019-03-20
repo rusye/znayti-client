@@ -284,9 +284,10 @@ export default function Businesses(props) {
         </div>
 
         {showtelephone ? (
-          <form role='link' action={`tel:${business.telephone}`}>
-            <input type="submit" value={`Tel: ${formatPhoneNumber(business.telephone)}`} />
-          </form>
+          // <form role='link' action={`tel:${business.telephone}`}>
+          //   <input type="submit" value={`Tel: ${formatPhoneNumber(business.telephone)}`} />
+          // </form>
+          <a href={`tel:${business.telephone}`}>Tel: {formatPhoneNumber(business.telephone)}</a>
           ) : (
           <button type='button' onClick={e => setShowtelephone(true)}>View Telephone</button>
           )
