@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from '../functions/normalizeResponse';
 import './Dashboard.css';
@@ -38,7 +39,9 @@ export default function Dashboard() {
 
   useEffect(
     () => {
-      fetchCategories()
+      if(localStorage.loggedIn) {
+        fetchCategories()
+      }
     }, [triggerFetch]
   )
 
@@ -65,45 +68,49 @@ export default function Dashboard() {
   )
 
   return (
-    <section className='Dashboard'>
-      <button className='collapsible'>Add Category</button>
-      <div className='content'>
-        <fieldset>
-          <legend>Add New Category</legend>
-          <AddCategory updateCategories={updateCategories}/>
-        </fieldset>
-      </div>
+    !localStorage.loggedIn ? (
+      <Redirect to='/bigboss/login' /> 
+    ) : (
+      <section className='Dashboard'>
+        <button className='collapsible'>Add Category</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Add New Category</legend>
+            <AddCategory updateCategories={updateCategories}/>
+          </fieldset>
+        </div>
 
-      <button className='collapsible'>Add Business</button>
-      <div className='content'>
-        <AddBusiness categories={categories}/>
-      </div>
+        <button className='collapsible'>Add Business</button>
+        <div className='content'>
+          <AddBusiness categories={categories}/>
+        </div>
 
-      <button className='collapsible'>Add Admin User</button>
-      <div className='content'>
-        <fieldset>
-          <legend>Add New Admin</legend>
-          <AddAdminUser />
-        </fieldset>
-      </div>
+        <button className='collapsible'>Add Admin User</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Add New Admin</legend>
+            <AddAdminUser />
+          </fieldset>
+        </div>
 
-      <button className='collapsible'>Edit Category</button>
-      <div className='content'>
-        <fieldset>
-          <legend>Edit A Category</legend>
-          <EditCategory categories={categories} onChange={setTriggerFetch}/>
-        </fieldset>
-      </div>
+        <button className='collapsible'>Edit Category</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Edit A Category</legend>
+            <EditCategory categories={categories} onChange={setTriggerFetch}/>
+          </fieldset>
+        </div>
 
-      <button className='collapsible'>Delete Category</button>
-      <div className='content'>
-        <fieldset>
-          <legend>Delete A Category</legend>
-          <DeleteCategory categories={categories} onChange={setTriggerFetch}/>
-        </fieldset>
-      </div>
+        <button className='collapsible'>Delete Category</button>
+        <div className='content'>
+          <fieldset>
+            <legend>Delete A Category</legend>
+            <DeleteCategory categories={categories} onChange={setTriggerFetch}/>
+          </fieldset>
+        </div>
 
-      {serverMessage}
-    </section>
+        {serverMessage}
+      </section>
+    )
   );
 }

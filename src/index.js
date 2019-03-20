@@ -1,6 +1,6 @@
 import React, { useState, useEffect }  from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './index.css';
 import Search from './components/Search';
 import NavBar from './components/NavBar';
@@ -58,19 +58,6 @@ function App() {
     )
   }
 
-  function EnforceAuthentication(Component) {
-    if (localStorage.loggedIn) {
-      return Component
-    }
-    else if (!localStorage.loggedIn) {
-      return Component
-    }
-    else {
-      const RedirectToHome = () => <Redirect to='/bigboss/login' />
-      return RedirectToHome
-    }
-  }
-
   return (
     <Router>
       <div className='App'>
@@ -85,12 +72,11 @@ function App() {
           </Switch>
 
           <Switch>
-            <Route exact path='/dashboard' component={EnforceAuthentication(Dashboard)} />
+            <Route exact path='/dashboard' component={Dashboard} />
             <Route exact path='/business/search' component={Categories} />
             <Route exact path='/business/:category/search' component={BusinessList} />
             <Route exact path='/business/:id' component={Business} />
-            {/* <Route exact path='/bigboss/login' component={AdminLogin} /> */}
-            <Route exact path='/bigboss/login' component={EnforceAuthentication(AdminLogin)} />
+            <Route exact path='/bigboss/login' component={AdminLogin} />
           </Switch>
         </main>
       </div>
