@@ -269,7 +269,7 @@ export default function Businesses(props) {
               &nbsp;{business.address.zip}
             </span>
           </address>
-          <a target='_blank' 
+          <a target='_blank' rel="noopener noreferrer" 
             href={`https://www.google.com/maps/place/
               ${business.address.street},
               +${business.address.city},
