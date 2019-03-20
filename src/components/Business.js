@@ -200,6 +200,28 @@ export default function Businesses(props) {
     })
   };
 
+  const timeDispaly = (time) => {
+
+    time = time.split(':');
+
+    let hours = Number(time[0]);
+    let minutes = Number(time[1]);
+    
+    let timeValue;
+
+    if (hours > 0 && hours <= 12) {
+      timeValue= "" + hours;
+    } else if (hours > 12) {
+      timeValue= "" + (hours - 12);
+    } else if (hours === 0) {
+      timeValue= "12";
+    }
+    
+    timeValue += (minutes < 10) ? ":0" + minutes : ":" + minutes;
+    timeValue += (hours >= 12) ? "pm" : "am";
+    return timeValue
+  }
+
   const displayHours = (obj) => {
     const days = Object.keys(obj)
   
@@ -208,9 +230,9 @@ export default function Businesses(props) {
         return (
           <p key={index}> {day}: 
           {(obj[day].open === obj[day].close) ? (
-            ' closed'
+            ' Closed'
             ) : (
-              ` open ${obj[day].open} close ${obj[day].close}`
+              ` ${timeDispaly(obj[day].open)}-${timeDispaly(obj[day].close)}`
             ) }
           </p>
         )
