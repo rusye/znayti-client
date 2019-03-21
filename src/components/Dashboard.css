@@ -25,11 +25,12 @@
 
 .collapsible:after {
   content: '\f067';
-  font-family: "fontawesome";
+  font-family: "Font Awesome 5 Free";
   font-size: 17px;
   color: black;
   float: right;
   margin-left: 5px;
+  font-weight: 900;
 }
 
 .active:after {
