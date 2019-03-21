@@ -49,28 +49,28 @@ export default function Search(props) {
 
   return (
     <form className='search-bar' onSubmit={searchRequest}>
-      <label htmlFor='search' aria-label='search-form'>City, State</label>
       <input 
-        type='text' 
-        id='search' 
+        aria-label='city and state'
+        type='text'
         name='search' 
         value={props.userLocation} 
         onChange={e => props.updateLocation(e.target.value)} 
-        placeholder='City, State or Zip Code'
+        placeholder='City, State'
         required>
       </input>
+
+      <select aria-label='radius' value={props.radius} onChange={e => props.updateRadius(e.target.value)}>
+        <option value='10'>10 Miles</option>
+        <option value='20'>20 Miles</option>
+        <option value='50'>50 Miles</option>
+        <option value='100'>100 Miles</option>
+        <option value='200'>200 Miles</option>
+        <option value='3963.2'>Any</option>
+      </select>
+
+      <button aria-label='search' type='submit'><i className="fas fa-search"></i></button>
       
-      <label htmlFor='radius' aria-label='radius-input'>Radius</label>
-        <select id='radius' value={props.radius} onChange={e => props.updateRadius(e.target.value)}>
-          <option value='10'>10</option>
-          <option value='20'>20</option>
-          <option value='50'>50</option>
-          <option value='100'>100</option>
-          <option value='200'>200</option>
-          <option value='3963.2'>Any</option>
-        </select>
-      <button type='submit'>Search</button>
       {serverMessage}
-    </form>
+   </form>
   )
 }
