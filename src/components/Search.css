@@ -1,0 +1,48 @@
+.search-bar {
+  color: black;
+}
+
+.search-bar select, .search-bar option {
+  width: 130px;
+  text-align-last: center;
+}
+
+.search-bar input {
+  max-width: 200px;
+}
+
+.search-bar input, .search-bar select {
+  text-align: center;
+}
+
+.search-bar button {
+  width: 35.96px;
+  border: 2px;
+  padding: 1px 6px 1px 6px;
+}
+
+.search-bar input, .search-bar button, .search-bar select {
+  height: 32px;
+  font-size: 20px;
+}
+
+@media (max-width:425px) {
+  .search-bar {
+    width: 200px;
+  }
+
+  .search-bar input, .search-bar select {
+    margin: 5px 0 5px 0;
+    max-width: 100%
+  }
+
+  .search-bar select {
+    width: 164.04px;
+  }
+}
+
+@media (min-width:425px) {
+  .search-bar input, select {
+    margin-right: 5px
+  }
+}
