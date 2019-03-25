@@ -19,7 +19,6 @@
 
 .search-bar button {
   width: 60px;
-  vertical-align: bottom;
 }
 
 .search {
@@ -32,6 +31,10 @@
 }
 
 @media (max-width:426px) {
+  .search-bar button {
+    position: relative;
+    top: 6px;
+  }
   .search-bar {
     width: 200px;
   }
@@ -41,7 +44,10 @@
   }
 }
 
-@media (min-width:425px) {
+@media (min-width:426px) {
+  .search-bar button {
+    vertical-align: bottom;
+  }
   .search-bar input, select {
     margin-right: 5px
   }
