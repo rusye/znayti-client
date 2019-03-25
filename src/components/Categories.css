@@ -1,15 +1,21 @@
-.categories {
-  text-align: center;
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.categoryButton {
+  width: 300px;
+  min-height: 50px;
+  font-size: 25px;
+  /* background-color: #f76c6c; */
+  background-color: #a8d0e6;
 }
 
-.categories-link {
-  color: #61dafb;
+.categoryButton:hover {
+  /* background-color: #a8d0e6 */
+  background-color: #f76c6c;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding-bottom: 8px;
 }
