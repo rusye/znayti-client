@@ -1,16 +1,19 @@
-import React from 'react';
-import './BusinessCard';
-
+import React from "react";
+import "./BusinessCard.css";
 
 export default function BusinessCard(props) {
   return (
-    <div className='listedBusinesses' key={props.business.id}>
-      <h3>{props.business.name}</h3>
-      <div className='location'>
-        {props.business.city}
-        {props.business.state}
-      </div>
-      <button type='button' id={props.business.id} key={props.business.id} onClick={props.viewBusiness}>View Business</button>
-    </div>
+    <button
+      className="businessCard"
+      type="button"
+      id={props.business.id}
+      key={props.business.id}
+      onClick={props.viewBusiness}
+    >
+      <h3 id={props.business.id}>{props.business.name}</h3>
+      <span id={props.business.id} className="location">
+        {props.business.city}, &nbsp;{props.business.state}
+      </span>
+    </button>
   );
 }
