@@ -1,0 +1,20 @@
+.businessCard {
+  width: 300px;
+  /* background-color: #f76c6c!important; */
+  background-color: #a8d0e6!important;
+  padding: 10px;
+}
+
+.businessCard h3 {
+  font-size: 25px;
+  margin: 0 0 10px 0;
+}
+
+.businessCard span {
+  font-size: 20px;
+}
+
+.businessCard:hover {
+  background-color: #f76c6c!important;
+  /* background-color: #a8d0e6!important */
+}
