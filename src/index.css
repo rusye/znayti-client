@@ -4,25 +4,51 @@
 
 html, body {
   font-family: Verdana, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
 }
 
 body {
-  margin: 0;
+  background-color: #24305e;
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
+#root {
   text-align: center;
-  background-color: #24305e;
-  min-height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+.App {
+  height: 100vh;
+  padding: 8px;
+}
+
+.componentLayout {
+  margin-top: 48px;
+  color: white;
+  text-align: center;
+}
+
+.componentResults {
+  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  /* font-size: calc(10px + 2vmin); */
   color: white;
+}
+
+.fullCentered {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
