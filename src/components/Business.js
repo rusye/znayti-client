@@ -3,6 +3,7 @@ import BusinessForm from "./BusinessForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
 import "./Business.css";
+import phoneIcon from "../images/phone.svg";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
@@ -16,6 +17,7 @@ export default function Businesses(props) {
 
   // This is for the form
   const [businessName, setBusinessName] = useState("");
+  const [contactName, setContactName] = useState("");
   const [categories, setCategories] = useState("");
   const [category, setCategory] = useState("");
   const [telephone, setTelephone] = useState("");
@@ -25,12 +27,14 @@ export default function Businesses(props) {
   const [zip, setZip] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const [googlePlace, setGooglePlace] = useState("");
   const [hours, setHours] = useState({});
   const [resetHours, setResetHours] = useState(false);
   // console.log(hours)
 
   const setStates = rcvdBusiness => {
     setBusinessName(rcvdBusiness.name);
+    setContactName(rcvdBusiness.contactName);
     setCategory(rcvdBusiness.category._id);
     setStreet(rcvdBusiness.address.street);
     setTelephone(rcvdBusiness.telephone);
@@ -39,6 +43,7 @@ export default function Businesses(props) {
     setZip(rcvdBusiness.address.zip);
     setLatitude(rcvdBusiness.address.coordinates[1]);
     setLongitude(rcvdBusiness.address.coordinates[0]);
+    setGooglePlace(rcvdBusiness.googlePlace);
     setHours(rcvdBusiness.hours);
     return rcvdBusiness;
   };
@@ -161,9 +166,11 @@ export default function Businesses(props) {
       headers,
       body: JSON.stringify({
         user: localStorage.userId,
+        contactName: contactName,
         id: businessId,
         name: businessName,
         category,
+        googlePlace,
         address: {
           street,
           city,
@@ -226,16 +233,6 @@ export default function Businesses(props) {
     days.forEach(day => {
       setDay(
         days.map((day, index) => {
-          // return (
-          //   <span key={index}> {day}:
-          //   {(obj[day].open === obj[day].close) ? (
-          //     ' Closed'
-          //     ) : (
-          //       ` ${timeDispaly(obj[day].open)}-${timeDispaly(obj[day].close)}`
-          //     ) }
-          //   <br/></span>
-          // )
-
           return (
             <div className="day" key={index}>
               <span className="dayDetails">{day} </span>
@@ -264,121 +261,126 @@ export default function Businesses(props) {
   }, []);
 
   return (
-    <div className="componentLayout">
-      <NavBar />
-
-      {fetchingData ? (
-        <h2>{serverMessage}</h2>
-      ) : (
-        <>
-          <Search {...props} />
-          <div className="componentResults business">
-            <h2>{business.name}</h2>
-            <div className="padding">
-              <h3>Address</h3>
-              <address>
-                <span>
-                  {business.address.street}, &nbsp;{business.address.city},
-                  &nbsp;{business.address.state}
-                  &nbsp;{business.address.zip}
-                </span>
-              </address>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://www.google.com/maps/place/
-                ${business.address.street},
-                +${business.address.city},
-                +${business.address.state}
-                +${business.address.zip}`}
-              >
-                Map
-              </a>
+    <>
+      {modal ? (
+        <section className="modal forms" aria-live="assertive">
+          <form
+            className="modal-content animate padding"
+            onSubmit={handleSubmit}
+          >
+            <div className="imgcontainer">
+              <span className="close" onClick={updateModal} title="Close Form">
+                &times;
+              </span>
             </div>
 
-            <div className="padding hours">
-              <h3>Hours</h3>
-              {day}
-            </div>
-
-            <a href={`tel:${business.telephone}`}>
-              Tel: {formatPhoneNumber(business.telephone)}
-            </a>
-
-            {modal ? (
-              <section className="modal forms" aria-live="assertive">
-                <form className="modal-content animate" onSubmit={handleSubmit}>
-                  <div className="imgcontainer">
-                    <span
-                      className="close"
-                      onClick={updateModal}
-                      title="Close Form"
-                    >
-                      &times;
-                    </span>
-                  </div>
-
-                  <fieldset>
-                    <legend>Edit Business</legend>
-                    <section className="container">
-                      <BusinessForm
-                        hours={hours}
-                        handleSubmit={handleEdit}
-                        categories={categories}
-                        handleHoursChange={handleHoursChange}
-                        businessName={businessName}
-                        setBusinessName={setBusinessName}
-                        category={category}
-                        setCategory={setCategory}
-                        telephone={telephone}
-                        setTelephone={setTelephone}
-                        street={street}
-                        setStreet={setStreet}
-                        city={city}
-                        setCity={setCity}
-                        state={state}
-                        setState={setState}
-                        zip={zip}
-                        setZip={setZip}
-                        latitude={latitude}
-                        setLatitude={setLatitude}
-                        longitude={longitude}
-                        setLongitude={setLongitude}
-                        resetHours={resetHours}
-                        setResetHours={setResetHours}
-                      />
-                    </section>
-                  </fieldset>
-                  {serverMessage}
-                </form>
+            <fieldset>
+              <legend>Edit Business</legend>
+              <section className="container">
+                <BusinessForm
+                  hours={hours}
+                  handleSubmit={handleEdit}
+                  categories={categories}
+                  handleHoursChange={handleHoursChange}
+                  businessName={businessName}
+                  setBusinessName={setBusinessName}
+                  contactName={contactName}
+                  setContactName={setContactName}
+                  category={category}
+                  setCategory={setCategory}
+                  telephone={telephone}
+                  setTelephone={setTelephone}
+                  street={street}
+                  setStreet={setStreet}
+                  city={city}
+                  setCity={setCity}
+                  state={state}
+                  setState={setState}
+                  zip={zip}
+                  setZip={setZip}
+                  latitude={latitude}
+                  setLatitude={setLatitude}
+                  longitude={longitude}
+                  setLongitude={setLongitude}
+                  googlePlace={googlePlace}
+                  setGooglePlace={setGooglePlace}
+                  resetHours={resetHours}
+                  setResetHours={setResetHours}
+                />
               </section>
-            ) : null}
-
-            {localStorage.admin ? (
-              <div>
-                <button
-                  type="button"
-                  onClick={e => {
-                    if (
-                      window.confirm(
-                        "Are you sure you want to delete this business?"
-                      )
-                    )
-                      handleDelete(e);
-                  }}
-                >
-                  Delete
-                </button>
-                <button type="button" onClick={updateModal}>
-                  Edit
-                </button>
-              </div>
-            ) : null}
-
+            </fieldset>
             {serverMessage}
-          </div>
-        </>
-      )}
-    </div>
+          </form>
+        </section>
+      ) : null}{" "}
+      <div className="componentLayout">
+        <NavBar />
+
+        {fetchingData ? (
+          <h2>{serverMessage}</h2>
+        ) : (
+          <>
+            <Search {...props} />
+            <div className="componentResults business">
+              <h2>{business.name}</h2>
+              {business.contactName ? (
+                <span>{business.contactName}</span>
+              ) : null}
+
+              <a className="contactInfo" href={`tel:${business.telephone}`}>
+                <img className="icon" src={phoneIcon} alt="phone" />
+                &nbsp;{formatPhoneNumber(business.telephone)}
+              </a>
+
+              <div className="padding">
+                <h3>Address</h3>
+                <address>
+                  <span>
+                    {business.address.street}, &nbsp;{business.address.city},
+                    &nbsp;{business.address.state}
+                    &nbsp;{business.address.zip}
+                  </span>
+                </address>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={business.googlePlace}
+                >
+                  Map
+                </a>
+              </div>
+
+              <div className="padding hours">
+                <h3>Hours</h3>
+                {day}
+              </div>
+
+              {localStorage.admin ? (
+                <div>
+                  <button
+                    type="button"
+                    onClick={e => {
+                      if (
+                        window.confirm(
+                          "Are you sure you want to delete this business?"
+                        )
+                      )
+                        handleDelete(e);
+                    }}
+                  >
+                    Delete
+                  </button>
+                  <button type="button" onClick={updateModal}>
+                    Edit
+                  </button>
+                </div>
+              ) : null}
+
+              {serverMessage}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 }
