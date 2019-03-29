@@ -153,6 +153,7 @@ nav {
     display: none!important;
   }
   .menu {
+    position: static;
     height: 32px;
     display: flex!important;
     justify-content: center!important;

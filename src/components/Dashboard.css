@@ -1,10 +1,12 @@
 .collapsible {
-  background-color: #777;
-  color: white;
+  background-color: #a8d0e6;
+  color: black;
   cursor: pointer;
   padding: 10px;
   height: 50px;
   width: 100%;
+  max-width: 450px;
+  position: static;
   border: none;
   text-align: left;
   outline: none;
@@ -12,16 +14,18 @@
 }
 
 .active, .collapsible:hover {
-  background-color: #555;
+  background-color: #6D9FE9;
 }
 
 .content {
-  padding: 0 18px;
-  max-height: 0;
+  /* padding: 0 18px; */
+  height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
   color: black;
+  width: 100%;
+  max-width: 450px;
 }
 
 .collapsible:after {
@@ -34,4 +38,94 @@
 
 .active:after {
   content: url(../images/minus.svg);
+}
+
+/* Form styling */
+.displayBlock input {
+  height: auto;
+}
+
+legend {
+  padding: 8px
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  /* remove the border around fieldset */
+}
+
+select, option {
+  min-width: 140px;
+  text-align-last: center;
+}
+
+input, select {
+  text-align: center;
+}
+
+input, select {
+  height: 34px;
+  font-size: 20px;
+}
+
+@media (min-width:400px) {
+  .displayInline {
+    display: inline-block!important;
+    width: 50%;
+    margin: auto;
+  }
+}
+
+@media (max-width:400px) {
+  .displayInline {
+    display: block!important;
+  }
+  .hourDisplay {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width:450px) {
+  .content select, option, .modal-content select, option {
+    width: 100%!important
+  }
+  /* .content label, .modal-content label { */
+    form label {
+    display: flex;
+    flex-direction: column
+  }
+}
+
+@media (min-width:450px) {
+  .content select, option, .modal-content select, option {
+    width: 255.2px!important
+  }
+  /* .content label, .modal-content label { */
+    form label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (max-width:426px) {
+  button {
+    position: relative;
+    top: 6px;
+  }
+  input, select {
+    margin: 5px 0 5px 0;
+    max-width: 100%
+  }
+}
+
+@media (min-width:426px) {
+  button {
+    vertical-align: bottom;
+  }
+  /* input, select {
+    margin-right: 5px
+  } */
 }

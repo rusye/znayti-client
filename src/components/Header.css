@@ -1,9 +1,10 @@
 .App-header {
   color: #a8d0e6;
+  margin-bottom: 40px;
 }
 
 .App-header h1 {
-  margin: -15px 0 0 0;
+  margin-top: 0;
   font-size: 90px;
   color: #f76c6c;
 }

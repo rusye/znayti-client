@@ -4,18 +4,18 @@
   margin: 0 auto;
 }
 
-.search-bar select, .search-bar option {
+/* .search-bar select, .search-bar option {
   width: 140px;
   text-align-last: center;
-}
+} */
 
-.search-bar input {
+/* .search-bar input {
   max-width: 200px;
 }
 
 .search-bar input, .search-bar select {
   text-align: center;
-}
+} */
 
 .search-bar button {
   width: 60px;
@@ -25,10 +25,21 @@
   height: 30px;
 }
 
-.search-bar input, .search-bar button, .search-bar select {
+.heightForty {
   height: 40px;
-  font-size: 20px;
 }
+
+.heightForty button {
+  background-color: #f76c6c;
+}
+
+.widthTwoHundred {
+  width: 200px
+}
+
+/* .search-bar input, .search-bar button, .search-bar select {
+  height: 40px;
+} */
 
 @media (max-width:426px) {
   .search-bar button {
@@ -38,17 +49,17 @@
   .search-bar {
     width: 200px;
   }
-  .search-bar input, .search-bar select {
+  /* .search-bar input, .search-bar select {
     margin: 5px 0 5px 0;
     max-width: 100%
-  }
+  } */
 }
 
 @media (min-width:426px) {
   .search-bar button {
     vertical-align: bottom;
   }
-  .search-bar input, select {
+  .search-bar>input, .search-bar select {
     margin-right: 5px
   }
 }

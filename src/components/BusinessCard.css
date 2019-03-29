@@ -7,7 +7,7 @@
 
 .businessCard h3 {
   font-size: 25px;
-  margin: 0 0 10px 0;
+  margin: 0;
 }
 
 .businessCard span {
@@ -17,4 +17,14 @@
 .businessCard:hover {
   background-color: #f76c6c!important;
   /* background-color: #a8d0e6!important */
+}
+
+.contactName {
+  display: block;
+  font-style: italic;
+}
+
+.location {
+  display: block;
+  margin-top: 10px;
 }
