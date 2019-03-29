@@ -51,10 +51,10 @@ export default function Dashboard() {
       coll[i].addEventListener("click", function() {
         this.classList.toggle("active");
         let content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-          content.style.maxHeight = null;
+        if (content.style.height) {
+          content.style.height = null;
         } else {
-          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.height = "100%"
         }
       });
     }
@@ -71,43 +71,28 @@ export default function Dashboard() {
       <NavBar />
       <section className="fullCentered componentLayout">
         <button className="collapsible">Add Category</button>
-        <div className="content">
-          <fieldset>
-            <legend>Add New Category</legend>
-            <AddCategory updateCategories={updateCategories} />
-          </fieldset>
+        <div className="content white">
+          <AddCategory updateCategories={updateCategories} />
         </div>
 
         <button className="collapsible">Add Business</button>
-        <div className="content">
+        <div className="content white">
           <AddBusiness categories={categories} />
         </div>
 
         <button className="collapsible">Add Admin User</button>
-        <div className="content">
-          <fieldset>
-            <legend>Add New Admin</legend>
-            <AddAdminUser />
-          </fieldset>
+        <div className="content white">
+          <AddAdminUser />
         </div>
 
         <button className="collapsible">Edit Category</button>
-        <div className="content">
-          <fieldset>
-            <legend>Edit A Category</legend>
-            <EditCategory categories={categories} onChange={setTriggerFetch} />
-          </fieldset>
+        <div className="content white">
+          <EditCategory categories={categories} onChange={setTriggerFetch} />
         </div>
 
         <button className="collapsible">Delete Category</button>
-        <div className="content">
-          <fieldset>
-            <legend>Delete A Category</legend>
-            <DeleteCategory
-              categories={categories}
-              onChange={setTriggerFetch}
-            />
-          </fieldset>
+        <div className="content white">
+          <DeleteCategory categories={categories} onChange={setTriggerFetch} />
         </div>
 
         {serverMessage}
