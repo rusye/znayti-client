@@ -8,7 +8,7 @@ html, body {
 
 body {
   background-color: #24305e;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: 0 auto;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -26,10 +26,12 @@ button {
 .App {
   height: 100vh;
   padding: 8px;
+  overflow: auto;
 }
 
 .componentLayout {
-  margin-top: 48px;
+  /* margin-top: 48px; */
+  padding-top: 48px;
   color: white;
   text-align: center;
 }
@@ -44,6 +46,11 @@ button {
   color: white;
 }
 
+.displayBlock {
+  display: block!important;
+  margin: 0 auto;
+}
+
 .fullCentered {
   min-height: 100%;
   display: flex;
@@ -51,4 +58,16 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.white {
+  background-color: white!important;
+}
+
+p a {
+  display: block;
 }
