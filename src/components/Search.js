@@ -43,9 +43,11 @@ export default function Search(props) {
     paramsKeys(parseQueryString(paramsString));
   }, []);
 
-  const getLocationCoordinates = input => {
-    if (cache[input]) {
-      return cache[input];
+  const searchRequest = e => {
+    e.preventDefault();
+
+    if (cache[userLocation]) {
+      return cache[userLocation];
     }
 
     const headers = {
@@ -66,8 +68,13 @@ export default function Search(props) {
       })
       .then(res => {
         setServerMessage(null);
-        cache[input] = [res.lat, res.long];
-        return [res.lat, res.long];
+        cache[userLocation] = [res.lat, res.long];
+        return res;
+      })
+      .then(results => {
+        props.history.push(
+          `/business/search?long=${results.long}&lat=${results.lat}&rad=${radius}&input=${userLocation}`
+        );
       })
       .catch(err => {
         console.log(err);
@@ -76,46 +83,39 @@ export default function Search(props) {
       });
   };
 
-  const searchRequest = async e => {
-    e.preventDefault();
-    const [lat, long] = await getLocationCoordinates(userLocation);
-    props.history.push(
-      `/business/search?long=${long}&lat=${lat}&rad=${radius}&input=${userLocation}`
-    );
-  };
-
   return (
-    <form className="search-bar" onSubmit={searchRequest}>
-      <input
-        className="heightForty widthTwoHundred"
-        aria-label="city and state"
-        type="text"
-        name="search"
-        value={userLocation}
-        onChange={e => updateLocation(e.target.value)}
-        placeholder="City, State"
-        required
-      />
+    <>
+      <form className="search-bar" onSubmit={searchRequest}>
+        <input
+          className="heightForty widthTwoHundred"
+          aria-label="city and state"
+          type="text"
+          name="search"
+          value={userLocation}
+          onChange={e => updateLocation(e.target.value)}
+          placeholder="City, State"
+          required
+        />
 
-      <select
-        className="heightForty"
-        aria-label="radius"
-        value={radius}
-        onChange={e => updateRadius(e.target.value)}
-      >
-        <option value="10">10 Miles</option>
-        <option value="20">20 Miles</option>
-        <option value="50">50 Miles</option>
-        <option value="100">100 Miles</option>
-        <option value="200">200 Miles</option>
-        <option value="3963.2">Any</option>
-      </select>
+        <select
+          className="heightForty"
+          aria-label="radius"
+          value={radius}
+          onChange={e => updateRadius(e.target.value)}
+        >
+          <option value="10">10 Miles</option>
+          <option value="20">20 Miles</option>
+          <option value="50">50 Miles</option>
+          <option value="100">100 Miles</option>
+          <option value="200">200 Miles</option>
+          <option value="3963.2">Any</option>
+        </select>
 
-      <button className="heightForty" aria-label="search" type="submit">
-        <img className="search" src={searchIcon} alt="search" />
-      </button>
-
-      {serverMessage}
-    </form>
+        <button className="heightForty" aria-label="search" type="submit">
+          <img className="search" src={searchIcon} alt="search" />
+        </button>
+      </form>
+      {serverMessage ? <div className="whiteText">{serverMessage}</div> : null}
+    </>
   );
 }

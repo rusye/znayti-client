@@ -68,6 +68,10 @@ a {
   background-color: white!important;
 }
 
+.whiteText {
+  color: white;
+}
+
 p a {
   display: block;
 }
