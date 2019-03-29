@@ -87,6 +87,7 @@ export default function Search(props) {
   return (
     <form className="search-bar" onSubmit={searchRequest}>
       <input
+        className="heightForty widthTwoHundred"
         aria-label="city and state"
         type="text"
         name="search"
@@ -97,6 +98,7 @@ export default function Search(props) {
       />
 
       <select
+        className="heightForty"
         aria-label="radius"
         value={radius}
         onChange={e => updateRadius(e.target.value)}
@@ -109,7 +111,7 @@ export default function Search(props) {
         <option value="3963.2">Any</option>
       </select>
 
-      <button aria-label="search" type="submit">
+      <button className="heightForty" aria-label="search" type="submit">
         <img className="search" src={searchIcon} alt="search" />
       </button>
 
