@@ -39,15 +39,9 @@ export default function Search(props) {
     setRadius(e);
   };
 
-  useEffect(() => {
-    paramsKeys(parseQueryString(paramsString));
-  }, []);
-
-  const searchRequest = e => {
-    e.preventDefault();
-
-    if (cache[userLocation]) {
-      return cache[userLocation];
+  const getLocationCoordinates = input => {
+    if (cache[input]) {
+      return Promise.resolve(cache[input]);
     }
 
     const headers = {
@@ -68,20 +62,32 @@ export default function Search(props) {
       })
       .then(res => {
         setServerMessage(null);
-        cache[userLocation] = [res.lat, res.long];
-        return res;
-      })
-      .then(results => {
-        props.history.push(
-          `/business/search?long=${results.long}&lat=${results.lat}&rad=${radius}&input=${userLocation}`
-        );
+        cache[input] = [res.lat, res.long];
+        return [res.lat, res.long];
       })
       .catch(err => {
         console.log(err);
         let message = "Something went wrong, please try again later";
         setServerMessage(message);
+        return Promise.reject();
       });
   };
+
+  const searchRequest = e => {
+    e.preventDefault();
+    return getLocationCoordinates(userLocation)
+      .then(res => {
+        const [lat, long] = res;
+        props.history.push(
+          `/business/search?long=${long}&lat=${lat}&rad=${radius}&input=${userLocation}`
+        );
+      })
+      .catch(res => {});
+  };
+
+  useEffect(() => {
+    paramsKeys(parseQueryString(paramsString));
+  }, []);
 
   return (
     <>
