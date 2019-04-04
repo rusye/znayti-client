@@ -30,7 +30,7 @@ export default function Categories(props) {
               return (
                 <li key={index}>
                   <button
-                    className="categoryButton"
+                    className="btn btn--border btn--primary btn--animated categoryButton"
                     type="button"
                     id={category}
                     onClick={searchCategory}
@@ -75,18 +75,15 @@ export default function Categories(props) {
   return (
     <div className="componentLayout">
       <NavBar />
+      <Search {...props} />
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
       ) : (
-        <>
-          <Search {...props} />
-
-          <div className="componentResults">
-            <h2>{title}</h2>
-            <ul>{categories}</ul>
-          </div>
-        </>
+        <div className="componentResults">
+          <h2>{title}</h2>
+          <ul>{categories}</ul>
+        </div>
       )}
     </div>
   );

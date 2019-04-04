@@ -53,34 +53,32 @@ export default function BusinessesList(props) {
   return (
     <div className="componentLayout">
       <NavBar />
+      <Search {...props} />
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
       ) : (
-        <>
-          <Search {...props} />
-          <div className="componentResults">
-            <h2>{props.match.params.category}</h2>
-            {businesses.length > 0 ? (
-              <ul>
-                {businesses.map((business, index) => (
-                  <li key={index}>
-                    <BusinessCard
-                      business={business}
-                      viewBusiness={viewBusiness}
-                    />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div>
-                <span>No businesses in this area</span>
-                <br />
-                <span>Submit a business</span>
-              </div>
-            )}
-          </div>
-        </>
+        <div className="componentResults">
+          <h2>{props.match.params.category}</h2>
+          {businesses.length > 0 ? (
+            <ul>
+              {businesses.map((business, index) => (
+                <li key={index}>
+                  <BusinessCard
+                    business={business}
+                    viewBusiness={viewBusiness}
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div>
+              <span>No businesses in this area</span>
+              <br />
+              <span>Submit a business</span>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

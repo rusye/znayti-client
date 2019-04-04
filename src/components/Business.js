@@ -315,70 +315,66 @@ export default function Businesses(props) {
       ) : null}{" "}
       <div className="componentLayout">
         <NavBar />
+        <Search {...props} />
 
         {fetchingData ? (
           <h2>{serverMessage}</h2>
         ) : (
-          <>
-            <Search {...props} />
-            <div className="componentResults business">
-              <h2>{business.name}</h2>
-              {business.contactName ? (
-                <span>{business.contactName}</span>
-              ) : null}
+          <div className="componentResults business">
+            <h2>{business.name}</h2>
+            {business.contactName ? <span>{business.contactName}</span> : null}
 
-              <a className="contactInfo" href={`tel:${business.telephone}`}>
-                <img className="icon" src={phoneIcon} alt="phone" />
-                &nbsp;{formatPhoneNumber(business.telephone)}
+            <a className="contactInfo" href={`tel:${business.telephone}`}>
+              <img className="icon" src={phoneIcon} alt="phone" />
+              &nbsp;{formatPhoneNumber(business.telephone)}
+            </a>
+
+            <div className="padding">
+              <h3>Address</h3>
+              <address>
+                <span>
+                  {business.address.street}, &nbsp;{business.address.city},
+                  &nbsp;{business.address.state}
+                  &nbsp;{business.address.zip}
+                </span>
+              </address>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={business.googlePlace}
+              >
+                Map
               </a>
-
-              <div className="padding">
-                <h3>Address</h3>
-                <address>
-                  <span>
-                    {business.address.street}, &nbsp;{business.address.city},
-                    &nbsp;{business.address.state}
-                    &nbsp;{business.address.zip}
-                  </span>
-                </address>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={business.googlePlace}
-                >
-                  Map
-                </a>
-              </div>
-
-              <div className="padding hours">
-                <h3>Hours</h3>
-                {day}
-              </div>
-
-              {localStorage.admin ? (
-                <div>
-                  <button
-                    type="button"
-                    onClick={e => {
-                      if (
-                        window.confirm(
-                          "Are you sure you want to delete this business?"
-                        )
-                      )
-                        handleDelete(e);
-                    }}
-                  >
-                    Delete
-                  </button>
-                  <button type="button" onClick={updateModal}>
-                    Edit
-                  </button>
-                </div>
-              ) : null}
-
-              {serverMessage}
             </div>
-          </>
+
+            <div className="padding hours">
+              <h3>Hours</h3>
+              {day}
+            </div>
+
+            {localStorage.admin ? (
+              <div>
+                <button
+                  type="button"
+                  onClick={e => {
+                    if (
+                      window.confirm(
+                        "Are you sure you want to delete this business?"
+                      )
+                    )
+                      handleDelete(e);
+                  }}
+                >
+                  Delete
+                </button>
+                <button type="button" onClick={updateModal}>
+                  Edit
+                </button>
+              </div>
+            ) : null}
+
+            {serverMessage}
+          </div>
         )}
       </div>
     </>
