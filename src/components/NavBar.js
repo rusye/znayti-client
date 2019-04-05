@@ -7,6 +7,14 @@ export default function NavBar() {
   const [links, setLinks] = useState("");
   const [displayMenu, setDisplayMenu] = useState(false);
 
+  const hide = e => {
+    window.onclick = function(e) {
+      if (e.target.alt !== "Dropdown menu" && displayMenu) {
+        setDisplayMenu(false);
+      }
+    };
+  };
+
   useEffect(() => {
     setLinks(
       <>
@@ -42,6 +50,10 @@ export default function NavBar() {
       </>
     );
   }, []);
+
+  useEffect(() => {
+    hide();
+  });
 
   return (
     <nav role="navigation">
