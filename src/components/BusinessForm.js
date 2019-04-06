@@ -19,7 +19,7 @@ export default function BusinessForm(props) {
         setEachDay(
           days.map((day, index) => {
             return (
-              <fieldset key={index}>
+              <fieldset className="hourInputs" key={index}>
                 <HourInputs
                   open={props.hours[day].open}
                   close={props.hours[day].close}
@@ -45,7 +45,7 @@ export default function BusinessForm(props) {
       setEachDay(
         days.map((day, index) => {
           return (
-            <fieldset key={index}>
+            <fieldset className="hourInputs" key={index}>
               <HourInputs name={day} onChange={props.handleHoursChange} />
             </fieldset>
           );
@@ -94,55 +94,58 @@ export default function BusinessForm(props) {
 
   return (
     <section>
-      <label aria-label="business name">
-        Business Name&nbsp;
-        <input
-          value={props.businessName}
-          onChange={e => props.setBusinessName(e.target.value)}
-          placeholder="enter business name"
-          type="text"
-          name="business-name"
-          pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
-          title="Please enter the business name"
-          aria-labelledby="business-name"
-          required
-        />
-      </label>
+      <fieldset>
+        <legend>General Info</legend>
+        <label aria-label="business name">
+          Business Name&nbsp;
+          <input
+            value={props.businessName}
+            onChange={e => props.setBusinessName(e.target.value)}
+            placeholder="enter business name"
+            type="text"
+            name="business-name"
+            pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
+            title="Please enter the business name"
+            aria-labelledby="business-name"
+            required
+          />
+        </label>
 
-      <label aria-label="contact name">
-        Contact Name&nbsp;
-        <input
-          value={props.contactName}
-          onChange={e => props.setContactName(e.target.value)}
-          placeholder="enter contact name"
-          type="text"
-          name="contact-name"
-          pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
-          title="Please enter the contact name"
-          aria-labelledby="contact-name"
-        />
-      </label>
+        <label aria-label="contact name">
+          Contact Name&nbsp;
+          <input
+            value={props.contactName}
+            onChange={e => props.setContactName(e.target.value)}
+            placeholder="enter contact name"
+            type="text"
+            name="contact-name"
+            pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
+            title="Please enter the contact name"
+            aria-labelledby="contact-name"
+          />
+        </label>
 
-      <SelectCategory
-        {...props}
-        category={props.category}
-        setCategory={props.setCategory}
-      />
-
-      <label aria-label="telephone-input">
-        Telephone&nbsp;
-        <input
-          type="tel"
-          value={props.telephone}
-          onChange={e => props.setTelephone(e.target.value)}
-          placeholder="5031239876"
-          title="Please enter a telephone number in this format: 5031239876"
-          pattern="^[0-9]{10,10}$"
-          name="telephone"
-          aria-labelledby="telephone"
-          required
+        <SelectCategory
+          {...props}
+          category={props.category}
+          setCategory={props.setCategory}
         />
-      </label>
+
+        <label aria-label="telephone-input">
+          Telephone&nbsp;
+          <input
+            type="tel"
+            value={props.telephone}
+            onChange={e => props.setTelephone(e.target.value)}
+            placeholder="5031239876"
+            title="Please enter a telephone number in this format: 5031239876"
+            pattern="^[0-9]{10,10}$"
+            name="telephone"
+            aria-labelledby="telephone"
+            required
+          />
+        </label>
+      </fieldset>
 
       <fieldset>
         <legend>Business Address</legend>
