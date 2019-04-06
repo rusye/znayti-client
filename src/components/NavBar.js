@@ -18,26 +18,26 @@ export default function NavBar() {
   useEffect(() => {
     setLinks(
       <>
-        <Link tabIndex="0" to="/">
-          <div
+        <Link tabIndex="-1" to="/">
+          <button
             className="bar-item button-one"
             onClick={() => setDisplayMenu(false)}
           >
             Home
-          </div>
+          </button>
         </Link>
 
-        <Link tabIndex="0" to="/dashboard">
-          <div
+        <Link tabIndex="-1" to="/dashboard">
+          <button
             className="bar-item button-one"
             onClick={() => setDisplayMenu(false)}
           >
             Dashboard
-          </div>
+          </button>
         </Link>
 
-        <Link tabIndex="0" to="/">
-          <div
+        <Link tabIndex="-1" to="/">
+          <button
             className="bar-item button-one"
             onClick={() => {
               setDisplayMenu(false);
@@ -45,7 +45,7 @@ export default function NavBar() {
             }}
           >
             LogOut
-          </div>
+          </button>
         </Link>
       </>
     );
@@ -57,11 +57,11 @@ export default function NavBar() {
 
   return (
     <nav role="navigation">
-      <div className="bar wide padding card">
-        <Link tabIndex="0" to="/">
-          <div className="logo bar-item button-one">
+      <div className="bar padding card">
+        <Link tabIndex="-1" to="/">
+          <button className="logo bar-item button-one">
             <b>Znayti</b>
-          </div>
+          </button>
         </Link>
 
         {localStorage.loggedIn ? (
@@ -85,7 +85,7 @@ export default function NavBar() {
         ) : (
           <div className="right">
             <Link to="/">
-              <div className="bar-item button-one">Home</div>
+              <button className="bar-item button-one">Home</button>
             </Link>
           </div>
         )}
