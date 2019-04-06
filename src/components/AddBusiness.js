@@ -94,7 +94,7 @@ export default function AddBusiness(props) {
   return (
     <form className="padding " onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Add New Business</legend>
+        <legend className="formTitle">Add New Business</legend>
         <BusinessForm
           {...props}
           handleHoursChange={handleHoursChange}
