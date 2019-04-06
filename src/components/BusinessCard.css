@@ -1,7 +1,6 @@
 .businessCard {
   width: 300px;
-  /* background-color: #f76c6c!important; */
-  background-color: #a8d0e6!important;
+  background-color: #f76c6c!important;
   padding: 10px;
 }
 
@@ -12,11 +11,6 @@
 
 .businessCard span {
   font-size: 20px;
-}
-
-.businessCard:hover {
-  background-color: #f76c6c!important;
-  /* background-color: #a8d0e6!important */
 }
 
 .contactName {

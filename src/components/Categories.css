@@ -2,12 +2,6 @@
   width: 300px;
   min-height: 50px;
   font-size: 25px;
-  /* background-color: #f76c6c; */
-  background-color: #a8d0e6;
-}
-
-.categoryButton:hover {
-  /* background-color: #a8d0e6 */
   background-color: #f76c6c;
 }
 
