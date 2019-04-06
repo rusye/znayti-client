@@ -66,7 +66,7 @@ export default function AddAdminUser() {
   return (
     <form className="padding" onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Add New Admin</legend>
+        <legend className="formTitle">Add New Admin</legend>
         <label aria-label="username-input">
           First Name&nbsp;
           <input

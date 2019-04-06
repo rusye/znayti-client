@@ -56,7 +56,7 @@ export default function AddCategory(props) {
   return (
     <form className="padding" onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Add New Category</legend>
+        <legend className="formTitle">Add New Category</legend>
         <label aria-label="category-name-input">
           Category Name&nbsp;
           <input

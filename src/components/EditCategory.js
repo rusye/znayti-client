@@ -56,7 +56,7 @@ export default function EditCategory(props) {
   return (
     <form className="padding" onSubmit={handleSubmit}>
       <fieldset>
-        <legend>Edit A Category</legend>
+        <legend className="formTitle">Edit A Category</legend>
         <SelectCategory
           {...props}
           category={category}

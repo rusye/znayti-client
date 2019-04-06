@@ -58,9 +58,9 @@ export default function AdminLogin(props) {
     <>
       <NavBar />
       <section className="fullCentered">
-        <form className="padding white adminLogin" onSubmit={handleSubmit}>
+        <form className="padding adminLogin" onSubmit={handleSubmit}>
           <fieldset>
-            <legend>Admin Login</legend>
+            <legend className="formTitle">Admin Login</legend>
             <label aria-label="username-input">
               Username&nbsp;
               <input

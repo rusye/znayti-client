@@ -55,7 +55,7 @@ export default function DeleteCategory(props) {
       }}
     >
       <fieldset>
-        <legend>Delete A Category</legend>
+        <legend className="formTitle">Delete A Category</legend>
         <SelectCategory
           {...props}
           category={category}
