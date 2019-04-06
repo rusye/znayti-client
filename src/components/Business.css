@@ -37,35 +37,27 @@
 .modal {
   position: absolute;
   color: black;
-  /* position: fixed; */
   z-index: 1;
   left: 50%;
   top: 48px;
   padding: inherit;
   width: 100%;
-  /* max-width: 1000px; */
   transform: translate(-50%, 0);
-  /* height: 100%; */
   overflow: auto;
-  /* background-color: rgb(0, 0, 0); */
   background-color: rgba(0, 0, 0, 0.4);
-  /* padding-top: 60px; */
 }
 
 /* Modal Content/Box */
 
 .modal-content {
-  background-color: #fefefe;
-  /* margin: 5% auto 15% auto; */
-  /* margin: 8px auto; */
   margin: auto;
-  /* border: 1px solid #888; */
   max-width: 500px;
 }
 
 /* The Close Button (x) */
 
 .close {
+  z-index: 1;
   line-height: 0;
   position: absolute;
   right: -5px;
@@ -73,7 +65,6 @@
   color: #000;
   font-size: 35px;
   font-weight: bold;
-  /* padding-top: 2px; */
 }
 
 .close:hover, .close:focus {
@@ -89,12 +80,5 @@
 }
 
 .imgcontainer {
-  /* text-align: center; */
   position: relative;
 }
-
-/* .container {
-  padding: 16px;
-} */
-
-/* Remove container classname from js file */

@@ -276,7 +276,7 @@ export default function Businesses(props) {
 
             <fieldset>
               <legend className="formTitle">Edit Business</legend>
-              <section className="container">
+              <section>
                 <BusinessForm
                   hours={hours}
                   handleSubmit={handleEdit}
