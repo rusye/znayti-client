@@ -1,28 +1,30 @@
 .search-bar {
-  color: black;
+  color: white;
   text-align: center;
   margin: 0 auto;
+  background: none;
 }
-
-/* .search-bar select, .search-bar option {
-  width: 140px;
-  text-align-last: center;
-} */
-
-/* .search-bar input {
-  max-width: 200px;
-}
-
-.search-bar input, .search-bar select {
-  text-align: center;
-} */
 
 .search-bar button {
-  width: 60px;
+  width: 72.4px;
+  height: 46px;
+  background-color: transparent;
+  border: 2px solid #a8d0e6!important;
 }
 
-.search {
+.search, .downArrow {
   height: 30px;
+  vertical-align: bottom;
+  filter: invert(1);
+  z-index: -1;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+@media (hover:hover) {
+  .search:hover {
+    filter: invert(0)
+  }
 }
 
 .heightForty {
@@ -37,29 +39,178 @@
   width: 200px
 }
 
-/* .search-bar input, .search-bar button, .search-bar select {
-  height: 40px;
-} */
+.search-bar label, .search-bar input, .search-bar select {
+  font-size: 20px;
+}
+
+.selectSpecs {
+  width: 119.6px!important;
+}
+
+.downArrow {
+  top: -4px;
+  position: absolute;
+  right: 0;
+}
 
 @media (max-width:426px) {
+  .search-bar select, .search-bar option, .selectSpecs {
+    margin-right: 8px!important
+  }
   .search-bar button {
     position: relative;
-    top: 6px;
+    top: 3.1px;
   }
   .search-bar {
-    width: 200px;
+    width: 304px;
   }
-  /* .search-bar input, .search-bar select {
-    margin: 5px 0 5px 0;
-    max-width: 100%
-  } */
+  .search-bar label {
+    display: inline-block;
+  }
+  .search-bar label {
+    margin: 7px 0;
+  }
 }
 
 @media (min-width:426px) {
   .search-bar button {
     vertical-align: bottom;
   }
-  .search-bar>input, .search-bar select {
-    margin-right: 5px
+  .search-bar input, .search-bar select, .search-bar label {
+    display: inline-block;
   }
+  .search-bar label {
+    margin-right: 5px;
+  }
+}
+
+/* Loading Icon */
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  vertical-align: bottom;
+  width: 36px;
+  height: 36px;
+}
+
+.lds-ring div {
+  display: block;
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* input label */
+
+.inp {
+  position: relative;
+  margin: auto;
+  width: 200px;
+  max-width: 280px;
+}
+
+.inp .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  color: #a8d0e6;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+.inp .border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.2px;
+  width: 100%;
+  background: #f76c6c;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: all 0.15s ease;
+}
+
+.inp input, .inp select, .inp option {
+  -webkit-appearance: none;
+  width: 200px;
+  border: 0;
+  padding: 0;
+  font-weight: 500;
+  border-bottom: 2px solid #a8d0e6;
+  background: none;
+  border-radius: 0;
+  color: white;
+  transition: all 0.15s ease;
+}
+
+.inp option, .inp select {
+  width: 119.6px;
+}
+
+.inp option {
+  top: 5px;
+  color: black;
+}
+
+.inp input:hover {
+  background: rgba(34, 50, 84, 0.03);
+}
+
+.inp input:not(:placeholder-shown)+span, .inp select:not(:placeholder-shown)+span {
+  top: 16px!important;
+  color: #a8d0e6;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.inp input:empty+span, .inp select:empty+span {
+  top: 6px
+}
+
+.inp input:focus, .inp select:focus {
+  background: none;
+  outline: none;
+}
+
+.inp input:focus+span {
+  top: 16px
+}
+
+.inp input:focus+span, .inp select:focus+span {
+  color: #f76c6c;
+  transform: translateY(-26px) scale(0.75);
+}
+
+.inp input:focus+span+.border, .inp select:focus+span+.border {
+  transform: scaleX(1);
+}
+
+.inp select:focus+span+.border+.downArrow {
+  filter: invert(49%) sepia(26%) saturate(1194%) hue-rotate(313deg) brightness(107%) contrast(93%);
 }

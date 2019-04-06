@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Search.css";
 import searchIcon from "../images/search.svg";
+import arrowIcon from "../images/downArrow.svg";
 import { API_BASE_URL } from "../config";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
 
@@ -9,6 +10,7 @@ const cache = {};
 export default function Search(props) {
   const [userLocation, setLocation] = useState("Portland, OR");
   const [radius, setRadius] = useState(10);
+  const [locadingIcon, setLoadingIcon] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const paramsString = decodeURIComponent(window.location.search.substring(1));
@@ -75,14 +77,18 @@ export default function Search(props) {
 
   const searchRequest = e => {
     e.preventDefault();
+    setLoadingIcon(true);
     return getLocationCoordinates(userLocation)
       .then(res => {
         const [lat, long] = res;
+        setLoadingIcon(false);
         props.history.push(
           `/business/search?long=${long}&lat=${lat}&rad=${radius}&input=${userLocation}`
         );
       })
-      .catch(res => {});
+      .catch(res => {
+        setLoadingIcon(false);
+      });
   };
 
   useEffect(() => {
@@ -91,34 +97,59 @@ export default function Search(props) {
 
   return (
     <>
-      <form className="search-bar" onSubmit={searchRequest}>
-        <input
-          className="heightForty widthTwoHundred"
-          aria-label="city and state"
-          type="text"
-          name="search"
-          value={userLocation}
-          onChange={e => updateLocation(e.target.value)}
-          placeholder="City, State"
-          required
-        />
+      <form className="search-bar" autoComplete="off" onSubmit={searchRequest}>
+        <label htmlFor="inp" className="inp">
+          <input
+            id="inp"
+            className="heightForty widthTwoHundred"
+            aria-label="city and state"
+            title="Please enter city and state you wish to search in"
+            type="text"
+            name="search"
+            required
+            onChange={e => updateLocation(e.target.value)}
+            value={userLocation}
+            placeholder="&nbsp;"
+          />
+          <span className="label">City, State</span>
+          <span className="border" />
+        </label>
+        <label htmlFor="sel" className="inp selectSpecs">
+          <select
+            id="sel"
+            className="heightForty"
+            aria-label="radius"
+            value={radius}
+            onChange={e => updateRadius(e.target.value)}
+            title="Please select how far from your location you want to search"
+          >
+            <option value="10">10 Miles</option>
+            <option value="20">20 Miles</option>
+            <option value="50">50 Miles</option>
+            <option value="100">100 Miles</option>
+            <option value="200">200 Miles</option>
+            <option value="3963.2">Any</option>
+          </select>
+          <span className="label">Radius</span>
+          <span className="border" />
+          <img className="downArrow" src={arrowIcon} alt="select arrow" />
+        </label>
 
-        <select
-          className="heightForty"
-          aria-label="radius"
-          value={radius}
-          onChange={e => updateRadius(e.target.value)}
+        <button
+          className="btn btn--border btn--primary btn--animated"
+          aria-label="search"
+          type="submit"
         >
-          <option value="10">10 Miles</option>
-          <option value="20">20 Miles</option>
-          <option value="50">50 Miles</option>
-          <option value="100">100 Miles</option>
-          <option value="200">200 Miles</option>
-          <option value="3963.2">Any</option>
-        </select>
-
-        <button className="heightForty" aria-label="search" type="submit">
-          <img className="search" src={searchIcon} alt="search" />
+          {locadingIcon ? (
+            <div className="lds-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          ) : (
+            <img className="search" src={searchIcon} alt="search" />
+          )}
         </button>
       </form>
       {serverMessage ? <div className="whiteText">{serverMessage}</div> : null}
