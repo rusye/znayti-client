@@ -13,13 +13,13 @@
   font-size: 15px;
 }
 
-.active, .collapsible:hover {
-  background-color: #6D9FE9;
+@media (hover:hover) {
+  .collapsible:hover, .collapsible:focus {
+    background-color: #6D9FE9;
+  }
 }
 
 .content {
-  /* padding: 0 18px; */
-  height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f1f1f1;
@@ -28,104 +28,81 @@
   max-width: 450px;
 }
 
-.collapsible:after {
-  content: url(../images/plus.svg);
+.plusMinusIcon {
   color: black;
   float: right;
   width: 20px;
   height: 20px;
 }
 
-.active:after {
-  content: url(../images/minus.svg);
-}
-
 /* Form styling */
+
 .displayBlock input {
   height: auto;
 }
 
+.formTitle {
+  color: black;
+  font-weight: bold;
+  font-size: 23px;
+  background: none;
+}
+
 legend {
-  padding: 8px
-}
-
-fieldset {
-  padding: 0;
-  margin: 0;
-  /* remove the border around fieldset */
-}
-
-select, option {
-  min-width: 140px;
-  text-align-last: center;
+  width: 100%;
+  position: relative;
+  top: 7px;
+  margin-bottom: 12px;
+  background: #24305e;
+  color: white;
 }
 
 input, select {
-  text-align: center;
-}
-
-input, select {
+  padding: 5px;
   height: 34px;
-  font-size: 20px;
+  font-size: 16px;
+  background-color: white;
 }
 
-@media (min-width:400px) {
-  .displayInline {
-    display: inline-block!important;
-    width: 50%;
-    margin: auto;
-  }
-}
-
-@media (max-width:400px) {
-  .displayInline {
-    display: block!important;
-  }
-  .hourDisplay {
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width:450px) {
-  .content select, option, .modal-content select, option {
-    width: 100%!important
-  }
-  /* .content label, .modal-content label { */
-    form label {
-    display: flex;
-    flex-direction: column
-  }
-}
-
-@media (min-width:450px) {
-  .content select, option, .modal-content select, option {
-    width: 255.2px!important
-  }
-  /* .content label, .modal-content label { */
-    form label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+.hourDisplay {
+  width: 125px;
 }
 
 @media (max-width:426px) {
-  button {
-    position: relative;
-    top: 6px;
+  .displayInline {
+    display: block!important;
+    text-align: center;
   }
-  input, select {
+  .hourDisplay {
+    display: block;
+    margin: 5px auto!important;
+  }
+  .content select, .content option, .modal-content select, .modal-content option {
+    width: 100%!important
+  }
+  form label {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  .content input, .content select, .adminLogin input {
     margin: 5px 0 5px 0;
     max-width: 100%
   }
 }
 
 @media (min-width:426px) {
-  button {
-    vertical-align: bottom;
+  .displayInline {
+    display: inline-block!important;
+    width: 50%;
+    margin: auto;
   }
-  /* input, select {
-    margin-right: 5px
-  } */
+  .content select, .content option, .modal-content select, .modal-content option {
+    width: 208.4px!important
+  }
+  form label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
