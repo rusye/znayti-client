@@ -8,7 +8,6 @@ html, body {
 
 body {
   background-color: #24305e;
-  /* max-width: 1000px; */
   margin: 0 auto;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -23,6 +22,24 @@ button {
   cursor: pointer;
 }
 
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.hourInputs {
+  margin: 0 8px;
+}
+
+.hourInputs legend {
+  background: #4156AB;
+}
+
+form {
+  background: #E6E6E6;
+}
+
 .App {
   height: 100vh;
   padding: 8px;
@@ -30,7 +47,6 @@ button {
 }
 
 .componentLayout {
-  /* margin-top: 48px; */
   padding-top: 48px;
   color: white;
   text-align: center;
@@ -42,13 +58,13 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* font-size: calc(10px + 2vmin); */
   color: white;
 }
 
 .displayBlock {
   display: block!important;
   margin: 0 auto;
+  text-align: center;
 }
 
 .fullCentered {
@@ -64,14 +80,71 @@ a {
   text-decoration: none;
 }
 
-.white {
-  background-color: white!important;
-}
-
 .whiteText {
   color: white;
 }
 
 p a {
   display: block;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 1.2px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 0;
+  cursor: pointer;
+}
+
+.btn--primary {
+  color: white;
+}
+
+.btn--border {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn--animated.btn--border.btn--primary {
+  border: none
+}
+
+@media (hover:hover) {
+  .btn--animated {
+    transition-property: color;
+    transition-duration: 0.5s;
+  }
+  .btn--animated:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #a8d0e6;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition-property: transform;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    z-index: -1;
+  }
+  .btn--animated:hover, .btn--animated:focus {
+    color: black;
+  }
+  .btn--animated:hover .search, .btn--animated:focus .search {
+    filter: invert(0)
+  }
+  .btn--animated:hover:before, .btn--animated:focus:before {
+    transform: scaleX(1);
+    transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66);
+  }
 }
