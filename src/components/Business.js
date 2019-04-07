@@ -333,8 +333,9 @@ export default function Businesses(props) {
               <h3>Address</h3>
               <address>
                 <span>
-                  {business.address.street}, &nbsp;{business.address.city},
-                  &nbsp;{business.address.state}
+                  {business.address.street},<br />
+                  {business.address.city}
+                  ,&nbsp;{business.address.state}
                   &nbsp;{business.address.zip}
                 </span>
               </address>
