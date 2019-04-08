@@ -36,6 +36,15 @@ export default function NavBar() {
           </button>
         </Link>
 
+        <Link tabIndex="-1" to="/about">
+          <button
+            className="bar-item button-one"
+            onClick={() => setDisplayMenu(false)}
+          >
+            About
+          </button>
+        </Link>
+
         <Link tabIndex="-1" to="/">
           <button
             className="bar-item button-one"
@@ -86,6 +95,10 @@ export default function NavBar() {
           <div className="right">
             <Link to="/">
               <button className="bar-item button-one">Home</button>
+            </Link>
+            
+            <Link to="/about">
+              <button className="bar-item button-one">About</button>
             </Link>
           </div>
         )}
