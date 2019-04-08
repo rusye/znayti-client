@@ -2,8 +2,9 @@
   color: #24305e;
   background-color: #a8d0e6;
   padding: 8px;
-  max-width: 500px;
-  margin: 8px auto 0 auto;
+  max-width: 400px;
+  margin-top: 8px;
+  border-radius: 13px;
 }
 
 .hours {
