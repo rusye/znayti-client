@@ -8,6 +8,7 @@ html, body {
 
 body {
   background-color: #24305e;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0;
   -webkit-font-smoothing: antialiased;
