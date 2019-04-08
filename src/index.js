@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./index.css";
+import About from "./components/About";
 import Home from "./components/Home";
 import Categories from "./components/Categories";
 import BusinessList from "./components/BusinessesList";
@@ -18,10 +19,12 @@ function App() {
         <Route exact path="/" component={Home} />
 
         <Switch>
+          <Route exact path="/about" component={About} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/business/search" component={Categories} />
           <Route
-            exact path="/business/:category/search"
+            exact
+            path="/business/:category/search"
             component={BusinessList}
           />
           <Route exact path="/business/:id" component={Business} />
