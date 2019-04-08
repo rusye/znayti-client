@@ -22,12 +22,14 @@ export default function About() {
 
       <h2>Current Goal</h2>
       <p>
-        Listing all known businesses that have a Russian speaker on staff in
-        Portland, OR.
+        We are currently creating a directory of businesses in the Portland, OR
+        area that have a Russian speaker on staff.
       </p>
 
       <h2>Next Goal</h2>
-      <p>Add a map that is populated with business locations.</p>
+      <p>
+        Add a map that that will show you all the listings within a category.
+      </p>
     </div>
   );
 }
