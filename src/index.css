@@ -53,6 +53,12 @@ form {
   text-align: center;
 }
 
+@-moz-document url-prefix() {
+  .componentLayout {
+    padding-bottom: 8px;
+  }
+}
+
 .componentResults {
   text-align: center;
   display: flex;
@@ -75,6 +81,7 @@ form {
   align-items: center;
   justify-content: center;
   text-align: center;
+  position: relative;
 }
 
 a {
