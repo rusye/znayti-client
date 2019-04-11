@@ -136,7 +136,7 @@ export default function Search(props) {
         </label>
 
         <button
-          className="btn btn--border btn--primary btn--animated"
+          className="searchButton"
           aria-label="search"
           type="submit"
         >
@@ -148,7 +148,7 @@ export default function Search(props) {
               <div />
             </div>
           ) : (
-            <img className="search" src={searchIcon} alt="search" />
+            <img className="searchIcon" src={searchIcon} alt="search" />
           )}
         </button>
       </form>

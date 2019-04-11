@@ -5,14 +5,18 @@
   background: none;
 }
 
-.search-bar button {
+.searchButton {
+  outline: none;
   width: 72.4px;
   height: 46px;
   background-color: transparent;
+  border-radius: 10px;
   border: 2px solid #a8d0e6!important;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
 }
 
-.search, .downArrow {
+.searchIcon, .downArrow {
   height: 30px;
   vertical-align: bottom;
   filter: invert(1);
@@ -22,8 +26,11 @@
 }
 
 @media (hover:hover) {
-  .search:hover {
+  .searchButton:hover .searchIcon, .searchButton:focus .searchIcon {
     filter: invert(0)
+  }
+  .searchButton:hover, .searchButton:focus {
+    background-color: #a8d0e6;
   }
 }
 
@@ -57,7 +64,7 @@
   .search-bar select, .search-bar option, .selectSpecs {
     margin-right: 8px!important
   }
-  .search-bar button {
+  .searchButton {
     position: relative;
     top: 3.1px;
   }
@@ -73,7 +80,7 @@
 }
 
 @media (min-width:426px) {
-  .search-bar button {
+  .searchButton {
     vertical-align: bottom;
   }
   .search-bar input, .search-bar select, .search-bar label {
