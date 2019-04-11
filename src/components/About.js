@@ -6,8 +6,8 @@ export default function About() {
   return (
     <div className="fullCentered about">
       <NavBar />
-      <span>Our Mission:</span>
-      <span>
+      <span className="missionTitle">Our Mission:</span>
+      <span className="statment">
         Helping you connect with a business that can communicate with you in
         Russian.
       </span>

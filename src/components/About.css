@@ -2,3 +2,24 @@
   padding-top: 48px;
   color: white;
 }
+
+h1, h2 {
+  margin-bottom: 0;
+}
+
+p {
+  margin: 5px auto;
+}
+
+.missionTitle {
+  text-transform: uppercase;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.statment {
+  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 50px;
+}
