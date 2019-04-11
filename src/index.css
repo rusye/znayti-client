@@ -45,12 +45,15 @@ form {
   min-height: 100vh;
   padding: 8px;
   overflow: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .componentLayout {
   padding-top: 48px;
   color: white;
   text-align: center;
+  width: 100%;
 }
 
 @-moz-document url-prefix() {
@@ -86,6 +89,7 @@ form {
 
 a {
   text-decoration: none;
+  color: #24305e;
 }
 
 .whiteText {
