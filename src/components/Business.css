@@ -11,26 +11,101 @@
   width: 100%;
 }
 
+.day:last-child {
+  margin-bottom: 0;
+}
+
 .day {
-  margin-bottom: 8px
+  margin-bottom: 8px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .dayDetails {
-  width: 100%;
-  display: block;
+  display: table-cell;
+  width: 156px;
+  text-align: left;
+}
+
+.theDay {
+  width: 120px;
+  padding-right: 5px;
+  display: table-cell;
+  text-align: left;
 }
 
 .business h2, .business h3 {
   margin: 8px 0;
 }
 
-.contactInfo {
+.contact {
+  font-weight: bold;
+}
+
+address {
+  margin: 8px auto;
+  font-style: normal;
+}
+
+.uxLink {
+  box-shadow: 1px 2px 4px 1px grey;
+  text-transform: uppercase;
   display: flex;
+  margin-right: 8px;
+  height: 65px;
+  width: 65px;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid #24305e!important;
+  color: black!important;
+  padding: 5px;
+  border-radius: 10px;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+.uxLinkContainer {
+  display: flex;
+}
+
+.uxLink:last-child {
+  margin-right: 0;
+}
+
+.showOnMobile {
+  display: none;
+}
+
+.uxLinkContainer a {
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
 }
 
 .business .icon {
   transform: scaleX(-1);
-  height: 20px;
+  height: 25px;
+  width: 25px;
+  margin-bottom: 5px;
+  transition: all 0.2s ease;
+}
+
+@media (hover:hover) {
+  .uxLink:hover, .uxLink:focus {
+    background: #24305e
+  }
+  .uxLink:hover .icon, .uxLink:focus .icon {
+    filter: invert(1)
+  }
+  .uxLinkContainer a:hover, .uxLinkContainer a:focus {
+    color: white!important
+  }
+}
+
+@media (max-width:768px) {
+  .showOnMobile {
+    display: flex;
+  }
 }
 
 /* The Modal (background) */

@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import Search from "./Search";
 import "./Business.css";
 import phoneIcon from "../images/phone.svg";
+import mapIcon from "../images/map.svg";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
@@ -235,13 +236,13 @@ export default function Businesses(props) {
         days.map((day, index) => {
           return (
             <div className="day" key={index}>
-              <span className="dayDetails">{day} </span>
+              <span className="theDay">{day}</span>
+
               {obj[day].open === obj[day].close ? (
-                <span className="dayDetails">&nbsp;Closed</span>
+                <span className="dayDetails">Closed</span>
               ) : (
                 <span className="dayDetails">
-                  &nbsp;{timeDispaly(obj[day].open)}-
-                  {timeDispaly(obj[day].close)}
+                  {timeDispaly(obj[day].open)}-{timeDispaly(obj[day].close)}
                 </span>
               )}
             </div>
@@ -322,33 +323,41 @@ export default function Businesses(props) {
         ) : (
           <div className="componentResults business">
             <h2>{business.name}</h2>
-            {business.contactName ? <span>{business.contactName}</span> : null}
 
-            <a className="contactInfo" href={`tel:${business.telephone}`}>
-              <img className="icon" src={phoneIcon} alt="phone" />
-              &nbsp;{formatPhoneNumber(business.telephone)}
-            </a>
+            {business.contactName ? (
+              <span className="contact">{business.contactName}</span>
+            ) : null}
+            <span>{formatPhoneNumber(business.telephone)}</span>
 
-            <div className="padding">
-              <h3>Address</h3>
-              <address>
-                <span>
-                  {business.address.street},<br />
-                  {business.address.city}
-                  ,&nbsp;{business.address.state}
-                  &nbsp;{business.address.zip}
-                </span>
-              </address>
+            <address>
+              <span>
+                {business.address.street},<br />
+                {business.address.city}
+                ,&nbsp;{business.address.state}
+                &nbsp;{business.address.zip}
+              </span>
+            </address>
+
+            <div className="uxLinkContainer">
               <a
+                className="uxLink showOnMobile"
+                href={`tel:${business.telephone}`}
+              >
+                <img className="icon" src={phoneIcon} alt="phone" />
+                Call
+              </a>
+              <a
+                className="uxLink"
                 target="_blank"
                 rel="noopener noreferrer"
                 href={business.googlePlace}
               >
+                <img className="icon" src={mapIcon} alt="phone" />
                 Map
               </a>
             </div>
 
-            <div className="padding hours">
+            <div className="hours">
               <h3>Hours</h3>
               {day}
             </div>
