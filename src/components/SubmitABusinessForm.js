@@ -12,6 +12,16 @@ export default function SubmitABusinessForm(props) {
   const [comment, setComment] = useState("");
   const [serverMessage, setServerMessage] = useState(null);
 
+  const reset = () => {
+    setReplyTo("");
+    setSubmitterName("");
+    setBusinessToAdd("");
+    setNewBusinessAddress("");
+    setNewBusinessHours("");
+    setNewBusinessTelephone("");
+    setComment("");
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     // disable submit button on click
@@ -21,13 +31,14 @@ export default function SubmitABusinessForm(props) {
       Accept: "application/json"
     };
 
-    return fetch(`${API_BASE_URL}/findbusiness`, {
+    return fetch(`${API_BASE_URL}/emailsupport`, {
       method: "POST",
       headers,
       body: JSON.stringify({
         //all the fields
-        submitterName,
+        formID: "add",
         replyTo,
+        submitterName,
         businessToAdd,
         newBusinessTelephone,
         newBusinessAddress,
@@ -41,13 +52,23 @@ export default function SubmitABusinessForm(props) {
       })
       .then(res => {
         //give user visual feedback and reset form and enable submit button again
-        setServerMessage("Business succesfully submitted")
+        setServerMessage(null);
+        reset();
+        setServerMessage("Business succesfully submitted");
+        setTimeout(() => {
+          setServerMessage(null);
+          // close the form
+          // enable the submit button
+        }, 4000);
       })
       .catch(err => {
         console.log(err);
         //enable submit button if something is wrong
         let message = "Something went wrong, please try again later";
         setServerMessage(message);
+        setTimeout(() => {
+          setServerMessage(null);
+        }, 5000);
       });
   };
 
@@ -141,7 +162,7 @@ export default function SubmitABusinessForm(props) {
 
         <label aria-label="comment">
           Comment&nbsp;
-          <input
+          <textarea
             value={comment}
             onChange={e => setComment(e.target.value)}
             placeholder="Is there a specific person you want users to contact?  Any additional info you would like to add?"
@@ -149,13 +170,14 @@ export default function SubmitABusinessForm(props) {
             name="comment"
             title="Please enter any additional comments you might have"
             aria-labelledby="comment"
-            required
+            rows={3}
           />
         </label>
 
         {serverMessage}
       </fieldset>
 
+      {/* Make the spinning thing show up when they hit submit */}
       <button type="submit" className="add-business-submit">
         Submit
       </button>
