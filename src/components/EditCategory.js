@@ -56,7 +56,7 @@ export default function EditCategory(props) {
   return (
     <form className="padding" onSubmit={handleSubmit}>
       <fieldset>
-        <legend className="formTitle">Edit A Category</legend>
+        <legend className="formTitle">Edit Category Name</legend>
         <SelectCategory
           {...props}
           category={category}
@@ -64,7 +64,7 @@ export default function EditCategory(props) {
         />
 
         <label aria-label="category-name-input">
-          New Category Name&nbsp;
+          New Name&nbsp;
           <input
             value={name}
             onChange={e => setName(e.target.value)}
