@@ -3,6 +3,7 @@ import "./BusinessesList.css";
 import BusinessCard from "./BusinessCard";
 import NavBar from "./NavBar";
 import Search from "./Search";
+import SubmitABusinessForm from "./SubmitABusinessForm";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
@@ -10,6 +11,11 @@ export default function BusinessesList(props) {
   const [businesses, setBusinesses] = useState([]);
   const [serverMessage, setServerMessage] = useState("Fetching Data");
   const [fetchingData, setFetchingData] = useState(true);
+  const [modal, setModal] = useState(false);
+
+  const updateModal = e => {
+    modal ? setModal(false) : setModal(true);
+  };
 
   const fetchBusinesses = () => {
     return fetch(
@@ -54,6 +60,7 @@ export default function BusinessesList(props) {
     <div className="componentLayout">
       <NavBar />
       <Search {...props} />
+      {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
@@ -74,10 +81,11 @@ export default function BusinessesList(props) {
           ) : (
             <div>
               <span>No businesses in this area</span>
-              <br />
-              <span>Submit a business</span>
             </div>
           )}
+          <button type="button" onClick={updateModal}>
+            Submit A Business
+          </button>
         </div>
       )}
     </div>
