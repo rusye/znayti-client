@@ -83,7 +83,14 @@ export default function BusinessForm(props) {
       })
       .catch(err => {
         console.log(err);
-        let message = "Something went wrong, please try again later";
+        let message;
+        if (err.code === 422) {
+          message = err.message;
+        } else if (err.code === 500) {
+          message = "Internal server error";
+        } else {
+          message = "Something went wrong, please try again later";
+        }
         setServerMessage(message);
       });
   };
