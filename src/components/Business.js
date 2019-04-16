@@ -313,7 +313,7 @@ export default function Businesses(props) {
                 />
               </section>
             </fieldset>
-            {serverMessage}
+            {serverMessage ? <div>{serverMessage}</div> : null}
           </form>
         </section>
       ) : null}
@@ -383,7 +383,7 @@ export default function Businesses(props) {
             </div>
           ) : null}
 
-          {serverMessage}
+          {serverMessage ? <div>{serverMessage}</div> : null}
         </div>
       )}
     </div>

@@ -256,11 +256,11 @@ export default function BusinessForm(props) {
         >
           Find Business
         </button>
-        {serverMessage}
+        {serverMessage ? <div>{serverMessage}</div> : null}
 
         {props.googlePlace ? (
           <p>
-            Did Google find the correct business?{" "}
+            Did Google find the correct business?
             <a
               target="_blank"
               rel="noopener noreferrer"

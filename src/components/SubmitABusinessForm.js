@@ -52,13 +52,11 @@ export default function SubmitABusinessForm(props) {
         return res.json();
       })
       .then(res => {
-        //give user visual feedback and reset form and enable submit button again
         setServerMessage(null);
         reset();
         setServerMessage("Business succesfully submitted");
         setTimeout(() => {
           setServerMessage(null);
-          // close the form
           props.updateModal();
           // enable the submit button
         }, 4000);
@@ -188,8 +186,6 @@ export default function SubmitABusinessForm(props) {
               aria-labelledby="comment"
             />
           </label>
-
-          {serverMessage}
         </fieldset>
 
         {/* Make the spinning thing show up when they hit submit */}
@@ -200,6 +196,8 @@ export default function SubmitABusinessForm(props) {
         <button type="reset" onClick={reset}>
           Reset
         </button>
+
+        {serverMessage ? <div>{serverMessage}</div> : null}
       </form>
     </section>
   );

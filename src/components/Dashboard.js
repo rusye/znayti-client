@@ -165,7 +165,7 @@ export default function Dashboard() {
           </div>
         ) : null}
 
-        {serverMessage}
+        {serverMessage ? <div>{serverMessage}</div> : null}
       </section>
     </>
   );
