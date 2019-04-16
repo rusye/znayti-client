@@ -7,7 +7,7 @@ import Header from "./Header";
 export default function Home(props) {
   return (
     <div className="fullCentered">
-      <Link to="/about">
+      <Link className="about" to="/about">
         <button className="aboutButton">About</button>
       </Link>
       <Header />

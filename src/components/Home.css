@@ -6,7 +6,7 @@
   font-family: inherit;
 }
 
-.fullCentered a {
+.fullCentered .about {
   position: absolute;
   bottom: 0;
   right: 0;
