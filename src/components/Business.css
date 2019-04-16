@@ -111,14 +111,15 @@ address {
 /* The Modal (background) */
 
 .modal {
-  position: absolute;
+  display: flex;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
   color: black;
   z-index: 1;
-  left: 50%;
-  top: 48px;
-  padding: inherit;
+  padding: 56px 8px 8px 8px;
   width: 100%;
-  transform: translate(-50%, 0);
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
 }
@@ -126,6 +127,7 @@ address {
 /* Modal Content/Box */
 
 .modal-content {
+  border-radius: 10px;
   margin: auto;
   width: 100%;
   max-width: 450px;
