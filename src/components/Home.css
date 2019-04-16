@@ -4,8 +4,10 @@
   border: none;
   font-size: 20px;
   font-family: inherit;
+}
+
+.fullCentered a {
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 0;
 }
