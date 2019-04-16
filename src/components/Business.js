@@ -262,7 +262,10 @@ export default function Businesses(props) {
   }, []);
 
   return (
-    <>
+    <div className="componentLayout">
+      <NavBar />
+      <Search {...props} />
+
       {modal ? (
         <section className="modal forms" aria-live="assertive">
           <form
@@ -315,79 +318,74 @@ export default function Businesses(props) {
         </section>
       ) : null}
 
-      <div className="componentLayout">
-        <NavBar />
-        <Search {...props} />
+      {fetchingData ? (
+        <h2>{serverMessage}</h2>
+      ) : (
+        <div className="componentResults business">
+          <h2>{business.name}</h2>
 
-        {fetchingData ? (
-          <h2>{serverMessage}</h2>
-        ) : (
-          <div className="componentResults business">
-            <h2>{business.name}</h2>
+          {business.contactName ? (
+            <span className="contact">{business.contactName}</span>
+          ) : null}
+          <span>{formatPhoneNumber(business.telephone)}</span>
 
-            {business.contactName ? (
-              <span className="contact">{business.contactName}</span>
-            ) : null}
-            <span>{formatPhoneNumber(business.telephone)}</span>
+          <address>
+            <span>
+              {business.address.street},<br />
+              {business.address.city}
+              ,&nbsp;{business.address.state}
+              &nbsp;{business.address.zip}
+            </span>
+          </address>
 
-            <address>
-              <span>
-                {business.address.street},<br />
-                {business.address.city}
-                ,&nbsp;{business.address.state}
-                &nbsp;{business.address.zip}
-              </span>
-            </address>
-
-            <div className="uxLinkContainer">
-              <a
-                className="uxLink showOnMobile"
-                href={`tel:${business.telephone}`}
-              >
-                <img className="icon" src={phoneIcon} alt="phone" />
-                Call
-              </a>
-              <a
-                className="uxLink"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={business.googlePlace}
-              >
-                <img className="icon" src={mapIcon} alt="phone" />
-                Map
-              </a>
-            </div>
-
-            <div className="hours">
-              <h3>Hours</h3>
-              {day}
-            </div>
-
-            {localStorage.admin ? (
-              <div>
-                <button
-                  type="button"
-                  onClick={e => {
-                    if (
-                      window.confirm(
-                        "Are you sure you want to delete this business?"
-                      )
-                    )
-                      handleDelete(e);
-                  }}
-                >
-                  Delete
-                </button>
-                <button type="button" onClick={updateModal}>
-                  Edit
-                </button>
-              </div>
-            ) : null}
-
-            {serverMessage}
+          <div className="uxLinkContainer">
+            <a
+              className="uxLink showOnMobile"
+              href={`tel:${business.telephone}`}
+            >
+              <img className="icon" src={phoneIcon} alt="phone" />
+              Call
+            </a>
+            <a
+              className="uxLink"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={business.googlePlace}
+            >
+              <img className="icon" src={mapIcon} alt="phone" />
+              Map
+            </a>
           </div>
-        )}
-      </div>
-    </>
+
+          <div className="hours">
+            <h3>Hours</h3>
+            {day}
+          </div>
+
+          {localStorage.admin ? (
+            <div>
+              <button
+                type="button"
+                onClick={e => {
+                  if (
+                    window.confirm(
+                      "Are you sure you want to delete this business?"
+                    )
+                  )
+                    handleDelete(e);
+                }}
+              >
+                Delete
+              </button>
+              <button type="button" onClick={updateModal}>
+                Edit
+              </button>
+            </div>
+          ) : null}
+
+          {serverMessage}
+        </div>
+      )}
+    </div>
   );
 }
