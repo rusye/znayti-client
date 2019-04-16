@@ -70,6 +70,9 @@ input, select {
 }
 
 @media (max-width:426px) {
+  .hourInputs {
+    background-color: #CCCCCC;
+  }
   .displayInline {
     display: block!important;
     text-align: center;
@@ -78,17 +81,13 @@ input, select {
     display: block;
     margin: 5px auto!important;
   }
-  .content select, .content option, .modal-content select, .modal-content option {
-    width: 100%!important
-  }
   form label {
     display: flex;
     flex-direction: column;
     text-align: left;
   }
-  .content input, .content select, .adminLogin input {
+  .content input, .content select, .adminLogin input, .modal-content input {
     margin: 5px 0 5px 0;
-    max-width: 100%
   }
 }
 
