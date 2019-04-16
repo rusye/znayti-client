@@ -313,7 +313,8 @@ export default function Businesses(props) {
             {serverMessage}
           </form>
         </section>
-      ) : null}{" "}
+      ) : null}
+
       <div className="componentLayout">
         <NavBar />
         <Search {...props} />
