@@ -9,12 +9,14 @@ import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
 export default function Businesses(props) {
+  const [fetchingData, setFetchingData] = useState(true);
   const [business, setBusiness] = useState("");
   const [businessId, setBusinessId] = useState("");
   const [day, setDay] = useState("");
-  const [serverMessage, setServerMessage] = useState(null);
-  const [fetchingData, setFetchingData] = useState(true);
   const [modal, setModal] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [businessDeleted, setBusinessDeleted] = useState(false);
+  const [serverMessage, setServerMessage] = useState(null);
 
   // This is for the form
   const [businessName, setBusinessName] = useState("");
@@ -82,7 +84,7 @@ export default function Businesses(props) {
   };
 
   const fetchBusiness = () => {
-    setServerMessage("Fetching Data");
+    setFetchingData(true);
     return fetch(`${API_BASE_URL}${props.location.pathname}`, {
       method: "GET"
     })
@@ -130,17 +132,16 @@ export default function Businesses(props) {
       .then(res => normalizeResponseErrors(res))
       .then(res => {
         setServerMessage(null);
-        setServerMessage("Business was successfully deleted.");
+        setBusinessDeleted(true);
         setTimeout(() => {
-          setServerMessage(null);
           props.history.goBack();
-        }, 5000);
+        }, 3000);
       })
       .catch(err => {
         console.log(err);
         let message;
-        if (err.code === 422 || 400) {
-          message = err.message;
+        if (err.code === 403) {
+          message = "Unauthorized";
         } else if (err.code === 500) {
           message = "Internal server error";
         } else {
@@ -148,10 +149,6 @@ export default function Businesses(props) {
         }
         setServerMessage(message);
       });
-  };
-
-  const handleEdit = e => {
-    e.preventDefault();
   };
 
   const handleSubmit = async e => {
@@ -186,12 +183,12 @@ export default function Businesses(props) {
       .then(res => normalizeResponseErrors(res))
       .then(res => {
         setServerMessage(null);
-        setServerMessage("Business successfully updated.");
+        setSuccess(true);
         setTimeout(() => {
-          setServerMessage(null);
-          fetchBusiness();
+          setSuccess(false);
           updateModal();
-        }, 4000);
+          fetchBusiness();
+        }, 3000);
       })
       .catch(err => {
         console.log(err);
@@ -268,58 +265,62 @@ export default function Businesses(props) {
 
       {modal ? (
         <section className="modal forms" aria-live="assertive">
-          <form
-            className="modal-content animate padding"
-            onSubmit={handleSubmit}
-          >
-            <div className="imgcontainer">
-              <span className="close" onClick={updateModal} title="Close Form">
-                &times;
-              </span>
-            </div>
+          <div className="modal-content animate padding">
+            {!success ? (
+              <form onSubmit={handleSubmit}>
+                <div className="imgcontainer" onClick={updateModal}>
+                  <span className="close" title="Close Form">
+                    &times;
+                  </span>
+                </div>
 
-            <fieldset>
-              <legend className="formTitle">Edit Business</legend>
-              <section>
-                <BusinessForm
-                  hours={hours}
-                  handleSubmit={handleEdit}
-                  categories={categories}
-                  handleHoursChange={handleHoursChange}
-                  businessName={businessName}
-                  setBusinessName={setBusinessName}
-                  contactName={contactName}
-                  setContactName={setContactName}
-                  category={category}
-                  setCategory={setCategory}
-                  telephone={telephone}
-                  setTelephone={setTelephone}
-                  street={street}
-                  setStreet={setStreet}
-                  city={city}
-                  setCity={setCity}
-                  state={state}
-                  setState={setState}
-                  zip={zip}
-                  setZip={setZip}
-                  latitude={latitude}
-                  setLatitude={setLatitude}
-                  longitude={longitude}
-                  setLongitude={setLongitude}
-                  googlePlace={googlePlace}
-                  setGooglePlace={setGooglePlace}
-                  resetHours={resetHours}
-                  setResetHours={setResetHours}
-                />
-              </section>
-            </fieldset>
-            {serverMessage ? <div>{serverMessage}</div> : null}
-          </form>
+                <fieldset>
+                  <legend className="formTitle">Edit Business</legend>
+                  <section>
+                    <BusinessForm
+                      hours={hours}
+                      categories={categories}
+                      handleHoursChange={handleHoursChange}
+                      businessName={businessName}
+                      setBusinessName={setBusinessName}
+                      contactName={contactName}
+                      setContactName={setContactName}
+                      category={category}
+                      setCategory={setCategory}
+                      telephone={telephone}
+                      setTelephone={setTelephone}
+                      street={street}
+                      setStreet={setStreet}
+                      city={city}
+                      setCity={setCity}
+                      state={state}
+                      setState={setState}
+                      zip={zip}
+                      setZip={setZip}
+                      latitude={latitude}
+                      setLatitude={setLatitude}
+                      longitude={longitude}
+                      setLongitude={setLongitude}
+                      googlePlace={googlePlace}
+                      setGooglePlace={setGooglePlace}
+                      resetHours={resetHours}
+                      setResetHours={setResetHours}
+                    />
+                  </section>
+                </fieldset>
+                {serverMessage ? <div>{serverMessage}</div> : null}
+              </form>
+            ) : (
+              <p>Business succesfully submitted</p>
+            )}
+          </div>
         </section>
       ) : null}
 
       {fetchingData ? (
-        <h2>{serverMessage}</h2>
+        <h2>{serverMessage ? serverMessage : "Fetching Data"}</h2>
+      ) : businessDeleted ? (
+        <h2>Business Successfully Deleted</h2>
       ) : (
         <div className="componentResults business">
           <h2>{business.name}</h2>
