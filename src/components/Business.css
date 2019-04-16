@@ -127,7 +127,8 @@ address {
 
 .modal-content {
   margin: auto;
-  max-width: 500px;
+  width: 100%;
+  max-width: 450px;
 }
 
 /* The Close Button (x) */
