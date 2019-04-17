@@ -8,7 +8,7 @@ import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const cache = {};
 
 export default function Search(props) {
-  const [userLocation, setLocation] = useState("Portland, OR");
+  const [userLocation, setUserLocation] = useState("Portland, OR");
   const [radius, setRadius] = useState(10);
   const [submitDisable, setSubmitDisable] = useState(false);
   const [locadingIcon, setLoadingIcon] = useState(false);
@@ -29,13 +29,14 @@ export default function Search(props) {
     return params;
   };
 
-  const paramsKeys = params =>
-    params.input && params.rad
-      ? (setLocation(params.input), setRadius(params.rad))
+  const paramsKeys = params => {
+    return params.input && params.rad
+      ? (setUserLocation(params.input), setRadius(params.rad))
       : null;
+  };
 
   const updateLocation = e => {
-    setLocation(e);
+    setUserLocation(e);
   };
 
   const updateRadius = e => {
@@ -97,7 +98,7 @@ export default function Search(props) {
 
   useEffect(() => {
     paramsKeys(parseQueryString(paramsString));
-  }, []);
+  }, [window.location.search]);
 
   return (
     <>
