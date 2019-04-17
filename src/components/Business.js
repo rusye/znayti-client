@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BusinessForm from "./BusinessForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
+import SubmitAnEditForm from "./SubmitAnEditForm";
 import "./Business.css";
 import phoneIcon from "../images/phone.svg";
 import mapIcon from "../images/map.svg";
@@ -14,6 +15,7 @@ export default function Businesses(props) {
   const [businessId, setBusinessId] = useState("");
   const [day, setDay] = useState("");
   const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [success, setSuccess] = useState(false);
   const [businessDeleted, setBusinessDeleted] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
@@ -253,6 +255,10 @@ export default function Businesses(props) {
     modal ? setModal(false) : setModal(true);
   };
 
+  const updateEditModal = e => {
+    editModal ? setEditModal(false) : setEditModal(true);
+  };
+
   useEffect(() => {
     fetchBusiness();
     fetchCategories();
@@ -262,6 +268,14 @@ export default function Businesses(props) {
     <div className="componentLayout">
       <NavBar />
       <Search {...props} />
+
+      {editModal ? (
+        <SubmitAnEditForm
+          updateEditModal={updateEditModal}
+          businessName={business.name}
+          businessId={businessId}
+        />
+      ) : null}
 
       {modal ? (
         <section className="modal forms" aria-live="assertive">
@@ -347,6 +361,7 @@ export default function Businesses(props) {
               <img className="icon" src={phoneIcon} alt="phone" />
               Call
             </a>
+
             <a
               className="uxLink"
               target="_blank"
@@ -378,11 +393,16 @@ export default function Businesses(props) {
               >
                 Delete
               </button>
+
               <button type="button" onClick={updateModal}>
                 Edit
               </button>
             </div>
           ) : null}
+
+          <button type="button" onClick={updateEditModal}>
+            Submit An Edit
+          </button>
 
           {serverMessage ? <div>{serverMessage}</div> : null}
         </div>
