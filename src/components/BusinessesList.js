@@ -8,10 +8,10 @@ import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
 export default function BusinessesList(props) {
-  const [businesses, setBusinesses] = useState([]);
-  const [serverMessage, setServerMessage] = useState("Fetching Data");
   const [fetchingData, setFetchingData] = useState(true);
+  const [businesses, setBusinesses] = useState([]);
   const [modal, setModal] = useState(false);
+  const [serverMessage, setServerMessage] = useState("Fetching Data");
 
   const updateModal = e => {
     modal ? setModal(false) : setModal(true);
@@ -83,6 +83,7 @@ export default function BusinessesList(props) {
               <span>No businesses in this area</span>
             </div>
           )}
+
           <button type="button" onClick={updateModal}>
             Submit A Business
           </button>
