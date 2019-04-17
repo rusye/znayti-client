@@ -287,9 +287,14 @@ export default function BusinessForm(props) {
         {eachDay}
       </fieldset>
 
-      <button type="submit" className="add-business-submit">
+      <button
+        type="submit"
+        disabled={props.submitDisable}
+        className="add-business-submit"
+      >
         Submit
       </button>
+
       <button type="reset" onClick={props.reset}>
         Reset
       </button>

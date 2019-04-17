@@ -8,10 +8,12 @@ import "./AdminLogin.css";
 export default function AdminLogin(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -37,6 +39,7 @@ export default function AdminLogin(props) {
         localStorage.setItem("userId", res.user.id);
         localStorage.setItem("loggedIn", true);
         localStorage.setItem("admin", true);
+        setSubmitDisable(false);
         props.history.push("/dashboard");
       })
       .catch(err => {
@@ -48,6 +51,7 @@ export default function AdminLogin(props) {
         } else {
           message = "Unable to login, please try again";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -92,10 +96,15 @@ export default function AdminLogin(props) {
             </label>
           </fieldset>
 
-          <button type="submit" className="login-submit">
+          <button
+            type="submit"
+            disabled={submitDisable}
+            className="login-submit"
+          >
             Submit
           </button>
         </form>
+        
         {serverMessage ? <div>{serverMessage}</div> : null}
       </section>
     </>

@@ -7,6 +7,7 @@ export default function AddAdminUser() {
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
@@ -18,6 +19,7 @@ export default function AddAdminUser() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -42,6 +44,7 @@ export default function AddAdminUser() {
       .then(res => {
         setServerMessage(null);
         reset();
+        setSubmitDisable(false);
         setServerMessage(`${res.username} succesfully added`);
         setTimeout(() => {
           setServerMessage(null);
@@ -56,6 +59,7 @@ export default function AddAdminUser() {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
         setTimeout(() => {
           setServerMessage(null);
@@ -125,12 +129,18 @@ export default function AddAdminUser() {
           />
         </label>
 
-        <button type="submit" className="add-user-admin-submit">
+        <button
+          type="submit"
+          disabled={submitDisable}
+          className="add-user-admin-submit"
+        >
           Submit
         </button>
+
         <button type="reset" onClick={reset}>
           Reset
         </button>
+
         {serverMessage ? <div>{serverMessage}</div> : null}
       </fieldset>
     </form>

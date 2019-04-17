@@ -18,6 +18,7 @@ export default function Businesses(props) {
   const [editModal, setEditModal] = useState(false);
   const [success, setSuccess] = useState(false);
   const [businessDeleted, setBusinessDeleted] = useState(false);
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   // This is for the form
@@ -155,6 +156,7 @@ export default function Businesses(props) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -185,6 +187,7 @@ export default function Businesses(props) {
       .then(res => normalizeResponseErrors(res))
       .then(res => {
         setServerMessage(null);
+        setSubmitDisable(false);
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
@@ -202,6 +205,7 @@ export default function Businesses(props) {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -319,9 +323,11 @@ export default function Businesses(props) {
                       setGooglePlace={setGooglePlace}
                       resetHours={resetHours}
                       setResetHours={setResetHours}
+                      submitDisable={submitDisable}
                     />
                   </section>
                 </fieldset>
+
                 {serverMessage ? <div>{serverMessage}</div> : null}
               </form>
             ) : (

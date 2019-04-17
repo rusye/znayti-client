@@ -17,6 +17,7 @@ export default function AddBusiness(props) {
   const [googlePlace, setGooglePlace] = useState("");
   const [hours, setHours] = useState({});
   const [resetHours, setResetHours] = useState(false);
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
@@ -36,6 +37,7 @@ export default function AddBusiness(props) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -69,6 +71,7 @@ export default function AddBusiness(props) {
       .then(res => {
         setServerMessage(null);
         reset();
+        setSubmitDisable(false);
         setServerMessage(`${res.name} succesfully added`);
         setTimeout(() => {
           setServerMessage(null);
@@ -83,6 +86,7 @@ export default function AddBusiness(props) {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -95,6 +99,7 @@ export default function AddBusiness(props) {
     <form className="padding " onSubmit={handleSubmit}>
       <fieldset>
         <legend className="formTitle">Add New Business</legend>
+
         <BusinessForm
           {...props}
           handleHoursChange={handleHoursChange}
@@ -123,7 +128,9 @@ export default function AddBusiness(props) {
           resetHours={resetHours}
           reset={reset}
           setResetHours={setResetHours}
+          submitDisable={submitDisable}
         />
+
         {serverMessage ? <div>{serverMessage}</div> : null}
       </fieldset>
     </form>

@@ -4,6 +4,7 @@ import { normalizeResponseErrors } from "../functions/normalizeResponse";
 
 export default function AddCategory(props) {
   const [name, setName] = useState("");
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
@@ -12,6 +13,7 @@ export default function AddCategory(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -34,6 +36,7 @@ export default function AddCategory(props) {
         setServerMessage(null);
         props.updateCategories(res);
         reset();
+        setSubmitDisable(false);
         setServerMessage(`${res.name} succesfully added`);
         setTimeout(() => {
           setServerMessage(null);
@@ -49,6 +52,7 @@ export default function AddCategory(props) {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -72,12 +76,18 @@ export default function AddCategory(props) {
           />
         </label>
 
-        <button type="submit" className="category-submit">
+        <button
+          type="submit"
+          disabled={submitDisable}
+          className="category-submit"
+        >
           Submit
         </button>
+
         <button type="reset" onClick={reset}>
           Reset
         </button>
+
         {serverMessage ? <div>{serverMessage}</div> : null}
       </fieldset>
     </form>

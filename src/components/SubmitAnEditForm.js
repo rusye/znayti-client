@@ -33,8 +33,8 @@ export default function SubmitAnEditForm(props) {
         formID: "edit",
         replyTo,
         submitterName,
-        "businessToEdit": props.businessName,
-        "businessID": props.businessId,
+        businessToEdit: props.businessName,
+        businessID: props.businessId,
         comment
       })
     })

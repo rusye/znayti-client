@@ -5,10 +5,12 @@ import SelectCategory from "./SelectCategory";
 
 export default function DeleteCategory(props) {
   const [category, setCategory] = useState("");
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -26,6 +28,7 @@ export default function DeleteCategory(props) {
       .then(res => {
         setServerMessage(null);
         setCategory("");
+        setSubmitDisable(false);
         setServerMessage("Category was successfully deleted.");
         setTimeout(() => {
           setServerMessage(null);
@@ -42,6 +45,7 @@ export default function DeleteCategory(props) {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -63,7 +67,7 @@ export default function DeleteCategory(props) {
         />
       </fieldset>
 
-      <button type="submit" className="delete-submit">
+      <button type="submit" disabled={submitDisable} className="delete-submit">
         Delete
       </button>
 

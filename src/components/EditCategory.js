@@ -6,6 +6,7 @@ import SelectCategory from "./SelectCategory";
 export default function EditCategory(props) {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
+  const [submitDisable, setSubmitDisable] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
@@ -15,6 +16,7 @@ export default function EditCategory(props) {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setSubmitDisable(true);
 
     const headers = {
       "Content-Type": "application/json",
@@ -33,6 +35,7 @@ export default function EditCategory(props) {
       .then(res => {
         setServerMessage(null);
         reset();
+        setSubmitDisable(false);
         setServerMessage("Category name successfully updated.");
         setTimeout(() => {
           setServerMessage(null);
@@ -49,6 +52,7 @@ export default function EditCategory(props) {
         } else {
           message = "Something went wrong, please try again later";
         }
+        setSubmitDisable(false);
         setServerMessage(message);
       });
   };
@@ -78,12 +82,18 @@ export default function EditCategory(props) {
           />
         </label>
 
-        <button type="submit" className="category-submit">
+        <button
+          type="submit"
+          disabled={submitDisable}
+          className="category-submit"
+        >
           Submit
         </button>
+
         <button type="reset" onClick={reset}>
           Reset
         </button>
+
         {serverMessage ? <div>{serverMessage}</div> : null}
       </fieldset>
     </form>
