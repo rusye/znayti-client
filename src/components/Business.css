@@ -112,13 +112,13 @@ address {
 
 .modal {
   display: flex;
-  height: 100%;
-  top: 0;
+  height: calc(100% - 48px);
+  top: 48px;
   left: 0;
   position: fixed;
   color: black;
   z-index: 1;
-  padding: 56px 8px 8px 8px;
+  padding: 8px;
   width: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
