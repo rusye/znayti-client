@@ -2,14 +2,20 @@ import React, { useState, useEffect } from "react";
 import "./Categories.css";
 import NavBar from "./NavBar";
 import Search from "./Search";
+import SubmitABusinessForm from "./SubmitABusinessForm";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
 const { API_BASE_URL } = require("../config");
 
 export default function Categories(props) {
+  const [fetchingData, setFetchingData] = useState(true);
   const [categories, setCategories] = useState("");
   const [title, setTitle] = useState(null);
+  const [modal, setModal] = useState(false);
   const [serverMessage, setServerMessage] = useState("Fetching Data");
-  const [fetchingData, setFetchingData] = useState(true);
+
+  const updateModal = e => {
+    modal ? setModal(false) : setModal(true);
+  };
 
   const fetchCategories = () => {
     return fetch(
@@ -44,7 +50,11 @@ export default function Categories(props) {
           );
         } else {
           setTitle("No businesses in this area");
-          setCategories("Submit a business");
+          setCategories(
+            <button type="button" onClick={updateModal}>
+              Submit A Business
+            </button>
+          );
         }
         setFetchingData(false);
       })
@@ -76,6 +86,7 @@ export default function Categories(props) {
     <div className="componentLayout">
       <NavBar />
       <Search {...props} />
+      {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
