@@ -188,11 +188,11 @@ export default function Businesses(props) {
       .then(res => {
         setServerMessage(null);
         setSubmitDisable(false);
+        fetchBusiness();
         setSuccess(true);
         setTimeout(() => {
           setSuccess(false);
           updateModal();
-          fetchBusiness();
         }, 3000);
       })
       .catch(err => {
@@ -331,7 +331,7 @@ export default function Businesses(props) {
                 {serverMessage ? <div>{serverMessage}</div> : null}
               </form>
             ) : (
-              <p>Business succesfully submitted</p>
+              <p>Business succesfully edited</p>
             )}
           </div>
         </section>
