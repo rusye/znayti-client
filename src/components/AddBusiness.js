@@ -131,6 +131,14 @@ export default function AddBusiness(props) {
 
         <button type="submit" disabled={submitDisable}>
           Submit
+          {submitDisable ? (
+            <div className="lds-ring dark-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          ) : null}
         </button>
 
         <button type="reset" onClick={reset}>

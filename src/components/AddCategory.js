@@ -82,6 +82,14 @@ export default function AddCategory(props) {
           className="category-submit"
         >
           Submit
+          {submitDisable ? (
+            <div className="lds-ring dark-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          ) : null}
         </button>
 
         <button type="reset" onClick={reset}>

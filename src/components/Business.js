@@ -333,6 +333,14 @@ export default function Businesses(props) {
                   className="uxLink other userFormButtonContainer"
                 >
                   Submit
+                  {submitDisable ? (
+                    <div className="lds-ring">
+                      <div />
+                      <div />
+                      <div />
+                      <div />
+                    </div>
+                  ) : null}
                 </button>
 
                 {serverMessage ? <div>{serverMessage}</div> : null}

@@ -135,6 +135,14 @@ export default function AddAdminUser() {
           className="add-user-admin-submit"
         >
           Submit
+          {submitDisable ? (
+            <div className="lds-ring dark-ring">
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+          ) : null}
         </button>
 
         <button type="reset" onClick={reset}>

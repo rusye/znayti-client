@@ -69,6 +69,14 @@ export default function DeleteCategory(props) {
 
       <button type="submit" disabled={submitDisable} className="delete-submit">
         Delete
+        {submitDisable ? (
+          <div className="lds-ring dark-ring">
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>
+        ) : null}
       </button>
 
       {serverMessage ? <div>{serverMessage}</div> : null}

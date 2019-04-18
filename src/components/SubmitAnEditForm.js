@@ -124,13 +124,20 @@ export default function SubmitAnEditForm(props) {
               </label>
             </fieldset>
 
-            {/* Make the spinning thing show up when they hit submit */}
             <button
               type="submit"
               disabled={submitDisable}
               className="uxLink other"
             >
               Submit
+              {submitDisable ? (
+                <div className="lds-ring">
+                  <div />
+                  <div />
+                  <div />
+                  <div />
+                </div>
+              ) : null}
             </button>
 
             {serverMessage ? <div>{serverMessage}</div> : null}
