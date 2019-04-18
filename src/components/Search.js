@@ -11,7 +11,6 @@ export default function Search(props) {
   const [userLocation, setUserLocation] = useState("Portland, OR");
   const [radius, setRadius] = useState(10);
   const [submitDisable, setSubmitDisable] = useState(false);
-  const [locadingIcon, setLoadingIcon] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const paramsString = decodeURIComponent(window.location.search.substring(1));
@@ -80,18 +79,15 @@ export default function Search(props) {
   const searchRequest = e => {
     e.preventDefault();
     setSubmitDisable(true);
-    setLoadingIcon(true);
     return getLocationCoordinates(userLocation)
       .then(res => {
         const [lat, long] = res;
-        setLoadingIcon(false);
         setSubmitDisable(false);
         props.history.push(
           `/business/search?long=${long}&lat=${lat}&rad=${radius}&input=${userLocation}`
         );
       })
       .catch(res => {
-        setLoadingIcon(false);
         setSubmitDisable(false);
       });
   };
@@ -150,7 +146,7 @@ export default function Search(props) {
           type="submit"
           disabled={submitDisable}
         >
-          {locadingIcon ? (
+          {submitDisable ? (
             <div className="lds-ring">
               <div />
               <div />
