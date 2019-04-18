@@ -195,13 +195,9 @@ export default function SubmitABusinessForm(props) {
             <button
               type="submit"
               disabled={submitDisable}
-              className="add-business-submit"
+              className="uxLink other"
             >
               Submit
-            </button>
-
-            <button type="reset" onClick={reset}>
-              Reset
             </button>
 
             {serverMessage ? <div>{serverMessage}</div> : null}
