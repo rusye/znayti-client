@@ -327,7 +327,11 @@ export default function Businesses(props) {
                   </section>
                 </fieldset>
 
-                <button type="submit" disabled={submitDisable}>
+                <button
+                  type="submit"
+                  disabled={submitDisable}
+                  className="uxLink other userFormButtonContainer"
+                >
                   Submit
                 </button>
 
