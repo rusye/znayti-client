@@ -271,7 +271,7 @@ export default function Businesses(props) {
   return (
     <div className="componentLayout">
       <NavBar />
-      <Search {...props} />
+      <Search blur={editModal ? true : false} {...props} />
 
       {editModal ? (
         <SubmitAnEditForm
@@ -342,7 +342,11 @@ export default function Businesses(props) {
       ) : businessDeleted ? (
         <h2>Business Successfully Deleted</h2>
       ) : (
-        <div className="componentResults business">
+        <div
+          className={`componentResults business ${
+            editModal || modal ? "blur" : null
+          }`}
+        >
           <h2>{business.name}</h2>
 
           {business.contactName ? (
@@ -384,31 +388,42 @@ export default function Businesses(props) {
             {day}
           </div>
 
-          {localStorage.admin ? (
-            <div>
+          <div className="userFormButtonContainer">
+            {localStorage.admin ? (
+              <>
+                <button
+                  type="button"
+                  className="uxLink other"
+                  onClick={e => {
+                    if (
+                      window.confirm(
+                        "Are you sure you want to delete this business?"
+                      )
+                    )
+                      handleDelete(e);
+                  }}
+                >
+                  Delete
+                </button>
+
+                <button
+                  className="uxLink other"
+                  type="button"
+                  onClick={updateModal}
+                >
+                  Edit
+                </button>
+              </>
+            ) : (
               <button
                 type="button"
-                onClick={e => {
-                  if (
-                    window.confirm(
-                      "Are you sure you want to delete this business?"
-                    )
-                  )
-                    handleDelete(e);
-                }}
+                className="uxLink other"
+                onClick={updateEditModal}
               >
-                Delete
+                Submit An Edit
               </button>
-
-              <button type="button" onClick={updateModal}>
-                Edit
-              </button>
-            </div>
-          ) : null}
-
-          <button type="button" onClick={updateEditModal}>
-            Submit An Edit
-          </button>
+            )}
+          </div>
 
           {serverMessage ? <div>{serverMessage}</div> : null}
         </div>

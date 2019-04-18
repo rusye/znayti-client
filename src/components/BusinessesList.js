@@ -59,13 +59,13 @@ export default function BusinessesList(props) {
   return (
     <div className="componentLayout">
       <NavBar />
-      <Search {...props} />
+      <Search blur={modal ? true : false} {...props} />
       {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
       ) : (
-        <div className="componentResults">
+        <div className={`componentResults ${modal ? "blur" : null}`}>
           <h2>{props.match.params.category}</h2>
           {businesses.length > 0 ? (
             <ul>
@@ -84,7 +84,11 @@ export default function BusinessesList(props) {
             </div>
           )}
 
-          <button type="button" onClick={updateModal}>
+          <button
+            type="button"
+            className="uxLink other light"
+            onClick={updateModal}
+          >
             Submit A Business
           </button>
         </div>

@@ -51,7 +51,11 @@ export default function Categories(props) {
         } else {
           setTitle("No businesses in this area");
           setCategories(
-            <button type="button" onClick={updateModal}>
+            <button
+              type="button"
+              className="uxLink other light"
+              onClick={updateModal}
+            >
               Submit A Business
             </button>
           );
@@ -85,13 +89,13 @@ export default function Categories(props) {
   return (
     <div className="componentLayout">
       <NavBar />
-      <Search {...props} />
+      <Search blur={modal ? true : false} {...props} />
       {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
         <h2>{serverMessage}</h2>
       ) : (
-        <div className="componentResults">
+        <div className={`componentResults ${modal ? "blur" : null}`}>
           <h2>{title}</h2>
           <ul>{categories}</ul>
         </div>
