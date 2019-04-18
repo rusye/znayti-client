@@ -323,10 +323,13 @@ export default function Businesses(props) {
                       setGooglePlace={setGooglePlace}
                       resetHours={resetHours}
                       setResetHours={setResetHours}
-                      submitDisable={submitDisable}
                     />
                   </section>
                 </fieldset>
+
+                <button type="submit" disabled={submitDisable}>
+                  Submit
+                </button>
 
                 {serverMessage ? <div>{serverMessage}</div> : null}
               </form>

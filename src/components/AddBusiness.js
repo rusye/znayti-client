@@ -126,10 +126,16 @@ export default function AddBusiness(props) {
           googlePlace={googlePlace}
           setGooglePlace={setGooglePlace}
           resetHours={resetHours}
-          reset={reset}
           setResetHours={setResetHours}
-          submitDisable={submitDisable}
         />
+
+        <button type="submit" disabled={submitDisable}>
+          Submit
+        </button>
+
+        <button type="reset" onClick={reset}>
+          Reset
+        </button>
 
         {serverMessage ? <div>{serverMessage}</div> : null}
       </fieldset>

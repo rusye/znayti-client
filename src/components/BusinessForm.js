@@ -286,14 +286,6 @@ export default function BusinessForm(props) {
         <legend>Business Hours</legend>
         {eachDay}
       </fieldset>
-
-      <button type="submit" disabled={props.submitDisable}>
-        Submit
-      </button>
-
-      <button type="reset" onClick={props.reset}>
-        Reset
-      </button>
     </section>
   );
 }
