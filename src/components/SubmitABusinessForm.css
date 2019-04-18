@@ -10,3 +10,24 @@ textarea {
   background-color: white;
   margin: 5px 0 5px 0;;
 }
+
+.uxLink .lds-ring div, .uxLink .lds-ring, .content .lds-ring div, .content .lds-ring {
+  width: 16px;
+  height: 16px;
+}
+
+.uxLink .lds-ring div, .content .lds-ring div {
+  border: 2px solid black;
+  border-color: black transparent transparent transparent;
+}
+
+.uxLink .lds-ring, .content .lds-ring {
+  margin-left: 5px; 
+}
+
+@media (hover:hover) {
+  .uxLink:hover .lds-ring div, .uxLink:focus .lds-ring div {
+    border: 2px solid #fff;
+    border-color: #fff transparent transparent transparent;
+  }
+}
