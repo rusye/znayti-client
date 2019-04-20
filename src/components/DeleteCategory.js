@@ -29,10 +29,10 @@ export default function DeleteCategory(props) {
         setServerMessage(null);
         setCategory("");
         setSubmitDisable(false);
+        props.onChange(Math.random());
         setServerMessage("Category was successfully deleted.");
         setTimeout(() => {
           setServerMessage(null);
-          props.onChange(Math.random());
         }, 4000);
       })
       .catch(err => {
