@@ -435,7 +435,7 @@ export default function Businesses(props) {
                 className="uxLink other"
                 onClick={updateEditModal}
               >
-                Submit An Edit
+                Suggest An Edit
               </button>
             )}
           </div>
