@@ -89,7 +89,7 @@ export default function BusinessesList(props) {
             className="uxLink other light"
             onClick={updateModal}
           >
-            Submit A Business
+            Add A Business
           </button>
         </div>
       )}
