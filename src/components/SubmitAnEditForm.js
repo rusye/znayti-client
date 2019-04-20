@@ -79,7 +79,7 @@ export default function SubmitAnEditForm(props) {
             </div>
 
             <fieldset>
-              <legend className="formTitle">Submit An Edit</legend>
+              <legend className="formTitle">Suggest An Edit</legend>
               <label aria-label="your name">
                 Your Name&nbsp;
                 <input
