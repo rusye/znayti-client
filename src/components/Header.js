@@ -6,7 +6,7 @@ export default function Header() {
     <header className="App-header">
       <h1>Znayti</h1>
       <h2>
-        Connecting you with businesses that have a Russian speaker on staff
+        Connecting you with businesses that have Russian speaking staff
       </h2>
     </header>
   );
