@@ -18,15 +18,6 @@ export default function NavBar() {
   useEffect(() => {
     setLinks(
       <>
-        <Link tabIndex="-1" to="/">
-          <button
-            className="bar-item button-one"
-            onClick={() => setDisplayMenu(false)}
-          >
-            Home
-          </button>
-        </Link>
-
         <Link tabIndex="-1" to="/dashboard">
           <button
             className="bar-item button-one"
@@ -93,10 +84,6 @@ export default function NavBar() {
           </>
         ) : (
           <div className="right">
-            <Link to="/">
-              <button className="bar-item button-one">Home</button>
-            </Link>
-            
             <Link to="/about">
               <button className="bar-item button-one">About</button>
             </Link>
