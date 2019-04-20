@@ -6,8 +6,10 @@
   font-family: inherit;
 }
 
-.fullCentered .about {
-  position: absolute;
-  bottom: 0;
+.fullCentered .aboutButtonAnchor {
+  position: fixed;
+  top: 0;
   right: 0;
+  margin-top: 8px;
+  margin-right: 8px;
 }
