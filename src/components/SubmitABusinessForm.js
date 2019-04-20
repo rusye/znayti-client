@@ -89,7 +89,7 @@ export default function SubmitABusinessForm(props) {
             </div>
 
             <fieldset>
-              <legend className="formTitle">Submit A Business</legend>
+              <legend className="formTitle">Add A Business</legend>
               <label aria-label="your name">
                 Your Name&nbsp;
                 <input
