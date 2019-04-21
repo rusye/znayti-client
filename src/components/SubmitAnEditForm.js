@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from "../config";
 import "./SubmitABusinessForm.css";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
@@ -9,6 +9,11 @@ export default function SubmitAnEditForm(props) {
   const [comment, setComment] = useState("");
   const [submitDisable, setSubmitDisable] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [integerOne, setIntegerOne] = useState("");
+  const [integerTwo, setIntegerTwo] = useState("");
+  const [sum, setSum] = useState("");
+  const [captchaResponse, setCaptchaResponse] = useState("");
+  const [wrongResponse, setWrongResponse] = useState(false);
   const [serverMessage, setServerMessage] = useState(null);
 
   const reset = () => {
@@ -17,51 +22,75 @@ export default function SubmitAnEditForm(props) {
     setComment("");
   };
 
+  const getRandomInt = () => {
+    setIntegerOne(Math.floor(Math.random() * Math.floor(31)));
+    setIntegerTwo(Math.floor(Math.random() * Math.floor(31)));
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     setSubmitDisable(true);
+    setWrongResponse(false);
+    setServerMessage(null);
 
-    const headers = {
-      "Content-Type": "application/json",
-      Accept: "application/json"
-    };
-
-    return fetch(`${API_BASE_URL}/emailsupport`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        formID: "edit",
-        replyTo,
-        submitterName,
-        businessToEdit: props.businessName,
-        businessID: props.businessId,
-        comment
+    if (sum === captchaResponse) {
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      };
+      
+      return fetch(`${API_BASE_URL}/emailsupport`, {
+        method: "POST",
+        headers,
+        body: JSON.stringify({
+          formID: "edit",
+          replyTo,
+          submitterName,
+          businessToEdit: props.businessName,
+          businessID: props.businessId,
+          comment
+        })
       })
-    })
-      .then(res => normalizeResponseErrors(res))
-      .then(res => {
-        return res.json();
-      })
-      .then(res => {
-        setServerMessage(null);
-        reset();
-        setSubmitDisable(false);
-        setSuccess(true);
-        setTimeout(() => {
-          setSuccess(false);
-          props.updateEditModal();
-        }, 3000);
-      })
-      .catch(err => {
-        console.log(err);
-        let message = "Something went wrong, please try again later";
-        setSubmitDisable(false);
-        setServerMessage(message);
-        setTimeout(() => {
+        .then(res => normalizeResponseErrors(res))
+        .then(res => {
+          return res.json();
+        })
+        .then(res => {
           setServerMessage(null);
-        }, 5000);
-      });
+          reset();
+          setSubmitDisable(false);
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+            props.updateEditModal();
+          }, 3000);
+        })
+        .catch(err => {
+          console.log(err);
+          let message = "Something went wrong, please try again later";
+          setSubmitDisable(false);
+          setServerMessage(message);
+          setTimeout(() => {
+            setServerMessage(null);
+          }, 5000);
+        });
+    } else {
+      setSubmitDisable(false);
+      setWrongResponse(true);
+      setServerMessage("You've entered the wrong answer");
+      setTimeout(() => {
+        setServerMessage(null);
+      }, 5000);
+    }
   };
+
+  useEffect(() => {
+    getRandomInt();
+  }, []);
+
+  useEffect(() => {
+    setSum(`${integerOne + integerTwo}`);
+  }, [captchaResponse]);
 
   return (
     <section className="modal forms" aria-live="assertive">
@@ -123,6 +152,24 @@ export default function SubmitAnEditForm(props) {
                 />
               </label>
             </fieldset>
+
+            <p>
+              {integerOne}+{integerTwo}=
+              <input
+                className={`captchaResponse ${
+                  wrongResponse ? "wrongResponse" : null
+                }`}
+                value={captchaResponse}
+                onChange={e => setCaptchaResponse(e.target.value)}
+                type="text"
+                name="your-answer"
+                title="Enter your answer"
+                aria-labelledby="your-answer"
+                autoComplete="off"
+                size={3}
+                required
+              />
+            </p>
 
             <button
               type="submit"

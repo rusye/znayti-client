@@ -8,7 +8,8 @@ textarea {
   width: 100%;
   padding: 5px;
   background-color: white;
-  margin: 5px 0 5px 0;;
+  margin: 5px 0 5px 0;
+  ;
 }
 
 .uxLink .lds-ring div, .uxLink .lds-ring, .content .lds-ring div, .content .lds-ring {
@@ -22,7 +23,7 @@ textarea {
 }
 
 .uxLink .lds-ring, .content .lds-ring {
-  margin-left: 5px; 
+  margin-left: 5px;
 }
 
 @media (hover:hover) {
@@ -30,4 +31,14 @@ textarea {
     border: 2px solid #fff;
     border-color: #fff transparent transparent transparent;
   }
+}
+
+.captchaResponse {
+  width: 42px;
+  outline: none;
+  text-align: center;
+}
+
+.wrongResponse {
+  border: 3px solid red;
 }
