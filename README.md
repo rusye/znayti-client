@@ -23,22 +23,22 @@ Demo Password: ffffffffff
 ## Screenshots
 
 Home Page
-![Home Page](https://github.com/rusye/znayti-server/blob/master/screenshots/home.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/home.png" width="350">
 
 Categories available in your search area
-![Categories List](https://github.com/rusye/znayti-server/blob/master/screenshots/categoriesList.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/categoriesList.png" width="350">
 
 Businesses available in a category in your search area
-![Businesses List](https://github.com/rusye/znayti-server/blob/master/screenshots/businessesList.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/businessesList.png" width="350">
 
 Business Details
-![Business Details](https://github.com/rusye/znayti-server/blob/master/screenshots/businessResult.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/businessResult.png" width="350">
 
 Add A Business Form
-![Add A Business Form](https://github.com/rusye/znayti-server/blob/master/screenshots/addABusinessForm.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/addABusinessForm.png" width="350">
 
 Suggest An Edit Form
-![Suggest An Edit Form](https://github.com/rusye/znayti-server/blob/master/screenshots/suggestAnEditForm.png =350x)
+<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/suggestAnEditForm.png" width="350">
 
 ## Tech Stack
 * React
