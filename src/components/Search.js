@@ -107,8 +107,8 @@ export default function Search(props) {
           <input
             id="inp"
             className="heightForty widthTwoHundred"
-            aria-label="city and state"
-            title="Please enter city and state you wish to search in"
+            aria-label="Near"
+            title="Please enter the city, state or zip code you wish to search in"
             type="text"
             name="search"
             required
@@ -116,7 +116,7 @@ export default function Search(props) {
             value={userLocation}
             placeholder="&nbsp;"
           />
-          <span className="label">City, State</span>
+          <span className="label">Near</span>
           <span className="border" />
         </label>
         <label htmlFor="sel" className="inp selectSpecs">
