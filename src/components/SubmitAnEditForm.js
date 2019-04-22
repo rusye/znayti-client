@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from "../config";
 import "./SubmitABusinessForm.css";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
+import { customeValidationMessage } from "../functions/customeValidationMessage";
 
 export default function SubmitAnEditForm(props) {
   const [replyTo, setReplyTo] = useState("");
@@ -38,7 +39,7 @@ export default function SubmitAnEditForm(props) {
         "Content-Type": "application/json",
         Accept: "application/json"
       };
-      
+
       return fetch(`${API_BASE_URL}/emailsupport`, {
         method: "POST",
         headers,
@@ -86,6 +87,7 @@ export default function SubmitAnEditForm(props) {
 
   useEffect(() => {
     getRandomInt();
+    customeValidationMessage();
   }, []);
 
   useEffect(() => {
@@ -110,7 +112,7 @@ export default function SubmitAnEditForm(props) {
             <fieldset>
               <legend className="formTitle">Suggest An Edit</legend>
               <label aria-label="your name">
-                Your Name&nbsp;
+                Your Name
                 <input
                   value={submitterName}
                   onChange={e => setSubmitterName(e.target.value)}
@@ -124,7 +126,7 @@ export default function SubmitAnEditForm(props) {
               </label>
 
               <label aria-label="your email">
-                Your Email&nbsp;
+                Your Email
                 <input
                   value={replyTo}
                   onChange={e => setReplyTo(e.target.value)}
@@ -138,7 +140,7 @@ export default function SubmitAnEditForm(props) {
               </label>
 
               <label className="userTextare" aria-label="comment">
-                Comment&nbsp;
+                Comment
                 <textarea
                   rows={4}
                   value={comment}

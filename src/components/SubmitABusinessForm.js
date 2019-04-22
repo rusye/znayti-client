@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { API_BASE_URL } from "../config";
 import "./SubmitABusinessForm.css";
 import { normalizeResponseErrors } from "../functions/normalizeResponse";
+import { customeValidationMessage } from "../functions/customeValidationMessage";
 
 export default function SubmitABusinessForm(props) {
   const [replyTo, setReplyTo] = useState("");
@@ -96,6 +97,7 @@ export default function SubmitABusinessForm(props) {
 
   useEffect(() => {
     getRandomInt();
+    customeValidationMessage();
   }, []);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ export default function SubmitABusinessForm(props) {
                   placeholder="enter your name"
                   type="text"
                   name="your-name"
-                  title="Enter your name"
+                  title="Please enter your name"
                   aria-labelledby="your-name"
                   required
                 />
@@ -141,7 +143,7 @@ export default function SubmitABusinessForm(props) {
                   placeholder="enter your email"
                   type="email"
                   name="your-email"
-                  title="Enter your email so we can contact you example@email.com"
+                  title="Enter your email so we can contact you"
                   aria-labelledby="your-name"
                   required
                 />
@@ -176,7 +178,7 @@ export default function SubmitABusinessForm(props) {
               </label>
 
               <label className="userTextare" aria-label="business address">
-                Business Address&nbsp;
+                Business Address
                 <textarea
                   rows={2}
                   value={newBusinessAddress}
@@ -191,7 +193,7 @@ export default function SubmitABusinessForm(props) {
               </label>
 
               <label className="userTextare" aria-label="business hours">
-                Business Hours&nbsp;
+                Business Hours
                 <textarea
                   rows={2}
                   value={newBusinessHours}
@@ -206,7 +208,7 @@ export default function SubmitABusinessForm(props) {
               </label>
 
               <label className="userTextare" aria-label="comment">
-                Comment&nbsp;
+                Comment (Optional)
                 <textarea
                   rows={3}
                   value={comment}
@@ -214,7 +216,7 @@ export default function SubmitABusinessForm(props) {
                   placeholder="Is there a specific person you want users to contact?  Any additional info you would like to add?"
                   type="text"
                   name="comment"
-                  title="Please enter any additional comments you might have"
+                  title="Enter any additional comments you might have"
                   aria-labelledby="comment"
                 />
               </label>
