@@ -23,22 +23,22 @@ Demo Password: ffffffffff
 ## Screenshots
 
 Home Page
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/home.png" width="350">
+![Home Page](https://github.com/rusye/znayti-server/blob/master/screenshots/home.png)
 
 Categories available in your search area
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/categoriesList.png" width="350">
+![Categories List](https://github.com/rusye/znayti-server/blob/master/screenshots/categoriesList.png)
 
 Businesses available in a category in your search area
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/businessesList.png" width="350">
+![Businesses List](https://github.com/rusye/znayti-server/blob/master/screenshots/businessesList.png)
 
 Business Details
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/businessResult.png" width="350">
+![Business Details](https://github.com/rusye/znayti-server/blob/master/screenshots/businessResult.png)
 
 Add A Business Form
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/addABusinessForm.png" width="350">
+![Add A Business Form](https://github.com/rusye/znayti-server/blob/master/screenshots/addABusinessForm.png)
 
 Suggest An Edit Form
-<img src="https://github.com/rusye/znayti-server/blob/master/screenshots/suggestAnEditForm.png" width="350">
+![Suggest An Edit Form](https://github.com/rusye/znayti-server/blob/master/screenshots/suggestAnEditForm.png)
 
 ## Tech Stack
 * React
