@@ -88,7 +88,6 @@ export default function AdminLogin(props) {
                 placeholder="enter password"
                 type="password"
                 name="password"
-                // pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$'
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 required
                 aria-labelledby="login-password"
@@ -105,8 +104,11 @@ export default function AdminLogin(props) {
           </button>
         </form>
 
-        <p className="whiteText">Demo Username & Password: ffffffffff</p>
-        
+        {window.location.origin === "https://safe-shore-26648.herokuapp.com/" ||
+        window.location.origin === "http://localhost:3000" ? (
+          <p className="whiteText">Demo Username & Password: ffffffffff</p>
+        ) : null}
+
         {serverMessage ? <div>{serverMessage}</div> : null}
       </section>
     </>

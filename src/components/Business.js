@@ -36,7 +36,6 @@ export default function Businesses(props) {
   const [googlePlace, setGooglePlace] = useState("");
   const [hours, setHours] = useState({});
   const [resetHours, setResetHours] = useState(false);
-  // console.log(hours)
 
   const setStates = rcvdBusiness => {
     setBusinessName(rcvdBusiness.name);
