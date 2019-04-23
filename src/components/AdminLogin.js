@@ -104,6 +104,8 @@ export default function AdminLogin(props) {
             Submit
           </button>
         </form>
+
+        <p className="whiteText">Demo Username & Password: ffffffffff</p>
         
         {serverMessage ? <div>{serverMessage}</div> : null}
       </section>
