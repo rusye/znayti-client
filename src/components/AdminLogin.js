@@ -104,7 +104,7 @@ export default function AdminLogin(props) {
           </button>
         </form>
 
-        {window.location.origin === "https://safe-shore-26648.herokuapp.com/" ||
+        {window.location.origin === "https://safe-shore-26648.herokuapp.com" ||
         window.location.origin === "http://localhost:3000" ? (
           <p className="whiteText">Demo Username & Password: ffffffffff</p>
         ) : null}
