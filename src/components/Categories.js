@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Categories.css";
 import NavBar from "./NavBar";
 import Search from "./Search";
@@ -13,78 +13,89 @@ export default function Categories(props) {
   const [modal, setModal] = useState(false);
   const [serverMessage, setServerMessage] = useState("Fetching Data");
 
-  const updateModal = e => {
-    modal ? setModal(false) : setModal(true);
-  };
+  const updateModal = useCallback(
+    e => {
+      modal ? setModal(false) : setModal(true);
+    },
+    [modal]
+  );
 
-  const fetchCategories = () => {
-    return fetch(
-      `${API_BASE_URL}${props.location.pathname}${props.location.search}`,
-      {
-        method: "GET"
-      }
-    )
-      .then(res => normalizeResponseErrors(res))
-      .then(res => {
-        return res.json();
-      })
-      .then(rcvdCategories => {
-        if (rcvdCategories.length > 0) {
-          setTitle("Categories");
-          setCategories(
-            rcvdCategories.map((category, index) => {
-              return (
-                <li key={index}>
-                  <button
-                    className="btn btn--border btn--primary btn--animated categoryButton"
-                    type="button"
-                    id={category}
-                    onClick={searchCategory}
-                    value={category}
-                  >
-                    {category}
-                  </button>
-                </li>
-              );
-            })
-          );
-        } else {
-          setTitle("No businesses in this area");
-          setCategories(
-            <button
-              type="button"
-              className="uxLink other light"
-              onClick={updateModal}
-            >
-              Add A Business
-            </button>
-          );
-        }
-        setFetchingData(false);
-      })
-      .catch(err => {
-        console.log(err);
-        let message;
-        if (err.code === 404) {
-          message = err.message;
-        } else if (err.code === 500) {
-          message = "Internal server error";
-        } else {
-          message = "Something went wrong, please try again later";
-        }
-        setServerMessage(message);
-      });
-  };
+  const searchCategory = useCallback(
+    e => {
+      e.preventDefault();
+      let category = e.target.value;
+      props.history.push(`${category}/search${props.location.search}`);
+    },
+    [props.history, props.location.search]
+  );
 
   useEffect(() => {
-    fetchCategories();
-  }, [props.location.search]);
+    const fetchCategories = () => {
+      return fetch(
+        `${API_BASE_URL}${props.location.pathname}${props.location.search}`,
+        {
+          method: "GET"
+        }
+      )
+        .then(res => normalizeResponseErrors(res))
+        .then(res => {
+          return res.json();
+        })
+        .then(rcvdCategories => {
+          if (rcvdCategories.length > 0) {
+            setTitle("Categories");
+            setCategories(
+              rcvdCategories.map((category, index) => {
+                return (
+                  <li key={index}>
+                    <button
+                      className="btn btn--border btn--primary btn--animated categoryButton"
+                      type="button"
+                      id={category}
+                      onClick={searchCategory}
+                      value={category}
+                    >
+                      {category}
+                    </button>
+                  </li>
+                );
+              })
+            );
+          } else {
+            setTitle("No businesses in this area");
+            setCategories(
+              <button
+                type="button"
+                className="uxLink other light"
+                onClick={updateModal}
+              >
+                Add A Business
+              </button>
+            );
+          }
+          setFetchingData(false);
+        })
+        .catch(err => {
+          console.log(err);
+          let message;
+          if (err.code === 404) {
+            message = err.message;
+          } else if (err.code === 500) {
+            message = "Internal server error";
+          } else {
+            message = "Something went wrong, please try again later";
+          }
+          setServerMessage(message);
+        });
+    };
 
-  const searchCategory = e => {
-    e.preventDefault();
-    let category = e.target.value;
-    props.history.push(`${category}/search${props.location.search}`);
-  };
+    fetchCategories();
+  }, [
+    props.location.pathname,
+    props.location.search,
+    searchCategory,
+    updateModal
+  ]);
 
   return (
     <div className="componentLayout">

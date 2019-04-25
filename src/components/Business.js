@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import BusinessForm from "./BusinessForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
@@ -85,7 +85,31 @@ export default function Businesses(props) {
       });
   };
 
-  const fetchBusiness = () => {
+  const displayHours = useCallback(obj => {
+    const days = Object.keys(obj);
+
+    days.forEach(day => {
+      setDay(
+        days.map((day, index) => {
+          return (
+            <div className="day" key={index}>
+              <span className="theDay">{day}</span>
+
+              {obj[day].open === obj[day].close ? (
+                <span className="dayDetails">Closed</span>
+              ) : (
+                <span className="dayDetails">
+                  {timeDispaly(obj[day].open)}-{timeDispaly(obj[day].close)}
+                </span>
+              )}
+            </div>
+          );
+        })
+      );
+    });
+  }, []);
+
+  const fetchBusiness = useCallback(() => {
     setFetchingData(true);
     return fetch(`${API_BASE_URL}${props.location.pathname}`, {
       method: "GET"
@@ -114,7 +138,7 @@ export default function Businesses(props) {
         }
         setServerMessage(message);
       });
-  };
+  }, [displayHours, props.location.pathname]);
 
   const handleDelete = e => {
     e.preventDefault();
@@ -230,30 +254,6 @@ export default function Businesses(props) {
     return timeValue;
   };
 
-  const displayHours = obj => {
-    const days = Object.keys(obj);
-
-    days.forEach(day => {
-      setDay(
-        days.map((day, index) => {
-          return (
-            <div className="day" key={index}>
-              <span className="theDay">{day}</span>
-
-              {obj[day].open === obj[day].close ? (
-                <span className="dayDetails">Closed</span>
-              ) : (
-                <span className="dayDetails">
-                  {timeDispaly(obj[day].open)}-{timeDispaly(obj[day].close)}
-                </span>
-              )}
-            </div>
-          );
-        })
-      );
-    });
-  };
-
   const updateModal = e => {
     modal ? setModal(false) : setModal(true);
   };
@@ -265,7 +265,7 @@ export default function Businesses(props) {
   useEffect(() => {
     fetchBusiness();
     fetchCategories();
-  }, []);
+  }, [fetchBusiness]);
 
   return (
     <div className="componentLayout">

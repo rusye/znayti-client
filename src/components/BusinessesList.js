@@ -17,38 +17,38 @@ export default function BusinessesList(props) {
     modal ? setModal(false) : setModal(true);
   };
 
-  const fetchBusinesses = () => {
-    return fetch(
-      `${API_BASE_URL}${props.location.pathname}${props.location.search}`,
-      {
-        method: "GET"
-      }
-    )
-      .then(res => normalizeResponseErrors(res))
-      .then(res => {
-        return res.json();
-      })
-      .then(rcvdBusinesses => {
-        setBusinesses(rcvdBusinesses);
-        setFetchingData(false);
-      })
-      .catch(err => {
-        console.log(err);
-        let message;
-        if (err.code === 404) {
-          message = err.message;
-        } else if (err.code === 500) {
-          message = "Internal server error";
-        } else {
-          message = "Something went wrong, please try again later";
-        }
-        setServerMessage(message);
-      });
-  };
-
   useEffect(() => {
+    const fetchBusinesses = () => {
+      return fetch(
+        `${API_BASE_URL}${props.location.pathname}${props.location.search}`,
+        {
+          method: "GET"
+        }
+      )
+        .then(res => normalizeResponseErrors(res))
+        .then(res => {
+          return res.json();
+        })
+        .then(rcvdBusinesses => {
+          setBusinesses(rcvdBusinesses);
+          setFetchingData(false);
+        })
+        .catch(err => {
+          console.log(err);
+          let message;
+          if (err.code === 404) {
+            message = err.message;
+          } else if (err.code === 500) {
+            message = "Internal server error";
+          } else {
+            message = "Something went wrong, please try again later";
+          }
+          setServerMessage(message);
+        });
+    };
+
     fetchBusinesses();
-  }, []);
+  }, [props.location.pathname, props.location.search]);
 
   const viewBusiness = e => {
     e.preventDefault();

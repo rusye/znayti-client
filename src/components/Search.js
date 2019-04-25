@@ -94,7 +94,7 @@ export default function Search(props) {
 
   useEffect(() => {
     paramsKeys(parseQueryString(paramsString));
-  }, [window.location.search]);
+  }, [paramsString]);
 
   return (
     <>

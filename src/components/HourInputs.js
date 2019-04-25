@@ -4,17 +4,17 @@ export default function HourInput(props) {
   const [open, setOpen] = useState(props.open || "");
   const [close, setClose] = useState(props.close || "");
 
-  const handleUpdate = () => {
-    if (open === "" || close === "") {
-      props.onChange(props.name, { open: "", close: "" });
-    } else {
-      props.onChange(props.name, { open, close });
-    }
-  };
-
   useEffect(() => {
+    const handleUpdate = () => {
+      if (open === "" || close === "") {
+        props.onChange(props.name, { open: "", close: "" });
+      } else {
+        props.onChange(props.name, { open, close });
+      }
+    };
+
     handleUpdate();
-  }, [open, close]);
+  }, [open, close, props]);
 
   return (
     <>

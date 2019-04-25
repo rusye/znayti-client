@@ -8,51 +8,55 @@ export default function BusinessForm(props) {
   const [eachDay, setEachDay] = useState("");
   const [serverMessage, setServerMessage] = useState(null);
 
-  const populateDays = () => {
-    props.setResetHours(false);
-    let days;
+  useEffect(() => {
+    const populateDays = () => {
+      props.setResetHours(false);
+      let days;
 
-    if (props.hours) {
-      days = Object.keys(props.hours);
+      if (props.hours) {
+        days = Object.keys(props.hours);
 
-      days.forEach(day => {
+        days.forEach(day => {
+          setEachDay(
+            days.map((day, index) => {
+              return (
+                <fieldset className="hourInputs" key={index}>
+                  <HourInputs
+                    open={props.hours[day].open}
+                    close={props.hours[day].close}
+                    name={day}
+                    onChange={props.handleHoursChange}
+                  />
+                </fieldset>
+              );
+            })
+          );
+        });
+      } else {
+        days = [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ];
+
         setEachDay(
           days.map((day, index) => {
             return (
               <fieldset className="hourInputs" key={index}>
-                <HourInputs
-                  open={props.hours[day].open}
-                  close={props.hours[day].close}
-                  name={day}
-                  onChange={props.handleHoursChange}
-                />
+                <HourInputs name={day} onChange={props.handleHoursChange} />
               </fieldset>
             );
           })
         );
-      });
-    } else {
-      days = [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday"
-      ];
+      }
+    };
 
-      setEachDay(
-        days.map((day, index) => {
-          return (
-            <fieldset className="hourInputs" key={index}>
-              <HourInputs name={day} onChange={props.handleHoursChange} />
-            </fieldset>
-          );
-        })
-      );
-    }
-  };
+    populateDays();
+  }, [props]);
 
   const findBusiness = e => {
     e.preventDefault();
@@ -94,10 +98,6 @@ export default function BusinessForm(props) {
         setServerMessage(message);
       });
   };
-
-  useEffect(() => {
-    populateDays();
-  }, []);
 
   return (
     <section>

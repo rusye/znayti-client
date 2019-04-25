@@ -102,7 +102,7 @@ export default function SubmitABusinessForm(props) {
 
   useEffect(() => {
     setSum(`${integerOne + integerTwo}`);
-  }, [captchaResponse]);
+  }, [captchaResponse, integerOne, integerTwo]);
 
   return (
     <section className="modal forms" aria-live="assertive">
