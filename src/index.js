@@ -14,24 +14,26 @@ import * as serviceWorker from "./serviceWorker";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Route exact path="/" component={Home} />
+    <main>
+      <Router>
+        <div className="App">
+          <Route exact path="/" component={Home} />
 
-        <Switch>
-          <Route exact path="/about" component={About} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/business/search" component={Categories} />
-          <Route
-            exact
-            path="/business/:category/search"
-            component={BusinessList}
-          />
-          <Route exact path="/business/:id" component={Business} />
-          <Route exact path="/bigboss/login" component={AdminLogin} />
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <Route exact path="/about" component={About} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/business/search" component={Categories} />
+            <Route
+              exact
+              path="/business/:category/search"
+              component={BusinessList}
+            />
+            <Route exact path="/business/:id" component={Business} />
+            <Route exact path="/bigboss/login" component={AdminLogin} />
+          </Switch>
+        </div>
+      </Router>
+    </main>
   );
 }
 
