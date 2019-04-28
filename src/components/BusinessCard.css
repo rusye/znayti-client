@@ -1,10 +1,25 @@
-.businessCard {
-  width: 300px;
-  background-color: #f76c6c!important;
-  padding: 10px;
+.businessCardBefore {
+  cursor: pointer;
 }
 
-.businessCard h3 {
+.businessCardBefore:hover .btn--animated:before, .businessCardBefore:focus .btn--animated:before {
+  transform: scaleX(1);
+  transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66);
+}
+
+.businessCardBefore:active .btn {
+  box-shadow: 2px 2px 1px 1px #666;
+  transform: translateY(2px);
+}
+
+.businessCard {
+  width: 300px;
+  background-color: #24305e;
+  padding: 10px;
+  z-index: -5;
+}
+
+.businessCard h2 {
   font-size: 25px;
   margin: 0;
 }

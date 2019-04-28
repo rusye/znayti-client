@@ -1,7 +1,7 @@
 .collapsible {
-  margin-top: 5px;
-  background-color: #a8d0e6;
-  color: black;
+  margin-top: 8px;
+  background-color: #24305e;
+  color: white;
   cursor: pointer;
   padding: 10px;
   height: 50px;
@@ -12,25 +12,37 @@
   text-align: left;
   outline: none;
   font-size: 15px;
+  box-shadow: 1px 2px 4px 1px grey;
+  z-index: 1;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+
+.collapsible:first-child {
+  margin-top: 0;
+}
+
+.collapsible:active {
+  box-shadow: 2px 2px 1px 1px #666;
+  transform: translateY(2px);
 }
 
 @media (hover:hover) {
   .collapsible:hover, .collapsible:focus {
-    background-color: #6D9FE9;
+    background-color: #AA2E00;
   }
 }
 
 .content {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
   color: black;
   width: 100%;
   max-width: 450px;
 }
 
 .plusMinusIcon {
-  color: black;
+  filter: invert(1);
   float: right;
   width: 20px;
   height: 20px;
@@ -89,6 +101,9 @@ input, select {
   .content input, .content select, .adminLogin input, .modal-content input {
     margin: 5px 0 5px 0;
   }
+  .content form input:not(.hourDisplay):not([type="checkbox"]), .modal-content form input:not(.hourDisplay):not([type="checkbox"]) {
+    width: 100%;
+  }
 }
 
 @media (min-width:426px) {
@@ -100,8 +115,11 @@ input, select {
   .content select, .content option, .modal-content select, .modal-content option {
     width: 208.4px!important
   }
+  .content form input:not(.hourDisplay):not([type="checkbox"]), .modal-content form input:not(.hourDisplay):not([type="checkbox"]) {
+    width: 208.4px;
+  }
   form label {
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;

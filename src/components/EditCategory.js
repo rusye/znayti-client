@@ -78,14 +78,14 @@ export default function EditCategory(props) {
             pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
             title="Please enter category name that is 3+ characters, first letters are capitalized"
             required
-            aria-labelledby="category-name"
+            aria-label="category-name"
           />
         </label>
 
         <button
           type="submit"
           disabled={submitDisable}
-          className="category-submit"
+          className="uxLink other dark"
         >
           Submit
           {submitDisable ? (
@@ -98,7 +98,7 @@ export default function EditCategory(props) {
           ) : null}
         </button>
 
-        <button type="reset" onClick={reset}>
+        <button type="reset" className="uxLink other dark" onClick={reset}>
           Reset
         </button>
 

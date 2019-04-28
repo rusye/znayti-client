@@ -120,7 +120,7 @@ export default function SubmitAnEditForm(props) {
                   type="text"
                   name="your-name"
                   title="Enter your name"
-                  aria-labelledby="your-name"
+                  aria-label="your-name"
                   required
                 />
               </label>
@@ -134,7 +134,7 @@ export default function SubmitAnEditForm(props) {
                   type="email"
                   name="your-email"
                   title="Enter your email so we can contact you example@email.com"
-                  aria-labelledby="your-name"
+                  aria-label="your-name"
                   required
                 />
               </label>
@@ -149,13 +149,13 @@ export default function SubmitAnEditForm(props) {
                   type="text"
                   name="comment"
                   title="Please enter what you would like to be edited"
-                  aria-labelledby="comment"
+                  aria-label="comment"
                   required
                 />
               </label>
             </fieldset>
 
-            <p>
+            <label className="displayBlock">
               {integerOne}+{integerTwo}=
               <input
                 className={`captchaResponse ${
@@ -166,17 +166,17 @@ export default function SubmitAnEditForm(props) {
                 type="text"
                 name="your-answer"
                 title="Enter your answer"
-                aria-labelledby="your-answer"
+                aria-label="your-answer"
                 autoComplete="off"
                 size={3}
                 required
               />
-            </p>
+            </label>
 
             <button
               type="submit"
               disabled={submitDisable}
-              className="uxLink other"
+              className="uxLink other dark marginTopEight"
             >
               Submit
               {submitDisable ? (

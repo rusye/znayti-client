@@ -22,6 +22,8 @@ export default function Dashboard() {
   const [serverMessage, setServerMessage] = useState(null);
   const [triggerFetch, setTriggerFetch] = useState(1);
 
+  document.activeElement.blur();
+
   const fetchCategories = () => {
     return fetch(`${API_BASE_URL}/categories`, {
       method: "GET"

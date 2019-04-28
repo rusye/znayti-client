@@ -7,7 +7,7 @@ html, body {
 }
 
 body {
-  background-color: #24305e;
+  background-color: #DEE9F3;
   max-width: 1000px;
   margin: 0 auto;
   padding: 0;
@@ -38,7 +38,7 @@ fieldset {
 }
 
 form {
-  background: #E6E6E6;
+  background: #C5CFD9;
 }
 
 .App {
@@ -51,7 +51,7 @@ form {
 
 .componentLayout {
   padding-top: 48px;
-  color: white;
+  color: black;
   text-align: center;
   width: 100%;
 }
@@ -68,7 +68,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #24305e;
 }
 
 .displayBlock {
@@ -92,10 +92,6 @@ a {
   text-decoration: none;
 }
 
-.whiteText {
-  color: white;
-}
-
 p a {
   display: block;
 }
@@ -108,6 +104,12 @@ p a {
   overflow: hidden;
   z-index: 0;
   cursor: pointer;
+  box-shadow: 1px 2px 4px 1px grey;
+}
+
+.btn:active {
+  box-shadow: 2px 2px 1px 1px #666;
+  transform: translateY(2px);
 }
 
 .btn--primary {
@@ -141,7 +143,7 @@ p a {
     left: 0;
     right: 0;
     bottom: 0;
-    background: #a8d0e6;
+    background: #AA2E00;
     transform: scaleX(0);
     transform-origin: 0 50%;
     transition-property: transform;
@@ -149,14 +151,12 @@ p a {
     transition-timing-function: ease-out;
     z-index: -1;
   }
-  .btn--animated:hover, .btn--animated:focus {
-    color: black;
-  }
-  .btn--animated:hover .search, .btn--animated:focus .search {
-    filter: invert(0)
-  }
   .btn--animated:hover:before, .btn--animated:focus:before {
     transform: scaleX(1);
     transition-timing-function: cubic-bezier(0.45, 1.64, 0.47, 0.66);
   }
+}
+
+.marginTopEight {
+  margin-top: 8px;
 }

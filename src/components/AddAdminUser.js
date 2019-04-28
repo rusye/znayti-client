@@ -81,7 +81,7 @@ export default function AddAdminUser() {
             name="first-name"
             pattern="[A-Za-z]{1,35}"
             title="Please enter first name"
-            aria-labelledby="first-name"
+            aria-label="first-name"
           />
         </label>
 
@@ -95,7 +95,7 @@ export default function AddAdminUser() {
             name="last-name"
             pattern="[A-Za-z]{1, 35}"
             title="Please enter last name"
-            aria-labelledby="last-name"
+            aria-label="last-name"
           />
         </label>
 
@@ -110,7 +110,7 @@ export default function AddAdminUser() {
             pattern="[A-Za-z0-9_]{4,35}"
             title="Please enter a desired username, must be min of 4 characters and max of 35"
             required
-            aria-labelledby="username"
+            aria-label="username"
           />
         </label>
 
@@ -122,17 +122,17 @@ export default function AddAdminUser() {
             placeholder="enter password"
             type="password"
             name="password"
-            pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$'
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
             title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             required
-            aria-labelledby="login-password"
+            aria-label="login-password"
           />
         </label>
 
         <button
           type="submit"
           disabled={submitDisable}
-          className="add-user-admin-submit"
+          className="uxLink other dark"
         >
           Submit
           {submitDisable ? (
@@ -145,7 +145,7 @@ export default function AddAdminUser() {
           ) : null}
         </button>
 
-        <button type="reset" onClick={reset}>
+        <button type="reset" className="uxLink other dark" onClick={reset}>
           Reset
         </button>
 

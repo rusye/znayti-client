@@ -11,7 +11,7 @@
   height: 46px;
   background-color: transparent;
   border-radius: 10px;
-  border: 2px solid #a8d0e6!important;
+  border: 2px solid #24305e!important;
   transform-origin: 0 0;
   transition: all 0.2s ease;
 }
@@ -19,18 +19,16 @@
 .searchIcon, .downArrow {
   height: 30px;
   vertical-align: bottom;
-  filter: invert(1);
-  z-index: -1;
   transform-origin: 0 0;
   transition: all 0.2s ease;
 }
 
 @media (hover:hover) {
-  .searchButton:hover .searchIcon, .searchButton:focus .searchIcon {
-    filter: invert(0)
+  .searchButton:hover .searchIcon, .searchButton:focus .searchIcon, .searchButton:focus .lds-ring div, .searchButton:hover .lds-ring div {
+    filter: invert(1)
   }
   .searchButton:hover, .searchButton:focus {
-    background-color: #a8d0e6;
+    background-color: #24305e;
   }
 }
 
@@ -106,10 +104,10 @@
   position: absolute;
   width: 36px;
   height: 36px;
-  border: 3px solid #fff;
+  border: 3px solid black;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: black transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -146,7 +144,7 @@
   position: absolute;
   top: 16px;
   left: 0;
-  color: #a8d0e6;
+  color: #24305e;
   font-weight: 500;
   transform-origin: 0 0;
   transition: all 0.2s ease;
@@ -156,9 +154,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 2.2px;
+  height: 2.5px;
   width: 100%;
-  background: #f76c6c;
+  background: #AA2E00;
   transform: scaleX(0);
   transform-origin: 0 0;
   transition: all 0.15s ease;
@@ -170,10 +168,9 @@
   border: 0;
   padding: 0;
   font-weight: 500;
-  border-bottom: 2px solid #a8d0e6;
+  border-bottom: 2px solid #24305e;
   background: none;
   border-radius: 0;
-  color: white;
   transition: all 0.15s ease;
 }
 
@@ -192,7 +189,7 @@
 
 .inp input:not(:placeholder-shown)+span, .inp select:not(:placeholder-shown)+span {
   top: 16px!important;
-  color: #a8d0e6;
+  color: #24305e;
   transform: translateY(-26px) scale(0.75);
 }
 
@@ -210,7 +207,7 @@
 }
 
 .inp input:focus+span, .inp select:focus+span {
-  color: #f76c6c;
+  color: #AA2e00;
   transform: translateY(-26px) scale(0.75);
 }
 
@@ -219,5 +216,5 @@
 }
 
 .inp select:focus+span+.border+.downArrow {
-  filter: invert(49%) sepia(26%) saturate(1194%) hue-rotate(313deg) brightness(107%) contrast(93%);
+  filter: invert(13%) sepia(90%) saturate(6675%) hue-rotate(38deg) brightness(97%) contrast(102%);
 }

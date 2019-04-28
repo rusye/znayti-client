@@ -2,7 +2,7 @@
   width: 300px;
   min-height: 50px;
   font-size: 25px;
-  background-color: #f76c6c;
+  background-color: #24305e;
 }
 
 ul {
@@ -17,4 +17,8 @@ li {
 
 li:last-child {
   margin-bottom: 0;
+}
+
+.fontTwenty {
+  font-size: 20px;
 }

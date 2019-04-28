@@ -76,7 +76,7 @@ export default function AdminLogin(props) {
                 pattern="[A-Za-z0-9_]{1,15}"
                 title="Username should only contain letters, numbers and underscores; no more than 15 characters e.g. Jojo_123"
                 required
-                aria-labelledby="login-username"
+                aria-label="login-username"
               />
             </label>
 
@@ -90,7 +90,7 @@ export default function AdminLogin(props) {
                 name="password"
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 required
-                aria-labelledby="login-password"
+                aria-label="login-password"
               />
             </label>
           </fieldset>
@@ -98,7 +98,7 @@ export default function AdminLogin(props) {
           <button
             type="submit"
             disabled={submitDisable}
-            className="login-submit"
+            className="uxLink other marginTopEight"
           >
             Submit
           </button>

@@ -329,7 +329,7 @@ export default function Businesses(props) {
                 <button
                   type="submit"
                   disabled={submitDisable}
-                  className="uxLink other userFormButtonContainer"
+                  className="uxLink other marginTopEight dark"
                 >
                   Submit
                   {submitDisable ? (
@@ -352,16 +352,18 @@ export default function Businesses(props) {
       ) : null}
 
       {fetchingData ? (
-        <h2>{serverMessage ? serverMessage : "Fetching Data"}</h2>
+        <h1 className="fontTwenty">
+          {serverMessage ? serverMessage : "Fetching Data"}
+        </h1>
       ) : businessDeleted ? (
-        <h2>Business Successfully Deleted</h2>
+        <h1>Business Successfully Deleted</h1>
       ) : (
         <div
           className={`componentResults business ${
             editModal || modal ? "blur" : null
           }`}
         >
-          <h2>{business.name}</h2>
+          <h1>{business.name}</h1>
 
           {business.contactName ? (
             <span className="contact">{business.contactName}</span>
@@ -398,11 +400,11 @@ export default function Businesses(props) {
           </div>
 
           <div className="hours">
-            <h3>Hours</h3>
+            <h2>Hours</h2>
             {day}
           </div>
 
-          <div className="userFormButtonContainer">
+          <div className="marginTopEight">
             {localStorage.admin ? (
               <>
                 <button

@@ -129,7 +129,11 @@ export default function AddBusiness(props) {
           setResetHours={setResetHours}
         />
 
-        <button type="submit" disabled={submitDisable}>
+        <button
+          type="submit"
+          className="uxLink other marginTopEight dark"
+          disabled={submitDisable}
+        >
           Submit
           {submitDisable ? (
             <div className="lds-ring dark-ring">
@@ -141,7 +145,11 @@ export default function AddBusiness(props) {
           ) : null}
         </button>
 
-        <button type="reset" onClick={reset}>
+        <button
+          type="reset"
+          className="uxLink other marginTopEight dark"
+          onClick={reset}
+        >
           Reset
         </button>
 

@@ -28,7 +28,7 @@ export default function HourInput(props) {
           onChange={e => setOpen(e.target.value)}
           name="open-time"
           title="Please enter open time"
-          aria-labelledby="open-time"
+          aria-label="open-time"
         />
       </label>
       <label className="displayInline" aria-label="select-close-time">
@@ -40,7 +40,7 @@ export default function HourInput(props) {
           onChange={e => setClose(e.target.value)}
           name="close-time"
           title="Please enter close time"
-          aria-labelledby="close-time"
+          aria-label="close-time"
         />
       </label>
     </>

@@ -113,7 +113,7 @@ export default function BusinessForm(props) {
             name="business-name"
             pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
             title="Please enter the business name"
-            aria-labelledby="business-name"
+            aria-label="business-name"
             required
           />
         </label>
@@ -128,7 +128,7 @@ export default function BusinessForm(props) {
             name="contact-name"
             pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
             title="Please enter the contact name"
-            aria-labelledby="contact-name"
+            aria-label="contact-name"
           />
         </label>
 
@@ -148,7 +148,7 @@ export default function BusinessForm(props) {
             title="Please enter a telephone number in this format: 5031239876"
             pattern="^[0-9]{10,10}$"
             name="telephone"
-            aria-labelledby="telephone"
+            aria-label="telephone"
             required
           />
         </label>
@@ -166,7 +166,7 @@ export default function BusinessForm(props) {
             placeholder="123 Main St"
             title="Please enter a street address in this pattern 542 W 15th Street"
             name="street-address"
-            aria-labelledby="street-address"
+            aria-label="street-address"
             required
           />
         </label>
@@ -181,7 +181,7 @@ export default function BusinessForm(props) {
             title="Please enter a city name, first letter must be capital"
             pattern="^(\b[A-Z]\w*\s*)+.{2,}$"
             name="city-name"
-            aria-labelledby="city-name"
+            aria-label="city-name"
             required
           />
         </label>
@@ -196,7 +196,7 @@ export default function BusinessForm(props) {
             title="Please enter state two letter abbreviation, must be uppercase"
             pattern="[A-Z]{2}"
             name="state-name"
-            aria-labelledby="state-name"
+            aria-label="state-name"
             required
           />
         </label>
@@ -211,7 +211,7 @@ export default function BusinessForm(props) {
             title="Please enter the business zip code"
             pattern="^\d{5}(?:[-]\d{4})?$"
             name="zip-code"
-            aria-labelledby="zip code"
+            aria-label="zip code"
             required
           />
         </label>
@@ -226,7 +226,7 @@ export default function BusinessForm(props) {
             title="Please enter the latitude, between 0 and 90 (North/South)"
             pattern="^([+]?)(90(\.0+)?|([1-8]?\d))(\.\d+)?$"
             name="latitude-code"
-            aria-labelledby="latitude code"
+            aria-label="latitude code"
             required
           />
         </label>
@@ -241,13 +241,14 @@ export default function BusinessForm(props) {
             title="Please enter the longitude, between -180 and 0 (East/West)"
             pattern="^([\-])(180(\.0+)?|(1[0-7]\d)|([1-9]?\d))(\.\d+)?$"
             name="longitude-code"
-            aria-labelledby="longitude code"
+            aria-label="longitude code"
             required
           />
         </label>
 
         <button
           type="button"
+          className="uxLink other dark"
           aria-label="search for business in google"
           title="Please make sure business name, street, city, state, and zip are filled out"
           onClick={findBusiness}

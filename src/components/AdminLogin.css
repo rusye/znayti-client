@@ -1,3 +1,9 @@
 .adminLogin {
   border-radius: 10px;
+  background-color: #24305e;
+  color: white;
+}
+
+.adminLogin .formTitle {
+  color: white;
 }

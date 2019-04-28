@@ -67,7 +67,11 @@ export default function DeleteCategory(props) {
         />
       </fieldset>
 
-      <button type="submit" disabled={submitDisable} className="delete-submit">
+      <button
+        type="submit"
+        disabled={submitDisable}
+        className="uxLink other dark"
+      >
         Delete
         {submitDisable ? (
           <div className="lds-ring dark-ring">

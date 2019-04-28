@@ -11,7 +11,7 @@ export default function Categories(props) {
   const [categories, setCategories] = useState("");
   const [title, setTitle] = useState(null);
   const [modal, setModal] = useState(false);
-  const [serverMessage, setServerMessage] = useState("Fetching Data");
+  const [serverMessage, setServerMessage] = useState(null);
 
   const updateModal = useCallback(
     e => {
@@ -64,13 +64,15 @@ export default function Categories(props) {
           } else {
             setTitle("No businesses in this area");
             setCategories(
-              <button
-                type="button"
-                className="uxLink other light"
-                onClick={updateModal}
-              >
-                Add A Business
-              </button>
+              <li>
+                <button
+                  type="button"
+                  className="uxLink other dark"
+                  onClick={updateModal}
+                >
+                  Add A Business
+                </button>
+              </li>
             );
           }
           setFetchingData(false);
@@ -104,10 +106,12 @@ export default function Categories(props) {
       {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
-        <h2>{serverMessage}</h2>
+        <h1 className="fontTwenty">
+          {serverMessage ? serverMessage : "Fetching Data"}
+        </h1>
       ) : (
         <div className={`componentResults ${modal ? "blur" : null}`}>
-          <h2>{title}</h2>
+          <h1>{title}</h1>
           <ul>{categories}</ul>
         </div>
       )}

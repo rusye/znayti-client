@@ -1,6 +1,6 @@
 .business {
-  color: #24305e;
-  background-color: #a8d0e6;
+  color: white;
+  background-color: #24305e;
   padding: 8px;
   max-width: 400px;
   margin: 8px auto 0 auto;
@@ -57,13 +57,17 @@ address {
   width: 65px;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #24305e;
-  color: black;
+  border: 2px solid #DEE9F3;
+  color: white;
   padding: 5px;
   border-radius: 10px;
   transform-origin: 0 0;
   transition: all 0.2s ease;
   outline: none;
+}
+
+.uxLink:disabled {
+  opacity: 0.6;
 }
 
 .uxLink:active {
@@ -78,14 +82,9 @@ address {
   background-color: transparent;
 }
 
-.light {
-  color: white;
-  margin-top: 8px;
-  border-color: #a8d0e6;
-}
-
-.userFormButtonContainer {
-  margin-top: 8px;
+.dark {
+  border-color: #24305e;
+  color: black;
 }
 
 .uxLinkContainer {
@@ -115,17 +114,13 @@ address {
 
 @media (hover:hover) {
   .uxLink:hover, .uxLink:focus {
-    background: #24305e
+    background: #AA2E00;
   }
   .uxLink:hover .icon, .uxLink:focus .icon {
     filter: invert(1)
   }
   .other:hover, .other:focus {
     color: white!important
-  }
-  .light:hover, .light:focus {
-    background-color: #a8d0e6;
-    color: black!important;
   }
   .uxLinkContainer a:hover, .uxLinkContainer a:focus {
     color: white!important
@@ -173,7 +168,7 @@ address {
 }
 
 .modal-content, .modal-content form {
-  background: #a8d0e6;
+  background: #C5CFD9;
 }
 
 /* The Close Button (x) */

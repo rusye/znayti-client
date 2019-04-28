@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./BusinessesList.css";
 import BusinessCard from "./BusinessCard";
 import NavBar from "./NavBar";
 import Search from "./Search";
@@ -11,7 +10,7 @@ export default function BusinessesList(props) {
   const [fetchingData, setFetchingData] = useState(true);
   const [businesses, setBusinesses] = useState([]);
   const [modal, setModal] = useState(false);
-  const [serverMessage, setServerMessage] = useState("Fetching Data");
+  const [serverMessage, setServerMessage] = useState(null);
 
   const updateModal = e => {
     modal ? setModal(false) : setModal(true);
@@ -63,10 +62,12 @@ export default function BusinessesList(props) {
       {modal ? <SubmitABusinessForm updateModal={updateModal} /> : null}
 
       {fetchingData ? (
-        <h2>{serverMessage}</h2>
+        <h1 className="fontTwenty">
+          {serverMessage ? serverMessage : "Fetching Data"}
+        </h1>
       ) : (
         <div className={`componentResults ${modal ? "blur" : null}`}>
-          <h2>{props.match.params.category}</h2>
+          <h1>{props.match.params.category}</h1>
           {businesses.length > 0 ? (
             <ul>
               {businesses.map((business, index) => (
@@ -86,7 +87,7 @@ export default function BusinessesList(props) {
 
           <button
             type="button"
-            className="uxLink other light"
+            className="uxLink other marginTopEight dark"
             onClick={updateModal}
           >
             Add A Business

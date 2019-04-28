@@ -130,7 +130,7 @@ export default function SubmitABusinessForm(props) {
                   type="text"
                   name="your-name"
                   title="Please enter your name"
-                  aria-labelledby="your-name"
+                  aria-label="your-name"
                   required
                 />
               </label>
@@ -144,7 +144,7 @@ export default function SubmitABusinessForm(props) {
                   type="email"
                   name="your-email"
                   title="Enter your email so we can contact you"
-                  aria-labelledby="your-name"
+                  aria-label="your-name"
                   required
                 />
               </label>
@@ -158,7 +158,7 @@ export default function SubmitABusinessForm(props) {
                   type="text"
                   name="business-name"
                   title="Please enter the business name"
-                  aria-labelledby="business-name"
+                  aria-label="business-name"
                   required
                 />
               </label>
@@ -172,7 +172,7 @@ export default function SubmitABusinessForm(props) {
                   placeholder="5031239876"
                   title="Please enter the business telephone number"
                   name="telephone"
-                  aria-labelledby="telephone"
+                  aria-label="telephone"
                   required
                 />
               </label>
@@ -187,7 +187,7 @@ export default function SubmitABusinessForm(props) {
                   type="text"
                   name="business-address"
                   title="Please enter the business address"
-                  aria-labelledby="business-address"
+                  aria-label="business-address"
                   required
                 />
               </label>
@@ -202,7 +202,7 @@ export default function SubmitABusinessForm(props) {
                   type="text"
                   name="business-hours"
                   title="Please enter the business operating hours"
-                  aria-labelledby="business-address"
+                  aria-label="business-address"
                   required
                 />
               </label>
@@ -217,12 +217,11 @@ export default function SubmitABusinessForm(props) {
                   type="text"
                   name="comment"
                   title="Enter any additional comments you might have"
-                  aria-labelledby="comment"
+                  aria-label="comment"
                 />
               </label>
             </fieldset>
-
-            <p>
+            <label className="displayBlock">
               {integerOne}+{integerTwo}=
               <input
                 className={`captchaResponse ${
@@ -233,17 +232,17 @@ export default function SubmitABusinessForm(props) {
                 type="text"
                 name="your-answer"
                 title="Enter your answer"
-                aria-labelledby="your-answer"
+                aria-label="your-answer"
                 autoComplete="off"
                 size={3}
                 required
               />
-            </p>
+            </label>
 
             <button
               type="submit"
               disabled={submitDisable}
-              className="uxLink other"
+              className="uxLink other dark marginTopEight"
             >
               Submit
               {submitDisable ? (
