@@ -359,8 +359,8 @@ export default function Businesses(props) {
         <h1>Business Successfully Deleted</h1>
       ) : (
         <div
-          className={`componentResults business ${
-            editModal || modal ? "blur" : null
+          className={`componentResults business${
+            editModal || modal ? " blur" : ""
           }`}
         >
           <h1>{business.name}</h1>
