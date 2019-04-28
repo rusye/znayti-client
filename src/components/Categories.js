@@ -110,7 +110,7 @@ export default function Categories(props) {
           {serverMessage ? serverMessage : "Fetching Data"}
         </h1>
       ) : (
-        <div className={`componentResults ${modal ? "blur" : null}`}>
+        <div className={`componentResults${modal ? " blur" : ""}`}>
           <h1>{title}</h1>
           <ul>{categories}</ul>
         </div>

@@ -99,7 +99,7 @@ export default function Search(props) {
   return (
     <>
       <form
-        className={`search-bar ${props.blur ? "blur" : null}`}
+        className={`search-bar${props.blur ? " blur" : ""}`}
         autoComplete="off"
         onSubmit={searchRequest}
       >

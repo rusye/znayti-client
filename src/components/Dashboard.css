@@ -101,7 +101,7 @@ input, select {
   .content input, .content select, .adminLogin input, .modal-content input {
     margin: 5px 0 5px 0;
   }
-  .content form input:not(.hourDisplay):not([type="checkbox"]), .modal-content form input:not(.hourDisplay):not([type="checkbox"]) {
+  .content form input:not(.hourDisplay):not([type="checkbox"]):not(.captchaResponse), .modal-content form input:not(.hourDisplay):not([type="checkbox"]):not(.captchaResponse) {
     width: 100%;
   }
 }
@@ -115,7 +115,7 @@ input, select {
   .content select, .content option, .modal-content select, .modal-content option {
     width: 208.4px!important
   }
-  .content form input:not(.hourDisplay):not([type="checkbox"]), .modal-content form input:not(.hourDisplay):not([type="checkbox"]) {
+  .content form input:not(.hourDisplay):not([type="checkbox"]):not(.captchaResponse), .modal-content form input:not(.hourDisplay):not([type="checkbox"]):not(.captchaResponse) {
     width: 208.4px;
   }
   form label {

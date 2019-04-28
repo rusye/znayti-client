@@ -66,7 +66,7 @@ export default function BusinessesList(props) {
           {serverMessage ? serverMessage : "Fetching Data"}
         </h1>
       ) : (
-        <div className={`componentResults ${modal ? "blur" : null}`}>
+        <div className={`componentResults${modal ? " blur" : ""}`}>
           <h1>{props.match.params.category}</h1>
           {businesses.length > 0 ? (
             <ul>

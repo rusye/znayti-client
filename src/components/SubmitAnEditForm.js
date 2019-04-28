@@ -159,7 +159,7 @@ export default function SubmitAnEditForm(props) {
               {integerOne}+{integerTwo}=
               <input
                 className={`captchaResponse ${
-                  wrongResponse ? "wrongResponse" : null
+                  wrongResponse ? "wrongResponse" : ""
                 }`}
                 value={captchaResponse}
                 onChange={e => setCaptchaResponse(e.target.value)}

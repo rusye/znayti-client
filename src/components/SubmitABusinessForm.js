@@ -224,8 +224,8 @@ export default function SubmitABusinessForm(props) {
             <label className="displayBlock">
               {integerOne}+{integerTwo}=
               <input
-                className={`captchaResponse ${
-                  wrongResponse ? "wrongResponse" : null
+                className={`captchaResponse${
+                  wrongResponse ? " wrongResponse" : ""
                 }`}
                 value={captchaResponse}
                 onChange={e => setCaptchaResponse(e.target.value)}
