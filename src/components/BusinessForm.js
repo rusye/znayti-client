@@ -70,9 +70,7 @@ export default function BusinessForm(props) {
       method: "POST",
       headers,
       body: JSON.stringify({
-        textquery: `${props.businessName} ${props.street}, ${props.city}, ${
-          props.state
-        }, ${props.zip}`
+        textquery: `${props.businessName} ${props.street}, ${props.city}, ${props.state}, ${props.zip}`
       })
     })
       .then(res => normalizeResponseErrors(res))
@@ -212,36 +210,6 @@ export default function BusinessForm(props) {
             pattern="^\d{5}(?:[-]\d{4})?$"
             name="zip-code"
             aria-label="zip code"
-            required
-          />
-        </label>
-
-        <label aria-label="latitude-input">
-          Latitude&nbsp;
-          <input
-            type="number"
-            value={props.latitude}
-            onChange={e => props.setLatitude(e.target.value)}
-            placeholder="45.5426225"
-            title="Please enter the latitude, between 0 and 90 (North/South)"
-            pattern="^([+]?)(90(\.0+)?|([1-8]?\d))(\.\d+)?$"
-            name="latitude-code"
-            aria-label="latitude code"
-            required
-          />
-        </label>
-
-        <label aria-label="longitude-input">
-          Longitude&nbsp;
-          <input
-            type="number"
-            value={props.longitude}
-            onChange={e => props.setLongitude(e.target.value)}
-            placeholder="-122.7944704"
-            title="Please enter the longitude, between -180 and 0 (East/West)"
-            pattern="^([\-])(180(\.0+)?|(1[0-7]\d)|([1-9]?\d))(\.\d+)?$"
-            name="longitude-code"
-            aria-label="longitude code"
             required
           />
         </label>
